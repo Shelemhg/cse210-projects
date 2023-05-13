@@ -1,0 +1,53 @@
+<mxfile host="65bd71144e">
+    <diagram id="FJXhwHptYgPNuSuxnt-G" name="Page-1">
+        <mxGraphModel dx="533" dy="912" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="40" value="Journal" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;fontSize=14;" vertex="1" parent="1">
+                    <mxGeometry x="210" y="260" width="170" height="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="41" value="*_entries: List&lt;Entry&gt;&#10;*_prompts: List&lt;string&gt;" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#333333;fontSize=14;" vertex="1" parent="40">
+                    <mxGeometry y="26" width="170" height="44" as="geometry"/>
+                </mxCell>
+                <mxCell id="42" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;fontSize=14;" vertex="1" parent="40">
+                    <mxGeometry y="70" width="170" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="43" value="ShowMenu(): void&#10;NewEntry(): void&#10;DisplayJournal(): void&#10;SaveJournal(): void&#10;LoadJournal(): void" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#333333;fontSize=14;" vertex="1" parent="40">
+                    <mxGeometry y="78" width="170" height="102" as="geometry"/>
+                </mxCell>
+                <mxCell id="57" value="Entry" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=14;" vertex="1" parent="1">
+                    <mxGeometry x="210" y="610" width="170" height="150" as="geometry"/>
+                </mxCell>
+                <mxCell id="58" value="*_author: string&#10;*_prompt: string&#10;*_response: string&#10;*_date: string" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#333333;fontSize=14;" vertex="1" parent="57">
+                    <mxGeometry y="26" width="170" height="84" as="geometry"/>
+                </mxCell>
+                <mxCell id="59" value="" style="line;strokeWidth=1;fillColor=#f5f5f5;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#666666;fontColor=#333333;fontSize=14;" vertex="1" parent="57">
+                    <mxGeometry y="110" width="170" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="60" value="Display(): void" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#333333;fontSize=14;" vertex="1" parent="57">
+                    <mxGeometry y="118" width="170" height="32" as="geometry"/>
+                </mxCell>
+                <mxCell id="65" value="Relation" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;fontSize=14;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="57">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="320" y="360" as="sourcePoint"/>
+                        <mxPoint x="295" y="440" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="66" value="0..n" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=top;fontSize=14;" connectable="0" vertex="1" parent="65">
+                    <mxGeometry x="-1" relative="1" as="geometry">
+                        <mxPoint x="15" y="-30" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="67" value="1" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=top;fontSize=14;" connectable="0" vertex="1" parent="65">
+                    <mxGeometry x="1" relative="1" as="geometry">
+                        <mxPoint x="25" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="68" value="The program will consist of a Journal Class, that contains 2 main Member variables. The first is a list of Entry Objects, and the second is a list of promts as a database of prompts.&lt;br&gt;Also this class will contain methods to Show the Menu, Create a new entry, Display the whole journal, Save the current Journal and Load it or show it.&lt;br&gt;&lt;br&gt;Then the Entry Class will contain the main information of the entry, with Author, prompt, response and date. Also it will contain a method to show the Entry." style="whiteSpace=wrap;html=1;aspect=fixed;fontSize=14;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+                    <mxGeometry x="450" y="370" width="290" height="290" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
