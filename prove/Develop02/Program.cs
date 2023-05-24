@@ -49,6 +49,10 @@ class Program
                                 Console.Clear();
                             }
                         }while (res1.ToLower() != "y" && res1.ToLower() != "n");
+                    }else{
+                        Journal.NewEntry(journal1);
+                        Console.Clear();
+                        Console.WriteLine("- Entry Received. Please remember to Save your changes. -");
                     }
                     
                 break;
