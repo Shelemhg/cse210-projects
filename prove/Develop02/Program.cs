@@ -1,3 +1,17 @@
+/*
+Exceeding Requirements
+
+1. Prompt guides for the user
+
+    Due to the simplicity of the program there are a few limitations and actions that can cause some trouble, but what a better way to approach that than through prompts that can guide the user and allowing him know what is going on so he can make the right choices being guided by useful prompts.
+
+2. Data validation
+
+    The user has to make a few choices when using the program, and using data validation and making sure that most inputs won't cause any trouble on the program, just the screen cleans and the user has another chance to input a right option.
+
+
+*/
+
 using System;
 
 class Program
@@ -59,7 +73,6 @@ class Program
 
                 //   Display Journal
                 case "2":
-                    if(File.Exists(Journal._fileName)){
                         if(journal1._entries.Count() > 0){
                             Console.Clear();
                             Journal.DisplayJournal(journal1);
@@ -68,10 +81,6 @@ class Program
                             Console.Clear();
                             Console.WriteLine("\nCurrent journal is empty.\n\nTry loading journal from file or adding a new entry.\n");
                         }
-                    }else{
-                        Console.Clear();
-                        Console.WriteLine("No Journal file was found.\n\nTry creating a new one or moving the journal to the program folder.\n");
-                    }
                 break;
 
                 //   Read from File
