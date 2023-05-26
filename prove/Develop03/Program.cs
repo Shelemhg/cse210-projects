@@ -1,3 +1,14 @@
+/*
+Exceeding Requirements:
+
+
+For this program I:
+
+
+1. Added the posibility for the user to type any scripture or text he wishes and then work with it to run the program.
+
+2. The program can take both scriptures or random texts.
+*/
 using System;
 
 class Program
@@ -20,7 +31,7 @@ class Program
             else if(selection.ToLower() == "n"){
                 scripture1 = new Scripture();                
             }
-        scripture1.RunProgram();
+        scripture1.StartHidding();
         Console.WriteLine("Thanks for Playing!");
     }
 }

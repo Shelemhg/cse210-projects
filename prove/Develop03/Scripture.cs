@@ -35,7 +35,7 @@ class Scripture {
         
     }
 //  Main method
-    public void RunProgram(){
+    public void StartHidding(){
         
         DisplayScripture();
         // Obtain the total number of words in the _word variable,
