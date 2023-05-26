@@ -34,21 +34,39 @@ class Program
         Console.Clear();
         scripture1.DisplayScripture();
         
-        string key;
+        ConsoleKeyInfo input;
 
         do{
             
             Console.WriteLine("\nPress Enter to hide more words, or quit to finish:");
-            key = Console.ReadLine();
+            // key = Console.ReadLine();
+            // input = string.Empty;
+            input = Console.ReadKey();
+            
+            if(input.Key == ConsoleKey.Enter){
+                scripture1.HideWords();
+                // scripture1.DisplayScripture();
+            }
+            else if (input.Key == ConsoleKey.Backspace){
+                Console.WriteLine("BACKSPACE");
+                scripture1.unhideWords();
+                // scripture1.DisplayScripture();
+            }else if (input.Key == ConsoleKey.Escape){
+                break;
+            }
+            Console.Clear();
+            scripture1.DisplayScripture();
+            // Console.WriteLine("\n\nHIDDEN words: " + scripture1._hiddenWordsList.Count() + " < Visible: " + scripture1._words.Count());
 
-            scripture1.StartHidding();
+        // }while((scripture1._visibleWords > 0) && (key != "quit"));
+        }while((scripture1._hiddenWordsList.Count() < scripture1._words.Count()));
+        // }while(true);
+        // Console.WriteLine("KEY" +input.Key);
 
-        }while((scripture1._visibleWords > 0) && (key != "quit"));
 
 
-
-
-        Console.Clear();        
-        Console.WriteLine("\nThanks for Playing!\n");
+        Console.Clear();
+        scripture1.DisplayScripture();        
+        Console.WriteLine("\n Thanks for Playing!\n");
     }
 }

@@ -1,9 +1,10 @@
 class Scripture {
     public Reference _reference = new Reference();
     public List<Word> _words = new List<Word>();
-    public int _visibleWords;
-    public int wordCount;
-    private List<int> _hiddenWords = new List<int>();
+    public int _wordCount = 0;
+    // public int _visibleWords = 0;
+    public int _amountToHide = 0;    
+    public List<int> _hiddenWordsList = new List<int>();
 
 //  Default constructor in case user rejects typing his own scripture
     public Scripture(){
@@ -25,8 +26,8 @@ class Scripture {
             Word newWord = new Word(word);
             _words.Add(newWord);
         }
-        wordCount = _words.Count();
-        _visibleWords = wordCount;
+        _wordCount = _words.Count();
+        // _visibleWords = _wordCount;
     }
 // Method that prints to Console all the words saved in the _words list.
     public void DisplayScripture(){
@@ -40,68 +41,105 @@ class Scripture {
         
     }
 //  Main method
-    public void StartHidding(){
+    public void HideWords(){
           // Obtain the total number of words in the _word variable.
         int hiddenUpTo = 0;
-        _hiddenWords.Clear();
+        // _hiddenWordsList.Clear();
             
             Random rnd = new Random();
             //  1. Select the number of X number of words to hide, ranging from 1 to 1/5 of the total
             
-            int amountToHide;
+            _amountToHide = 0;
 
-            if(_visibleWords > 15){
-                amountToHide = rnd.Next(3, _visibleWords/5);
+            if(_hiddenWordsList.Count() < _wordCount * .6){
+                _amountToHide = rnd.Next(_wordCount/10, _wordCount/5);
             }
-            else if(_visibleWords > 6){
-                amountToHide = 3;
+            else if(_hiddenWordsList.Count() < _wordCount * .15){
+                _amountToHide = rnd.Next(_wordCount/20, _wordCount/10);
             }
-            else{
-                amountToHide = 2;
+            else if(_hiddenWordsList.Count() > 2){
+                _amountToHide = 2;
+            }else{
+                _amountToHide = 1;
             }
 
 
-            // Console.WriteLine("AMOUNT TO HIDE: " + amountToHide);
+            // Console.WriteLine("AMOUNT TO HIDE: " + _amountToHide);
             //  Create an array of the same X size as the words we are going to hide.
-            int[] selectedWords = new int[amountToHide];
+            int[] selectedWords = new int[_amountToHide];
             
             Random randFill = new Random();
             // 2. Here we select WHAT words will be hidden. So, we fill the array with random numbers, from 0 to the last word in the array.
-            for (int i = 0; i < amountToHide; i++){
-                selectedWords[i] = randFill.Next(0, wordCount - 1);
+
+            // Console.WriteLine("Amount to hide: " + _amountToHide);
+            for (int i = 0; i < _amountToHide; i++){
+                selectedWords[i] = randFill.Next(0, _wordCount - 1);
             }
             // Now we know 1. How many words we are going to hide and 2.What words are those.
 
             //  Now we iterate thorugh the list and hide those words.
-            for(int i = 0; i < amountToHide; i++ ){
+            for(int i = 0; i < _amountToHide; i++ ){
                 
                 if(_words[selectedWords[i]]._hidden == false){
                     _words[selectedWords[i]]._hidden = true;
-                    _hiddenWords.Add(selectedWords[i]);
+                    _hiddenWordsList.Add(selectedWords[i]);
+                    // Console.WriteLine("hidden words: " + _hiddenWordsList.Count());
                 }else{
-                    for(int j = hiddenUpTo;j < wordCount; j++, hiddenUpTo++){
+                    for(int j = hiddenUpTo;j < _wordCount; j++, hiddenUpTo++){
                         // Console.WriteLine("PALABRA: " + j + " = " + _words[j]._word);
                         if(_words[j]._hidden == false){
                             _words[j]._hidden = true;
-                            _hiddenWords.Add(j);
+                            _hiddenWordsList.Add(j);
                             break;
                         }
-                        if(hiddenUpTo >= wordCount){
-                            amountToHide = 0;
+                        if(hiddenUpTo >= _wordCount){
+                            // _amountToHide = 0;
                             // key = "quit";
                             break;
                         }
                     }
-                }
+                }                
             }
-            _visibleWords -= amountToHide;
-            Console.WriteLine("WORDS VISIBLE: " + _visibleWords);
+            // _visibleWords -= _amountToHide;
+            // Console.WriteLine("WORDS VISIBLE: " + _visibleWords);
             // Console.WriteLine("hiddenUpTo: " + hiddenUpTo);
             // Console.Clear();
-            DisplayScripture();
-            // Console.WriteLine("HIDDEN WORDS: " + _hiddenWords);
-            // for(int i = 0; i<_hiddenWords.Count; i++){
-            //     Console.WriteLine(_hiddenWords[i]);
+            
+            // Console.WriteLine("HIDDEN WORDS: " + _hiddenWordsList);
+            // for(int i = 0; i<_hiddenWordsList.Count; i++){
+            //     Console.WriteLine(_hiddenWordsList[i]);
             // }
+    }
+
+    public void unhideWords(){
+        // Console.WriteLine("No. of hidden WORDS: " + _hiddenWordsList.Count());
+        //     for(int i = 0; i<_hiddenWordsList.Count(); i++){
+        //         Console.WriteLine(_hiddenWordsList[i] + " : " + _words[_hiddenWordsList[i]]._word);
+        //     }
+
+        if(_hiddenWordsList.Count() > 0){
+            Random rnd2 = new Random();
+            _amountToHide = 0;
+
+            if(_hiddenWordsList.Count() > _wordCount * .6){
+                _amountToHide = rnd2.Next(_wordCount/10, _wordCount/5);
+            }
+            else if(_hiddenWordsList.Count() > _wordCount * .15){
+                _amountToHide = rnd2.Next(_wordCount/20, _wordCount/10);
+            }
+            else{
+                _amountToHide = 2;
+            }
+            // Console.WriteLine("_amountToHide: "+ _amountToHide);
+
+            for(int j = _amountToHide -1;j >= 0; j--){
+                if(_hiddenWordsList.Count() > 0){
+                    _words[_hiddenWordsList[j]]._hidden = false;
+                    _hiddenWordsList.RemoveAt(j);
+                }else{
+                    break;
+                }
+            }
+        }
     }
 }
