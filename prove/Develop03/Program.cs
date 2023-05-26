@@ -33,7 +33,22 @@ class Program
             }
         Console.Clear();
         scripture1.DisplayScripture();
-        scripture1.StartHidding();
+        
+        string key;
+
+        do{
+            
+            Console.WriteLine("\nPress Enter to hide more words, or quit to finish:");
+            key = Console.ReadLine();
+
+            scripture1.StartHidding();
+
+        }while((scripture1._visibleWords > 0) && (key != "quit"));
+
+
+
+
+        Console.Clear();        
         Console.WriteLine("\nThanks for Playing!\n");
     }
 }

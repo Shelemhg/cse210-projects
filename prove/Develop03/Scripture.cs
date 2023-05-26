@@ -1,6 +1,9 @@
 class Scripture {
     public Reference _reference = new Reference();
     public List<Word> _words = new List<Word>();
+    public int _visibleWords;
+    public int wordCount;
+    private List<int> _hiddenWords = new List<int>();
 
 //  Default constructor in case user rejects typing his own scripture
     public Scripture(){
@@ -22,6 +25,8 @@ class Scripture {
             Word newWord = new Word(word);
             _words.Add(newWord);
         }
+        wordCount = _words.Count();
+        _visibleWords = wordCount;
     }
 // Method that prints to Console all the words saved in the _words list.
     public void DisplayScripture(){
@@ -36,24 +41,19 @@ class Scripture {
     }
 //  Main method
     public void StartHidding(){
-          // Obtain the total number of words in the _word variable,
-        int wordCount = _words.Count();
-        int visibleWords = wordCount;
-        string key;
+          // Obtain the total number of words in the _word variable.
         int hiddenUpTo = 0;
-
-        do {
-            Console.WriteLine("\nPress Enter to hide more words, or quit to finish:");
-            key = Console.ReadLine();
+        _hiddenWords.Clear();
+            
             Random rnd = new Random();
             //  1. Select the number of X number of words to hide, ranging from 1 to 1/5 of the total
             
             int amountToHide;
 
-            if(visibleWords > 15){
-                amountToHide = rnd.Next(3, visibleWords/5);
+            if(_visibleWords > 15){
+                amountToHide = rnd.Next(3, _visibleWords/5);
             }
-            else if(visibleWords > 6){
+            else if(_visibleWords > 6){
                 amountToHide = 3;
             }
             else{
@@ -75,30 +75,33 @@ class Scripture {
             //  Now we iterate thorugh the list and hide those words.
             for(int i = 0; i < amountToHide; i++ ){
                 
-                //   TODO:   Meter un do While que itere en todo el arreglo hasta que encuentre una palabra con hidden = false
                 if(_words[selectedWords[i]]._hidden == false){
                     _words[selectedWords[i]]._hidden = true;
+                    _hiddenWords.Add(selectedWords[i]);
                 }else{
                     for(int j = hiddenUpTo;j < wordCount; j++, hiddenUpTo++){
                         // Console.WriteLine("PALABRA: " + j + " = " + _words[j]._word);
                         if(_words[j]._hidden == false){
                             _words[j]._hidden = true;
+                            _hiddenWords.Add(j);
                             break;
                         }
                         if(hiddenUpTo >= wordCount){
                             amountToHide = 0;
-                            key = "quit";
+                            // key = "quit";
                             break;
                         }
                     }
                 }
             }
-            visibleWords -= amountToHide;
-            // Console.WriteLine("WORDS VISIBLE: " + visibleWords);
+            _visibleWords -= amountToHide;
+            Console.WriteLine("WORDS VISIBLE: " + _visibleWords);
             // Console.WriteLine("hiddenUpTo: " + hiddenUpTo);
-            Console.Clear();
+            // Console.Clear();
             DisplayScripture();
-
-        }while((visibleWords > 0) && (key != "quit"));
+            // Console.WriteLine("HIDDEN WORDS: " + _hiddenWords);
+            // for(int i = 0; i<_hiddenWords.Count; i++){
+            //     Console.WriteLine(_hiddenWords[i]);
+            // }
     }
 }
