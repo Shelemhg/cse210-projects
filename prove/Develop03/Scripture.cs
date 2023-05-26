@@ -98,6 +98,7 @@ class Scripture {
             visibleWords -= amountToHide;
             // Console.WriteLine("WORDS VISIBLE: " + visibleWords);
             // Console.WriteLine("hiddenUpTo: " + hiddenUpTo);
+            Console.Clear();
             DisplayScripture();
 
         }while((visibleWords > 0) && (key != "quit"));

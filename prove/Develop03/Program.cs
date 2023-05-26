@@ -32,6 +32,6 @@ class Program
                 scripture1 = new Scripture();                
             }
         scripture1.StartHidding();
-        Console.WriteLine("Thanks for Playing!");
+        Console.WriteLine("\nThanks for Playing!\n");
     }
 }
