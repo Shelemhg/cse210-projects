@@ -7,6 +7,8 @@ public class Reference {
         return _book + " " + _chapter + ":" + _verse;
     }
 
+    public Reference(){        
+    }
     public Reference(string book){
         _book = book;
     }
