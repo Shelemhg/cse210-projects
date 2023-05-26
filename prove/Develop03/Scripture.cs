@@ -63,7 +63,7 @@ class Scripture {
             }
 
 
-            Console.WriteLine("AMOUNT TO HIDE: " + amountToHide);
+            // Console.WriteLine("AMOUNT TO HIDE: " + amountToHide);
             //  Create an array of the same X size as the words we are going to hide.
             int[] selectedWords = new int[amountToHide];
             
@@ -82,7 +82,7 @@ class Scripture {
                     _words[selectedWords[i]]._hidden = true;
                 }else{
                     for(int j = hiddenUpTo;j < wordCount; j++, hiddenUpTo++){
-                        Console.WriteLine("PALABRA: " + j + " = " + _words[j]._word);
+                        // Console.WriteLine("PALABRA: " + j + " = " + _words[j]._word);
                         if(_words[j]._hidden == false){
                             _words[j]._hidden = true;
                             break;
@@ -96,8 +96,8 @@ class Scripture {
                 }
             }
             visibleWords -= amountToHide;
-            Console.WriteLine("WORDS VISIBLE: " + visibleWords);
-            Console.WriteLine("hiddenUpTo: " + hiddenUpTo);
+            // Console.WriteLine("WORDS VISIBLE: " + visibleWords);
+            // Console.WriteLine("hiddenUpTo: " + hiddenUpTo);
             DisplayScripture();
 
         }while((visibleWords > 0) && (key != "quit"));
