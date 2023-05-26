@@ -48,13 +48,13 @@ class Program
                 // scripture1.DisplayScripture();
             }
             else if (input.Key == ConsoleKey.Backspace){
-                Console.WriteLine("BACKSPACE");
+                // Console.WriteLine("BACKSPACE");
                 scripture1.unhideWords();
                 // scripture1.DisplayScripture();
             }else if (input.Key == ConsoleKey.Escape){
                 break;
             }
-            Console.Clear();
+            // Console.Clear();
             scripture1.DisplayScripture();
             // Console.WriteLine("\n\nHIDDEN words: " + scripture1._hiddenWordsList.Count() + " < Visible: " + scripture1._words.Count());
 
