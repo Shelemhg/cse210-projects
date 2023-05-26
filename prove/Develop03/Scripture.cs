@@ -36,9 +36,7 @@ class Scripture {
     }
 //  Main method
     public void StartHidding(){
-        
-        DisplayScripture();
-        // Obtain the total number of words in the _word variable,
+          // Obtain the total number of words in the _word variable,
         int wordCount = _words.Count();
         int visibleWords = wordCount;
         string key;

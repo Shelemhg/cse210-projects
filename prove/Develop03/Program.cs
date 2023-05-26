@@ -31,6 +31,8 @@ class Program
             else if(selection.ToLower() == "n"){
                 scripture1 = new Scripture();                
             }
+        Console.Clear();
+        scripture1.DisplayScripture();
         scripture1.StartHidding();
         Console.WriteLine("\nThanks for Playing!\n");
     }
