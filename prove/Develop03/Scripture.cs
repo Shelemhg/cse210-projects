@@ -2,17 +2,18 @@ class Scripture {
     public Reference _reference = new Reference();
     public List<Word> _words = new List<Word>();
 
-       public Scripture(){
+//  Default constructor in case user rejects typing his own scripture
+    public Scripture(){
         
         string defaultScripture = "And if men come unto me I will show unto them their weakness. I give unto men weakness that they may be humble; and my grace is sufficient for all men that humble themselves before me; for if they humble themselves before me, and have faith in me, then will I make weak things become strong unto them.";
 
         saveScripture(defaultScripture);
     }
-
+//  Constructor in case user decides to type his own scripture
     public Scripture(string newScripture){
         saveScripture(newScripture);
     }
-
+//  Method that takes the any text as argument, then saves all the words in the _words List variable of the Scripture class.
     public void saveScripture(string newScripture){
         
         string[] words = newScripture.Split(' ');
@@ -22,7 +23,7 @@ class Scripture {
             _words.Add(newWord);
         }
     }
-
+// Method that prints to Console all the words saved in the _words list.
     public void DisplayScripture(){
 
         string scripture = "";
@@ -33,22 +34,19 @@ class Scripture {
         Console.WriteLine(scripture);
         
     }
-
+//  Main method
     public void RunProgram(){
         
         DisplayScripture();
-
+        // Obtain the total number of words in the _word variable,
         int wordCount = _words.Count();
         int visibleWords = wordCount;
         string key;
-        // Console.WriteLine(key != "quit");
-        // Console.WriteLine("visibleWords" + visibleWords + "<");
-        // Console.WriteLine("wordCount" + wordCount);
         int hiddenUpTo = 0;
+
         do {
             Console.WriteLine("\nPress Enter to hide more words, or quit to finish:");
             key = Console.ReadLine();
-            // Console.WriteLine("olake ase");
             Random rnd = new Random();
             //  1. Select the number of X number of words to hide, ranging from 1 to 1/5 of the total
             
@@ -102,11 +100,6 @@ class Scripture {
             Console.WriteLine("hiddenUpTo: " + hiddenUpTo);
             DisplayScripture();
 
-             
-            // Console.WriteLine("olake mira");
         }while((visibleWords > 0) && (key != "quit"));
-        // }while((visibleWords <= wordCount) );
     }
-
-
 }
