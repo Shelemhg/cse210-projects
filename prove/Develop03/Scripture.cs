@@ -2,7 +2,8 @@ class Scripture {
     public Reference _reference = new Reference();
     public List<Word> _words = new List<Word>();
     public int _wordCount = 0;
-    public List<int> _hiddenWordsList = new List<int>();
+    // public List<int> _hiddenWordsList = new List<int>();
+    public Stack<int> _hiddenWordsList = new Stack<int>();
     // private List<int> _delPerTurn = new List<int>();
     private Stack<int> _delPerTurn = new Stack<int>();
     public int _hiddenUpTo = -1;
@@ -84,18 +85,18 @@ class Scripture {
             for (int i = 0; i < amountToHide; i++){               
                 if(_words[selectedWords[i]]._hidden == false){
                     _words[selectedWords[i]]._hidden = true;
-                    _hiddenWordsList.Add(selectedWords[i]);
+                    _hiddenWordsList.Push(selectedWords[i]);
                 }else{
                     for(int j = _hiddenUpTo + 1; j < _wordCount; j++){
                         //  Starting from 0: If the word is visible, hide it 
                         if(_words[j]._hidden == false){
                             _words[j]._hidden = true;
-                            _hiddenWordsList.Add(j);
+                            _hiddenWordsList.Push(j);
                             _hiddenUpTo = j;
                             break;
-                        }
-                        _hiddenUpTo = j;
-                        //  If the word is now hidden or was hidden initially, we started from 0, so, UPDATE _hiddenUpTo;                        
+                        }                        
+                        //  If the word is now hidden or was hidden initially, we started from 0, so, UPDATE _hiddenUpTo;     
+                        _hiddenUpTo = j;                   
                     }
                 }
             }
@@ -108,13 +109,13 @@ class Scripture {
             // Iterate j from 0 up to the number of words deleted the last turn, so we can unhide that many
             for(int j = 0;j < _delPerTurn.Peek(); j++){
                 //  CHECK if the word you just unhide has a smaller index than _hiddenUpTo, if that's the case UPDATE _hiddenUpTo with that new value.
-                if(_hiddenWordsList[_hiddenWordsList.Count()-1] <= _hiddenUpTo){
-                    _hiddenUpTo = _hiddenWordsList[_hiddenWordsList.Count()-1]-1;
+                if(_hiddenWordsList.Peek() <= _hiddenUpTo){
+                    _hiddenUpTo = _hiddenWordsList.Peek() - 1;
                 }
                 //  From the list of all the hidden words, UNHIDE the last one
-                _words[_hiddenWordsList[_hiddenWordsList.Count()-1]]._hidden = false;
+                _words[_hiddenWordsList.Peek()]._hidden = false;
                 //  Because it has been unhiden, now REMOVE the index from the list
-                _hiddenWordsList.RemoveAt(_hiddenWordsList.Count()-1);
+                _hiddenWordsList.Pop();
             }
             _delPerTurn.Pop();
         }
