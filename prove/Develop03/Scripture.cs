@@ -70,10 +70,7 @@ class Scripture {
             int amountToHide = GenerateAmountToHide();
             //  The number of words deleted this turn was amountToHide
             _delPerTurn.Push(amountToHide);
-            //  Create an array of the same X size as the words we are going to hide.
-            // selectedWords.Clear();
-            // Array.Clear(selectedWords, 0, selectedWords.Length);
-            
+            //  Create an array of the same X size as the words we are going to hide.            
             int[] selectedWords = new int[amountToHide];
             // 2. Here we select WHAT words will be hidden. So, we fill the array with random numbers, from 0 to the last word in the array.
             Random rndWordSelection = new Random();
@@ -90,7 +87,7 @@ class Scripture {
                     _hiddenWordsList.Add(selectedWords[i]);
                 }else{
                     for(int j = _hiddenUpTo + 1; j < _wordCount; j++){
-                        //  Starting from 0, if the word is visible, hide it 
+                        //  Starting from 0: If the word is visible, hide it 
                         if(_words[j]._hidden == false){
                             _words[j]._hidden = true;
                             _hiddenWordsList.Add(j);
@@ -98,44 +95,22 @@ class Scripture {
                             break;
                         }
                         _hiddenUpTo = j;
-                        //  If the word is now hidden or was hidden, we started from 0, so, Update _hiddenUpTo;                        
+                        //  If the word is now hidden or was hidden initially, we started from 0, so, UPDATE _hiddenUpTo;                        
                     }
                 }
             }
-            // for(int i = 0; i < amountToHide; i++ ){
-            //     // Are all the words hidden? then ignore this for loop
-            //     if(_hiddenUpTo > _wordCount){
-            //         Console.WriteLine("BRAKE");
-            //         break;
-            //     }
-            //     if(_words[selectedWords[i]]._hidden == false){
-            //         _words[selectedWords[i]]._hidden = true;
-            //         _hiddenWordsList.Add(selectedWords[i]);
-            //     }else{
-            //         for(int j = _hiddenUpTo;j < _wordCount; j++, _hiddenUpTo++){
-            //             if(_words[j]._hidden == false){
-            //                 _words[j]._hidden = true;
-            //                 _hiddenWordsList.Add(j);
-            //                 break;
-            //             }                        
-            //         }
-            //     }                
-            // }
-            
     }
 
     public void UnhideWords(){
         // Console.WriteLine("Unhide");
         // If there are still hidden words...
-        // if (_hiddenWordsList.Count() > 0 && _hiddenWordsList[_hiddenWordsList.Count - 1] < _words.Count){
             if (_hiddenWordsList.Count() > 0 ){
             // Iterate j from 0 up to the number of words deleted the last turn, so we can unhide that many
             for(int j = 0;j < _delPerTurn.Peek(); j++){
-                //  Not too important but: CHECK if the word you just unhide has a smaller index than _hiddenUpTo, so you can update _hiddenUpTo with that new value.
+                //  CHECK if the word you just unhide has a smaller index than _hiddenUpTo, if that's the case UPDATE _hiddenUpTo with that new value.
                 if(_hiddenWordsList[_hiddenWordsList.Count()-1] <= _hiddenUpTo){
                     _hiddenUpTo = _hiddenWordsList[_hiddenWordsList.Count()-1]-1;
                 }
-                //???????? It fails some times, like 1 in 20 attempts, wtf
                 //  From the list of all the hidden words, UNHIDE the last one
                 _words[_hiddenWordsList[_hiddenWordsList.Count()-1]]._hidden = false;
                 //  Because it has been unhiden, now REMOVE the index from the list
