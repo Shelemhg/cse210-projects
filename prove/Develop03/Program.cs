@@ -5,9 +5,17 @@ Exceeding Requirements:
 For this program I:
 
 
-1. Added the posibility for the user to type any scripture or text he wishes and then work with it to run the program.
+1. Updated the inputs to ENTER, BACKSPACE and ESC as main drivers of the program
+
+2. The program can receive any text and help you memorize it
+
+3. The program contains a "History" of how many words were hidden every round, and what words were hidden. So if the last attempt to hide more words failed, you can just back track and move a step back. But not any step, but THE EXACT STEP you took. Meaning the program can take you back all the way to the last position you felt comfortable reciting.
+
 
 2. The program can take both scriptures or random texts.
+
+
+The program selects random words to hide OR starts hidding from the begining. Why? Because the words that you memorize first are those at the begining, so we hide them first instead of other words at the end that are harder to memorize.
 */
 using System;
 
@@ -15,28 +23,34 @@ class Program
 {
     static void Main(string[] args)
     {
+        Console.Clear();
         
-        string selection;
-        Console.WriteLine("Would you like to add your own scripture? (y/n)(quit):");
-        selection = "n";
-
+        string selection = null;
+        
         Scripture scripture1 = null;
-        
-            if (selection.ToLower() == "y"){
-                Console.WriteLine(" Enter the new scripture and hit Enter:");
-                string newScripture = Console.ReadLine();
-                scripture1 = new Scripture(newScripture);
-            }
-            else if(selection.ToLower() == "n"){
-                scripture1 = new Scripture();                
-            }
+
+        do{
+            Console.WriteLine("Would you like to add your own scripture? (y/n)(quit):");
+            // selection = "n";
+            selection = Console.ReadLine();
+
+            
+                if (selection.ToLower() == "y"){
+                    Console.WriteLine(" Enter the new scripture and hit Enter:");
+                    string newScripture = Console.ReadLine();
+                    scripture1 = new Scripture(newScripture);
+                }
+                else if(selection.ToLower() == "n"){
+                    scripture1 = new Scripture();                
+                }
+        }while(selection.ToLower() != "y" && selection.ToLower() != "n");
 
         Console.Clear();
         scripture1.DisplayScripture();        
         ConsoleKeyInfo input;
 
         do{
-            Console.WriteLine("\nPress Enter to hide more words, or quit to finish:");
+            Console.WriteLine("\nPress:\n\n ENTER - to hide more words\n BACKSPACE - to unhide the last words hidden or \n ESC - to end the program:");
             input = Console.ReadKey();
             
             if(input.Key == ConsoleKey.Enter){

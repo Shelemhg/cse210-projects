@@ -48,10 +48,10 @@ class Scripture {
         Random rnd = new Random();
         int amountToHide;
         if(_hiddenWordsList.Count() < _wordCount * .6){
-                amountToHide = rnd.Next(_wordCount/10, _wordCount/5);
+                amountToHide = rnd.Next(_wordCount/15, _wordCount/7);
             }
             else if(_hiddenWordsList.Count() < _wordCount * .15){
-                amountToHide = rnd.Next(_wordCount/20, _wordCount/10);
+                amountToHide = rnd.Next(_wordCount/23, _wordCount/15);
             }
             else if(_hiddenWordsList.Count() > 3){
                 amountToHide = 3;
@@ -62,12 +62,13 @@ class Scripture {
             if(amountToHide > _wordCount - _hiddenWordsList.Count()){
                amountToHide = _wordCount - _hiddenWordsList.Count();
             }
+            if(amountToHide == 0){
+                amountToHide = 1;
+            }
         return amountToHide;
     }
 //  Main method
-    public void HideWords(){
-          // Obtain the total number of words in the _word variable.
-                        
+    public void HideWords(){                        
             //  1. Select the number of X number of words to hide, the range depends on visible words.
             int amountToHide = GenerateAmountToHide();
             //  The number of words deleted this turn was amountToHide
@@ -86,16 +87,16 @@ class Scripture {
                     _words[selectedWords[i]]._hidden = true;
                     _hiddenWordsList.Push(selectedWords[i]);
                 }else{
-                    for(int j = _hiddenUpTo + 1; j < _wordCount; j++){
+                    for(int j = _hiddenUpTo + 1; j < _wordCount; j++, _hiddenUpTo++){
                         //  Starting from 0: If the word is visible, hide it 
                         if(_words[j]._hidden == false){
                             _words[j]._hidden = true;
                             _hiddenWordsList.Push(j);
-                            _hiddenUpTo = j;
+                            // _hiddenUpTo = j;
                             break;
                         }                        
                         //  If the word is now hidden or was hidden initially, we started from 0, so, UPDATE _hiddenUpTo;     
-                        _hiddenUpTo = j;                   
+                        // _hiddenUpTo = j;                   
                     }
                 }
             }
