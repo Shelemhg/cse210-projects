@@ -28,7 +28,6 @@ class Scripture {
             _words.Add(newWord);
         }
         _wordCount = _words.Count();
-        // _visibleWords = _wordCount;
     }
 // Method that prints to Console all the words saved in the _words list.
     public void DisplayScripture(){
@@ -59,6 +58,11 @@ class Scripture {
             }else{
                 _amountToHide = 1;
             }
+            // If the random No. _amountToHide happens to be larger than words Visible, then HIDE ONLY the visible amount
+            if(_amountToHide > _wordCount - _hiddenWordsList.Count()){
+               _amountToHide = _wordCount - _hiddenWordsList.Count();
+            }
+            //  The number of words deleted this turn was _amountToHide
             _delPerTurn.Add(_amountToHide);
 
             //  Create an array of the same X size as the words we are going to hide.
@@ -96,19 +100,18 @@ class Scripture {
     }
 
     public void UnhideWords(){
-        Console.WriteLine("Unhide");
+        // Console.WriteLine("Unhide");
         // If there are still hidden words...
-        if(_hiddenWordsList.Count() > 0){
+        if (_hiddenWordsList.Count() > 0 && _hiddenWordsList[_hiddenWordsList.Count - 1] < _words.Count){
             // Iterate j from 0 up to the number of words deleted the last turn, so we can unhide that many
             for(int j = 0;j < _delPerTurn[_delPerTurn.Count()-1]; j++){
-                //????????
-                //  From the list of all the hidden words, UNHIDE the last one
-                _words[_hiddenWordsList[_hiddenWordsList.Count()-1]]._hidden = false;
-                
                 //  Not too important but: CHECK if the word you just unhide has a smaller index than hiddenUpTo, so you can update hiddenUpTo with that new value.
                 if(_hiddenWordsList[_hiddenWordsList.Count()-1] < hiddenUpTo -1){
                     hiddenUpTo = _hiddenWordsList[_hiddenWordsList.Count()-1];
                 }
+                //???????? It fails some times, like 1 in 20 attempts, wtf
+                //  From the list of all the hidden words, UNHIDE the last one
+                _words[_hiddenWordsList[_hiddenWordsList.Count()-1]]._hidden = false;
                 //  Because it has been unhiden, now REMOVE the index from the list
                 _hiddenWordsList.RemoveAt(_hiddenWordsList.Count()-1);
             }
