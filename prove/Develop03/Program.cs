@@ -49,7 +49,7 @@ class Program
             }
             else if (input.Key == ConsoleKey.Backspace){
                 // Console.WriteLine("BACKSPACE");
-                scripture1.unhideWords();
+                scripture1.UnhideWords();
                 // scripture1.DisplayScripture();
             }else if (input.Key == ConsoleKey.Escape){
                 break;

@@ -67,13 +67,17 @@ class Scripture {
             _numHiddenList.Add(_amountToHide);
 
             // Console.WriteLine("AMOUNT TO HIDE: " + _amountToHide);
+
+
+
+
+
             //  Create an array of the same X size as the words we are going to hide.
             int[] selectedWords = new int[_amountToHide];
             
             Random randFill = new Random();
             // 2. Here we select WHAT words will be hidden. So, we fill the array with random numbers, from 0 to the last word in the array.
 
-            // Console.WriteLine("Amount to hide: " + _amountToHide);
             for (int i = 0; i < _amountToHide; i++){
                 selectedWords[i] = randFill.Next(0, _wordCount - 1);
             }
@@ -130,7 +134,7 @@ class Scripture {
             
     }
 
-    public void unhideWords(){
+    public void UnhideWords(){
         // Console.WriteLine("No. of hidden WORDS: " + _hiddenWordsList.Count());
         //     for(int i = 0; i<_hiddenWordsList.Count(); i++){
         //         Console.WriteLine(_hiddenWordsList[i] + " : " + _words[_hiddenWordsList[i]]._word);
