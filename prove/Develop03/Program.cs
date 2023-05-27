@@ -18,7 +18,6 @@ class Program
         
         string selection;
         Console.WriteLine("Would you like to add your own scripture? (y/n)(quit):");
-        // selection = Console.ReadLine();
         selection = "n";
 
         Scripture scripture1 = null;
@@ -31,39 +30,27 @@ class Program
             else if(selection.ToLower() == "n"){
                 scripture1 = new Scripture();                
             }
+
         Console.Clear();
-        scripture1.DisplayScripture();
-        
+        scripture1.DisplayScripture();        
         ConsoleKeyInfo input;
 
         do{
-            
             Console.WriteLine("\nPress Enter to hide more words, or quit to finish:");
-            // key = Console.ReadLine();
-            // input = string.Empty;
             input = Console.ReadKey();
             
             if(input.Key == ConsoleKey.Enter){
                 scripture1.HideWords();
-                // scripture1.DisplayScripture();
             }
             else if (input.Key == ConsoleKey.Backspace){
-                // Console.WriteLine("BACKSPACE");
                 scripture1.UnhideWords();
-                // scripture1.DisplayScripture();
             }else if (input.Key == ConsoleKey.Escape){
                 break;
             }
             Console.Clear();
             scripture1.DisplayScripture();
-            // Console.WriteLine("\n\nHIDDEN words: " + scripture1._hiddenWordsList.Count() + " < Visible: " + scripture1._words.Count());
-
-        // }while((scripture1._visibleWords > 0) && (key != "quit"));
+            
         }while((scripture1._hiddenWordsList.Count() < scripture1._words.Count()));
-        // }while(true);
-        // Console.WriteLine("KEY" +input.Key);
-
-
 
         Console.Clear();
         scripture1.DisplayScripture();        

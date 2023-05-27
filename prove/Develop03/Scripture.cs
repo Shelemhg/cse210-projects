@@ -1,6 +1,7 @@
 class Scripture {
     public Reference _reference = new Reference();
     public List<Word> _words = new List<Word>();
+    //  defined in SaveScripture Function
     public int _wordCount = 0;
     // public List<int> _hiddenWordsList = new List<int>();
     public Stack<int> _hiddenWordsList = new Stack<int>();
@@ -79,9 +80,7 @@ class Scripture {
             for (int i = 0; i < amountToHide; i++){
                 selectedWords[i] = rndWordSelection.Next(0, _wordCount - 1);
             }
-            // Now we know 1. How many words we are going to hide and 2.What words are those.
-
-            //  Now we iterate thorugh the list and hide those words.
+            // Now we know 1. How many words we are going to hide and 2.What words are those we iterate thorugh the list and hide those words.
             for (int i = 0; i < amountToHide; i++){               
                 if(_words[selectedWords[i]]._hidden == false){
                     _words[selectedWords[i]]._hidden = true;
@@ -103,7 +102,6 @@ class Scripture {
     }
 
     public void UnhideWords(){
-        // Console.WriteLine("Unhide");
         // If there are still hidden words...
             if (_hiddenWordsList.Count() > 0 ){
             // Iterate j from 0 up to the number of words deleted the last turn, so we can unhide that many
