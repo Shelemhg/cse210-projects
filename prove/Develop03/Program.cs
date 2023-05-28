@@ -41,12 +41,13 @@ class Program
                     scripture1 = new Scripture(newScripture);
                 }
                 else if(selection.ToLower() == "n"){
-                    scripture1 = new Scripture();                
+                    scripture1 = new Scripture();              
                 }
         }while(selection.ToLower() != "y" && selection.ToLower() != "n");
 
         Console.Clear();
-        scripture1.DisplayScripture();        
+        scripture1.DisplayScripture();   
+        scripture1.DisplayReference();     
         ConsoleKeyInfo input;
 
         do{
@@ -64,7 +65,7 @@ class Program
             Console.Clear();
             scripture1.DisplayScripture();
             
-        }while((scripture1._hiddenWordsList.Count() < scripture1._words.Count()));
+        }while((scripture1._hiddenWordsList.Count() < scripture1._wordCount));
 
         Console.Clear();
         scripture1.DisplayScripture();        

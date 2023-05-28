@@ -4,7 +4,7 @@ public class Reference {
     private string _verse;
 
     public string Display(){
-        return _book + " " + _chapter + ":" + _verse;
+        return "- " + _book + " " + _chapter + ":" + _verse;
     }
 
     public Reference(){        
