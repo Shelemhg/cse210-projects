@@ -9,11 +9,9 @@ For this program I:
 
 2. The program can receive any text and help you memorize it
 
-3. The program contains a "History" of how many words were hidden every round, and what words were hidden. So if the last attempt to hide more words failed, you can just back track and move a step back. But not any step, but THE EXACT STEP you took. Meaning the program can take you back all the way to the last position you felt comfortable reciting.
+3. The program contains a "History" of how many words were hidden every round, and what words were hidden. So if in the last attempt to hide more words the user fails, he can just back track and move a step back in 1 click. But not any step, but THE EXACT STEP he took. Meaning the program can take him back all the way until he finds a past point where he felt comfortable reciting.
 
-
-2. The program can take both scriptures or random texts.
-
+- Finally, attention to the detail:
 
 The program selects random words to hide OR starts hidding from the begining. Why? Because the words that you memorize first are those at the begining, so we hide them first instead of other words at the end that are harder to memorize.
 */
