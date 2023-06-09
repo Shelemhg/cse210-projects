@@ -25,10 +25,17 @@ class Program
                     BreathingActivity breathingActivity1 = new BreathingActivity();
                     breathingActivity1.RunBreathing();
                     break;
+
                 case "2":
+                    ReflectionActivity reflexionActivity1 = new ReflectionActivity();
+                    reflexionActivity1.RunReflection();                
                     break;
+
                 case "3":
+                    ListingActivity listingActivity1 = new ListingActivity();
+                    listingActivity1.RunListing(); 
                     break;
+
                 case "4":
                     input = "4";
                     break;

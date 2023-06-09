@@ -7,10 +7,11 @@ public class BreathingActivity : Activity{
         _pause = 1000;
     }
     public void RunBreathing(){
-        Console.Write(_prompts[0]);
+        Console.Clear();
+        DisplayStartingMessage();
         SetDuration();
         PauseToBegin();
-        int timmer = _duration;
+        int timmer = _activityDuration;
 
         do{
             BreadIn();
