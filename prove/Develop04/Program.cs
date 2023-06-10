@@ -9,6 +9,7 @@ class Program
         
         string input = null;
         do{
+            Console.Clear();
             Console.WriteLine("- - - - - - - - - - - - - - - -");
             Console.WriteLine("-    M I N D F U L N E S S    -");
             Console.WriteLine("- - - - - - - - - - - - - - - -");

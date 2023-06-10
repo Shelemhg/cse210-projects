@@ -3,9 +3,11 @@ public class ReflectionActivity : Activity{
     private int _timePerQuestion;
     
     public ReflectionActivity(){
+       
+       _name ="Reflection Activity";
+        _description = "This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.\n";
+       
         _prompts = new List<string>();
-        _prompts.Add("This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.");
-        _prompts.Add("Reflection Activity");
         _prompts.Add("Think of a time when you stood up for someone else.");
         _prompts.Add("Think of a time when you did something really difficult.");
         _prompts.Add("Think of a time when you helped someone in need.");
@@ -23,46 +25,63 @@ public class ReflectionActivity : Activity{
         _timePerQuestion = 5000;
         _activityDuration = _timePerQuestion * _questions.Count();
     }
+
     public void RunReflection(){
+        
+        Random rnd = new Random();
+        // Select a random message, and then send it to the Display Prompt and Questions, for their use.
+        int numSelected = rnd.Next(0, _prompts.Count()-1);
+
         Console.Clear();
         DisplayStartingMessage();
+        Thread.Sleep(2000);
+        
+        SetDuration();      
+        Console.Clear();
+
+        DisplayPrompt(numSelected);
         Thread.Sleep(3000);
-        Random rnd = new Random();
-        // Select a random message ignoring the first 2 indexes, as they are the description and name of the activity, and send it to the Display Prompt and Questions, for their use.
-        int selected = rnd.Next(2, _prompts.Count()-1);
-        DisplayPrompt(selected);
-        DisplayQuestions(selected);
+
+        DisplayQuestions(numSelected);
+        Console.Clear(); 
+
         DisplayEndingMessage();
+        Thread.Sleep(4000);
+        Console.Clear();
     }
 
-    private void DisplayPrompt(int selected){
+    private void DisplayPrompt(int numSelected){
         Console.Write("- - - - - - - - - - - - - - - - - - - - -");
-        Console.Write("\n" + _prompts[selected]);
+        Console.Write("\n" + _prompts[numSelected]);
         Console.Write("\n- - - - - - - - - - - - - - - - - - - - -\n");
     }
-    private void DisplayQuestions(int selected){
-        for(int i = _questions.Count()-1;i >= 0; i--){
+
+    private void DisplayQuestions(int numSelected){
+        DateTime endTime = DateTime.Now.AddSeconds(_activityDuration); 
+        int i = 0;
+        do{
             Console.Write(_questions[i] + "\n");
+            i++;
             DisplaySpinner();
             Console.Clear();
-            DisplayPrompt(selected);
-        }
-        Console.Clear();   
+            DisplayPrompt(numSelected);
+        }while(DateTime.Now < endTime);
+          
     }
 
     private void DisplaySpinner(){
         int interval = 250;
         int timmer = _timePerQuestion;
         do{
-            Console.Write("|");
+            Console.Write("| ");
             Thread.Sleep(interval);
-            Console.Write("\b/");
+            Console.Write("\b\b/ ");
             Thread.Sleep(interval);
-            Console.Write("\b--");
+            Console.Write("\b\b--");
             Thread.Sleep(interval);
-            Console.Write("\b\b\\");
+            Console.Write("\b\b\\ ");
             Thread.Sleep(interval);
-            Console.Write("\b");
+            Console.Write("\b\b");
             timmer -= 1000;
         }while(timmer > 0);
     }

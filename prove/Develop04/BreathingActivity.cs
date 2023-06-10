@@ -1,25 +1,35 @@
 public class BreathingActivity : Activity{
     
     public BreathingActivity(){
+        
+        _name ="Breathing Activity";
+        _description = "This activity will help you relax by walking your through breathing in and out slowly. Clear your mind and focus on your breathing.\n";
         _prompts = new List<string>();
-        _prompts.Add("This activity will help you relax by walking your through breathing in and out slowly. Clear your mind and focus on your breathing.");
-        _prompts.Add("Breading Activity");
-        _pause = 1000;
+        _pause = 5; // In seconds
     }
+
     public void RunBreathing(){
         Console.Clear();
+        
         DisplayStartingMessage();
+        Thread.Sleep(4000);
+
         SetDuration();
+        Console.Clear();
+
         PauseToBegin();
         int timmer = _activityDuration;
 
         do{
+            Console.Clear();
             BreadIn();
             BreadOut();
             timmer -=10000;
         }while(timmer > 0);
 
-        DisplayEndingMessage();
+        DisplayEndingMessage();        
+        Thread.Sleep(4000);
+        Console.Clear();
     }
 
     private void BreadIn(){
@@ -30,6 +40,7 @@ public class BreathingActivity : Activity{
         }
         Console.Clear();     
     }
+
     private void BreadOut(){
         Console.Write("Breath Out...\n  ");
         for(int i = 4;i >= 0; i--){
