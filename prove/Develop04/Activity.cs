@@ -1,6 +1,6 @@
 public class Activity{
-    protected string _name;
-    protected string _description;
+    protected string _activityName;
+    protected string _activityDescription;
     protected int _activityDuration;
     protected int _pause;
     protected List<string> _prompts;
@@ -22,10 +22,15 @@ public class Activity{
     }
 
     protected void DisplayStartingMessage(){
-        Console.Write(_description + "\n");
+        Console.Write(_activityDescription + "\n");
     }
 
     protected void DisplayEndingMessage(){
-        Console.Write("You have completed " + _activityDuration + " seconds of the " + _name);
+        Console.Write("You have completed " + _activityDuration + " seconds of the " + _activityName);
+    }
+    protected void DisplayPrompt(int numSelected){
+        Console.Write("- - - - - - - - - - - - - - - - - - - - -");
+        Console.Write("\n" + _prompts[numSelected]);
+        Console.Write("\n- - - - - - - - - - - - - - - - - - - - -\n");
     }
 }

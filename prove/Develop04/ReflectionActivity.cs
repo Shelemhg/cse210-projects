@@ -4,8 +4,8 @@ public class ReflectionActivity : Activity{
     
     public ReflectionActivity(){
        
-       _name ="Reflection Activity";
-        _description = "This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.\n";
+       _activityName ="Reflection Activity";
+        _activityDescription = "This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.\n";
        
         _prompts = new List<string>();
         _prompts.Add("Think of a time when you stood up for someone else.");
@@ -35,7 +35,7 @@ public class ReflectionActivity : Activity{
         Console.Clear();
         DisplayStartingMessage();
         Thread.Sleep(2000);
-        
+
         SetDuration();      
         Console.Clear();
 
@@ -48,12 +48,6 @@ public class ReflectionActivity : Activity{
         DisplayEndingMessage();
         Thread.Sleep(4000);
         Console.Clear();
-    }
-
-    private void DisplayPrompt(int numSelected){
-        Console.Write("- - - - - - - - - - - - - - - - - - - - -");
-        Console.Write("\n" + _prompts[numSelected]);
-        Console.Write("\n- - - - - - - - - - - - - - - - - - - - -\n");
     }
 
     private void DisplayQuestions(int numSelected){

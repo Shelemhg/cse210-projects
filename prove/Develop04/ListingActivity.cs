@@ -3,8 +3,8 @@ public class ListingActivity : Activity{
     
     public ListingActivity(){
         
-        _name ="Listing Activity";
-        _description = "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.\n";
+        _activityName ="Listing Activity";
+        _activityDescription = "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.\n";
         _pause = 8; // In seconds
 
         _prompts = new List<string>();
@@ -46,12 +46,6 @@ public class ListingActivity : Activity{
         DisplayEndingMessage();        
         Thread.Sleep(4000);
         Console.Clear();
-    }
-
-    private void DisplayPrompt(int numSelected){
-        Console.Write("- - - - - - - - - - - - - - - - - - - - -");
-        Console.Write("\n" + _prompts[numSelected]);
-        Console.Write("\n- - - - - - - - - - - - - - - - - - - - -\n");
     }
 
     private void GetIdeas(int numSelected){
