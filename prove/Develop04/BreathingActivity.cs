@@ -18,18 +18,22 @@ public class BreathingActivity : Activity{
         Console.Clear();
 
         PauseToBegin();
-        int timmer = _activityDuration;
+        double timmer = _activityDuration;
 
         do{
             Console.Clear();
             BreadIn();
             BreadOut();
-            timmer -=10000;
+            timmer -=10;
         }while(timmer > 0);
-
+        if (_activityDuration < 10){
+            _activityDuration = 10;
+        }        
+        _numOfActivities += 1;
         DisplayEndingMessage();        
         Thread.Sleep(4000);
         Console.Clear();
+        _numOfActivities += 1;
     }
 
     private void BreadIn(){

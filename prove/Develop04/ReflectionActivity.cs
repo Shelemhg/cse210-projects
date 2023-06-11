@@ -39,12 +39,18 @@ public class ReflectionActivity : Activity{
         SetDuration();      
         Console.Clear();
 
+        DateTime startTime = DateTime.Now;
         DisplayPrompt(numSelected);
         Thread.Sleep(3000);
 
         DisplayQuestions(numSelected);
         Console.Clear(); 
 
+        
+        _numOfActivities += 1;
+        DateTime endTime = DateTime.Now;
+        TimeSpan elapsedTime = endTime - startTime;
+        _activityDuration = Math.Round(elapsedTime.TotalSeconds, 1);
         DisplayEndingMessage();
         Thread.Sleep(4000);
         Console.Clear();
@@ -59,6 +65,9 @@ public class ReflectionActivity : Activity{
             DisplaySpinner();
             Console.Clear();
             DisplayPrompt(numSelected);
+            if(i == _questions.Count()-1){
+                i = 0;
+            }
         }while(DateTime.Now < endTime);
           
     }

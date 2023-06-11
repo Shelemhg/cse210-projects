@@ -1,4 +1,21 @@
+/*
+Exceeds core requirements
+
+1. All the inputs are fool proof. As they have data validation and can take: strings, negative numbers and positive numbers. But the program will only continue if a positive int was entered.
+
+2. All the animations and countdowns show on the console without an annoying cursor right next to them. This for clear reading.
+
+3.The program keeps track of how many activities were performed.
+
+4.A precise way to count the time spent on the activities is implemented regardless of the time input, the activity let you finish and counts that time.
+
+*/
+
+
+
+
 using System;
+using System.Diagnostics;
 
 class Program
 {
@@ -38,7 +55,6 @@ class Program
                     break;
 
                 case "4":
-                    input = "4";
                     break;
             }
 

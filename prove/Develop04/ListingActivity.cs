@@ -36,15 +36,21 @@ public class ListingActivity : Activity{
             Console.Write(i + " ");
             Thread.Sleep(1000);
         }
-
+        DateTime startTime = DateTime.Now;
         GetIdeas(numSelected);
         Console.Clear();
+
+        DateTime endTime = DateTime.Now;
+        TimeSpan elapsedTime = endTime - startTime;
+        _activityDuration = Math.Round(elapsedTime.TotalSeconds, 1);
 
         DisplayIdeas();
         Thread.Sleep(3000);
 
+        
+        _numOfActivities += 1;
         DisplayEndingMessage();        
-        Thread.Sleep(4000);
+        Thread.Sleep(5000);
         Console.Clear();
     }
 
