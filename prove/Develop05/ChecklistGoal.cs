@@ -30,6 +30,22 @@ class ChecklistGoal : Goal{
         }
     }
 
+    public int GetNumberOfItems(){
+        return _records.Count();
+    }
+    public override int GetPorcentCompleted(){
+        double total = 0;
+        int percent = 0;
+        int itemsCompleted = 0;
+        foreach(KeyValuePair<string, Boolean> record in _records){
+            if(record.Value == true){
+                itemsCompleted ++;
+            }
+        }
+        total = itemsCompleted /_records.Count() * 100;
+        percent = (int)Math.Round(total);
+        return percent;
+    }
     public override void UpdateItem(int itemSelected){
         
         int i = 1;

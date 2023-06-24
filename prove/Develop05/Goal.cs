@@ -30,6 +30,12 @@ class Goal {
         return _completed;
     }
     
+    public virtual int GetNumberOfItems(){
+        return 0;
+    }
+    public virtual int GetPorcentCompleted(){
+        return 0;
+    }
     public int GetPoints(){
         return _points;
     }

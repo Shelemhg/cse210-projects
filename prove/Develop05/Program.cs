@@ -5,11 +5,11 @@ EXCEEDING REQUIREMENTS:
 
 - The checklist Goals class has been expanded to allow the user to specify the different steps to complete, allowing the user to input Goals from a Shopping List all the way to a HW List, and he is able to complete the steps in the order he wishes, making this type of goal way more specific, flexible and useful.
 
-- You can even add more items to a checklist after it's creation
+- You can even add more items to a checklist after it's creation and in the process, the program will only show you Checklists saved, so you can choose the one you want to modify.
 
 - The Display Goals method has been bastly improved with nice formating and colors: Every yellow line indicates a pending goal, and every green one indicates a completed goal. All this changes make for a much easier reading experience on a console.
 
-- 
+- The program now has a much stronger data validation in all inputs, not only allowing the user to type virtually anything without breaking the program and keeping a clean screen (ok, maybe not anything, but I haven't found an input that breaks the program or makes it misbehave) but also, it does not allow for Goals to go without a name, or using only spaces as a name.
 
 */
 
@@ -176,10 +176,11 @@ class Program
                                         }while(selection != "");
                                         break;
                                 }
-                            }else{
-                                Console.Write("Goal " + goalSelected +" not found. Please try again.");
-                                Thread.Sleep(3000);
                             }
+                            // else{
+                            //     Console.Write("Goal " + goalSelected +" not found. Please try again.");
+                            //     Thread.Sleep(3000);
+                            // }
                         }
 
                     }while(input3 != "");

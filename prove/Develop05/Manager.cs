@@ -13,40 +13,56 @@ class Manager{
         string input;
         do{
             Console.Clear();
-            Console.WriteLine("Please type an Item for the goal\nor Hit ENTER to Go Back: \n");
+            Console.WriteLine("Add at least one Item for the goal\nor Hit ENTER to Go Back: \n");
             input = Console.ReadLine();
 
-            if(input.ToLower() == ""){
-                break;
-            }            
-            checklistGoal1.AddItem(input);
+            if(input.Replace(" ", "") != "" && input.ToLower() != ""){
+                checklistGoal1.AddItem(input);
+            }
 
-        }while(input != "");
+        }while(input.Replace(" ", "") == "" && checklistGoal1.GetNumberOfItems() == 0);
     }
 
     public void CreateChecklistGoal(){
-        
-        Console.Write("Please type the name of the goal:\n\n");
-        string description = Console.ReadLine();
-        ChecklistGoal checklistGoal1 = new ChecklistGoal(description);
-        _goals.Add(checklistGoal1);
-        AddItemToChecklist(checklistGoal1);
+        string description;
+        do{
+            Console.Clear();
+            Console.Write("Please type the name of the goal:\n\n");
+            description = Console.ReadLine();
+            if(description.Replace(" ", "") != ""){
+                ChecklistGoal checklistGoal1 = new ChecklistGoal(description);
+                _goals.Add(checklistGoal1);
+                AddItemToChecklist(checklistGoal1);
+            }
+        }while(description.Replace(" ", "") == "");        
     }
 
     public void CreateEternalGoal(){
-        
-        Console.Write("Please type the description of the goal:\n\n");
-        string description = Console.ReadLine();
-        EternalGoal simplegoal1 = new EternalGoal(description);
-        _goals.Add(simplegoal1);
+
+        string description;
+        do{
+            Console.Clear();
+            Console.Write("Please type the description of the goal:\n\n");
+            description = Console.ReadLine();
+            if(description.Replace(" ", "") != ""){
+                EternalGoal simplegoal1 = new EternalGoal(description);
+                _goals.Add(simplegoal1);
+            }
+        }while(description.Replace(" ", "") == "");  
     }
 
     public void CreateSimpleGoal(){
-        
-        Console.Write("Please type the description of the goal:\n\n");
-        string description = Console.ReadLine();
-        SimpleGoal simplegoal1 = new SimpleGoal(description);
-        _goals.Add(simplegoal1);
+
+        string description;
+        do{
+            Console.Clear();
+            Console.Write("Please type the description of the goal:\n\n");
+            description = Console.ReadLine();
+            if(description.Replace(" ", "") != ""){
+                SimpleGoal simplegoal1 = new SimpleGoal(description);
+                _goals.Add(simplegoal1);
+            }
+        }while(description.Replace(" ", "") == "");  
     }
 
     public void DisplayChecklists(){
@@ -96,7 +112,7 @@ class Manager{
                     }else{
                         Console.ForegroundColor = ConsoleColor.Yellow;
                     }
-                    Console.WriteLine(i + ". " + goal.GetDescription());                    
+                    Console.WriteLine(i + ". " + goal.GetDescription() + "  -  Pending");                    
                     Console.ResetColor();
                     Console.WriteLine("    Simple Goal");
                     Console.WriteLine("Created: " + goal.GetDateCreated());
@@ -123,6 +139,7 @@ class Manager{
                     Console.ResetColor();
                     Console.WriteLine("    Checklist Goal");
                     Console.WriteLine("Created: " + goal.GetDateCreated());
+                    Console.WriteLine("Completed: "+ goal.GetPorcentCompleted() + " %");
                     Console.WriteLine("Points: " + goal.GetPoints());
                     goal.DisplayGoal();
                     Console.ResetColor();
