@@ -59,9 +59,10 @@ class Manager{
         int i = 1;
 
         foreach(var goal in _goals){
-            Console.WriteLine("- - - - - - - - - - ");
 
             if(goal.GetTypeOfGoal() == "Checklist Goal"){
+                
+                Console.WriteLine("- - - - - - - - - - ");
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine(i + ". " + goal.GetDescription());                    
                 Console.ResetColor();
@@ -143,7 +144,7 @@ class Manager{
         Console.WriteLine("- - - - - - - - - - - - - - - - - - -");
         Console.WriteLine("1. Create New Goal");
         Console.WriteLine("2. Display Goals");
-        Console.WriteLine("3. Add Event");
+        Console.WriteLine("3. Record Event");
         Console.WriteLine("4. Add Items to Existing Checklist Goal");
         Console.WriteLine(". . . . . . . . . . . .");
         Console.WriteLine("0. Exit\n");
@@ -166,7 +167,7 @@ class Manager{
         
         Console.WriteLine("- - - - - - - - - - - - - - - -");
         Console.WriteLine("- - - - - - - - - - - - - - - -\n");
-        Console.ForegroundColor = ConsoleColor.Red;
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("        TOTAL SCORE: " + GetScore());
         Console.ResetColor();
         Console.WriteLine("\n- - - - - - - - - - - - - - - -");

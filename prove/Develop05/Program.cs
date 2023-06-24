@@ -1,3 +1,19 @@
+/*
+EXCEEDING REQUIREMENTS:
+
+- The program stores and shows when each goal was created.
+
+- The checklist Goals class has been expanded to allow the user to specify the different steps to complete, allowing the user to input Goals from a Shopping List all the way to a HW List, and he is able to complete the steps in the order he wishes, making this type of goal way more specific, flexible and useful.
+
+- You can even add more items to a checklist after it's creation
+
+- The Display Goals method has been bastly improved with nice formating and colors: Every yellow line indicates a pending goal, and every green one indicates a completed goal. All this changes make for a much easier reading experience on a console.
+
+- 
+
+*/
+
+
 using System;
 
 class Program
@@ -63,7 +79,7 @@ class Program
                     do{
                         Console.Clear();        
                         Console.WriteLine("- - - - - - - - - - - - - -");
-                        Console.WriteLine("- -  A D D   E V E N T - -");
+                        Console.WriteLine("- -  R E C O R D   E V E N T - -");
                         Console.WriteLine("- - - - - - - - - - - - - -\n");
                         manager1.DisplayGoals();
                         manager1.DisplayTotalScore();   
@@ -181,7 +197,7 @@ class Program
                         Console.WriteLine("- - - - - - - - - - - - - -\n");
                         manager1.DisplayChecklists();
                         manager1.DisplayTotalScore();   
-                        Console.WriteLine("Select the Goal to modify\nor Hit ENTER to Go Back): \n");
+                        Console.WriteLine("Select the Cheklist in Pink to modify\nor Hit ENTER to Go Back): \n");
                         input4 = Console.ReadLine();
 
                         if(input4 == ""){
@@ -194,15 +210,9 @@ class Program
 
                             if(goalSelected <= manager1.GetNumberOfGoals()){
                                 ;
-                                if(manager1.GetGoal(goalSelected).GetTypeOfGoal() != "Checklist Goal"){
-                                    break;
+                                if(manager1.GetGoal(goalSelected).GetTypeOfGoal() == "Checklist Goal"){
+                                    manager1.AddItemToChecklist(manager1.GetGoal(goalSelected));
                                 }
-
-                                manager1.AddItemToChecklist(manager1.GetGoal(goalSelected));
-                                
-                            }else{
-                                Console.Write("Goal " + goalSelected +" not found. Please try again.");
-                                Thread.Sleep(3000);
                             }
                         }
 
