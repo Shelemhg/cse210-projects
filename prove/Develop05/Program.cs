@@ -1,14 +1,21 @@
 /*
 EXCEEDING REQUIREMENTS:
 
+DATE RECORD
 - The program stores and shows when each goal was created.
 
-- The checklist Goals class has been expanded to allow the user to specify the different steps to complete, allowing the user to input Goals from a Shopping List all the way to a HW List, and he is able to complete the steps in the order he wishes, making this type of goal way more specific, flexible and useful.
+SUPER CHECKLIST
+- The checklist Goals class has been expanded so now the user can specify the name of the General goal and add not a number of ocurrences, but actually multiple specific steps to be completed, allowing the user to input Goals from a Shopping List all the way to a HW List or more, and he is able to complete the steps in the order he wishes, making this new Checklist Goal way more specific, flexible and useful.
 
-- You can even add more items to a checklist after it's creation and in the process, the program will only show you Checklists saved, so you can choose the one you want to modify.
+ADD TO EXISTING CHECKLIST
+- You can add more items to a checklist after it's creation, and in the process, the program will only show you Checklists saved, so you can choose the one you want to modify instead of showing you all the goals including not checklists.
 
-- The Display Goals method has been bastly improved with nice formating and colors: Every yellow line indicates a pending goal, and every green one indicates a completed goal. All this changes make for a much easier reading experience on a console.
+GREAT UX
+- All the menu and options have been polished for an easy reading and input experience. ENTER goes back one step from any part of the menu, but does not allow the program to exit by accident.
 
+-The DisplayGoals method has been bastly improved, with nice formating and colors: Every yellow line indicates a pending goal, and every green one indicates a completed goal.
+
+FOOLPROOF INPUTS
 - The program now has a much stronger data validation in all inputs, not only allowing the user to type virtually anything without breaking the program and keeping a clean screen (ok, maybe not anything, but I haven't found an input that breaks the program or makes it misbehave) but also, it does not allow for Goals to go without a name, or using only spaces as a name.
 
 */
