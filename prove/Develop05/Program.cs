@@ -15,6 +15,8 @@ GREAT UX
 
 -The DisplayGoals method has been bastly improved, with nice formating and colors: Every yellow line indicates a pending goal, and every green one indicates a completed goal.
 
+- The user receives usefull messages when no goals are saved and he tries calling a method.
+
 FOOLPROOF INPUTS
 - The program now has a much stronger data validation in all inputs, not only allowing the user to type virtually anything without breaking the program and keeping a clean screen (ok, maybe not anything, but I haven't found an input that breaks the program or makes it misbehave) but also, it does not allow for Goals to go without a name, or using only spaces as a name.
 
