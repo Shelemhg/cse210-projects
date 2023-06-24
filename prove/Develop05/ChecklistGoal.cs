@@ -30,7 +30,7 @@ class ChecklistGoal : Goal{
         }
     }
 
-    public int GetNumberOfItems(){
+    public override int GetNumberOfItems(){
         return _records.Count();
     }
     public override int GetPorcentCompleted(){
