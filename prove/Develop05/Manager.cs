@@ -1,11 +1,13 @@
 class Manager{
     private int _totalScore;
+    private int _totalNumberOfChecklists;
     private List<Goal> _goals;
 
     public Manager(){
         
         _totalScore = 0;
         _goals = new List<Goal>();
+        _totalNumberOfChecklists = 0;
     }
 
     public void AddItemToChecklist(Goal checklistGoal1){
@@ -33,6 +35,7 @@ class Manager{
                 ChecklistGoal checklistGoal1 = new ChecklistGoal(description);
                 _goals.Add(checklistGoal1);
                 AddItemToChecklist(checklistGoal1);
+                _totalNumberOfChecklists++;
             }
         }while(description.Replace(" ", "") == "");        
     }
@@ -67,11 +70,16 @@ class Manager{
 
     public void DisplayChecklists(){
         
-        if(_goals.Count() == 0){
-            Console.WriteLine("No Goals saved. Try Adding a new goal.");
+        if(_totalNumberOfChecklists == 0){
+            Console.WriteLine("No Checklists saved. Try Adding a new one.");
             Thread.Sleep(2000);
             return;
         }
+        // if(_goals.Count() == 0){
+        //     Console.WriteLine("No Goals saved. Try Adding a new goal.");
+        //     Thread.Sleep(2000);
+        //     return;
+        // }
         int i = 1;
 
         foreach(var goal in _goals){
@@ -201,6 +209,21 @@ class Manager{
         return _goals.Count();
     }
 
+    public int GetNumberOfChecklists(){
+        // int numberOfChecklists = 0;
+        // if(_goals.Count() == 0){
+        //     return 0;
+        // }
+
+        // foreach(var goal in _goals){
+
+        //     if(goal.GetTypeOfGoal() == "Checklist Goal"){
+        //         numberOfChecklists ++;
+        //     }
+        // }
+        // return numberOfChecklists;
+        return _totalNumberOfChecklists;
+    }
     public int GetScore(){
         
         int total = 0;

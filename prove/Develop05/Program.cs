@@ -34,7 +34,7 @@ class Program
             manager1.DisplayMenu();
             manager1.DisplayTotalScore();
             
-            Console.WriteLine("Select one option or 0 to quit: ");
+            Console.WriteLine("Select one option or 0 to quit:\n");
             input = Console.ReadLine();
 
             switch(input){
@@ -68,6 +68,12 @@ class Program
                 
                 //  Display Goals
                 case "2":
+                    
+                    if(manager1.GetNumberOfGoals() == 0){
+                        Console.WriteLine("\nNo Goals saved. Try Adding a new goal.");
+                        Thread.Sleep(2000);
+                        break;
+                    }
                     Console.Clear();
                     Console.WriteLine("- - - - - - - - - - - -");
                     Console.WriteLine("- -    G O A L S    - -");
@@ -80,7 +86,11 @@ class Program
 
                 // Add Event
                 case "3":                            
-                    
+                    if(manager1.GetNumberOfGoals() == 0){
+                        Console.WriteLine("\nNo Goals saved. Try Adding a new goal.");
+                        Thread.Sleep(2000);
+                        break;
+                    }
                     string input3;
 
                     do{
@@ -196,6 +206,12 @@ class Program
 
                 //  Add to Checklist
                 case "4":
+                    if(manager1.GetNumberOfChecklists() == 0){
+                        // Console.Clear();
+                        Console.WriteLine("\nNo checklists found. Try adding one from the main menu.");
+                        Thread.Sleep(3000);
+                        break;
+                    }
                     string input4;
 
                     do{
