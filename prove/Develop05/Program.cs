@@ -45,8 +45,15 @@ class Program
                 
                 //  Display Goals
                 case "2":
-                    Console.Clear(); 
-                    manager1.DisplayGoals();         
+                    Console.Clear();
+                    Console.WriteLine("- - - - - - - - - - - -");
+                    Console.WriteLine("- -    G O A L S    - -");
+                    Console.WriteLine("- - - - - - - - - - - -\n"); 
+                    manager1.DisplayGoals();
+                    Console.WriteLine("- - - - - - - - - - - - -");
+                    Console.WriteLine("- - - - - - - - - - - - -\n");
+                    Console.WriteLine("TOTAL SCORE: " + manager1.GetScore());
+                    Console.WriteLine("\n- - - - - - - - - - - - -");         
                     Console.WriteLine("- - - - - - - - - - - - -");           
                     Console.WriteLine("Press Enter to continue.");
                     Console.ReadLine();
@@ -64,6 +71,10 @@ class Program
                         Console.WriteLine("- - - - - - - - - - - - - -\n");
                         manager1.DisplayGoals();
                         Console.WriteLine("- - - - - - - - - - - - -");
+                        Console.WriteLine("- - - - - - - - - - - - -\n");
+                        Console.WriteLine("TOTAL SCORE: " + manager1.GetScore());
+                        Console.WriteLine("- - - - - - - - - - - - -");
+                        Console.WriteLine("\n- - - - - - - - - - - - -");      
                         Console.WriteLine("Select the Goal to modify (Hit ENTER to Go Back): ");
                         input3 = Console.ReadLine();
                         Console.Clear();
@@ -106,6 +117,7 @@ class Program
                                             }while(res != "y" || res !="n");
                                         }
                                         break;
+
                                     case "Eternal Goal":
 
                                         do{
@@ -129,7 +141,31 @@ class Program
                                             }
                                         }while(res != "y" || res !="n");
                                         break;
+                                    
                                     case "Checklist Goal":
+                                        
+                                        string selection;
+
+                                        do{
+                                            Console.Clear();
+                                            Console.ForegroundColor = ConsoleColor.Magenta;
+                                            Console.WriteLine(goal1.GetDescription());                    
+                                            Console.ResetColor();
+                                            Console.WriteLine("    Checklist Goal");
+                                            Console.WriteLine("Created: " + goal1.GetDateCreated());
+                                            Console.WriteLine("Points: " + goal1.GetPoints());
+                                            goal1.DisplayGoal();
+                                            Console.ResetColor();
+
+                                            int numberSelected;
+                                        
+                                            Console.WriteLine("Select one Item to mark as done, or Hit ENTER to go Back:\n");
+                                            selection = Console.ReadLine();
+
+                                            if(selection != "" && int.TryParse(selection, out numberSelected)){
+                                                goal1.UpdateItem(numberSelected);
+                                            }
+                                        }while(selection != "");
                                         break;
                                 }
                             }else{

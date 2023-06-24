@@ -34,8 +34,7 @@ class Goal {
     public int GetPoints(){
         return _points;
     }
-    public void MarkCompleted(){
-        _dateCompleted = DateTime.Now;
-        _completed = true;
+    public virtual void MarkCompleted(){
     }
+    public virtual void UpdateItem(int itemSelected){}
 }

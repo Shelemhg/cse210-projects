@@ -47,10 +47,23 @@ class Manager{
     }
 
     public void CreateChecklistGoal(){
-        Console.Write("Please type the description of the goal:\n\n");
+        Console.Write("Please type the name of the goal:\n\n");
         string description = Console.ReadLine();
-        EternalGoal simplegoal1 = new EternalGoal(description);
+        ChecklistGoal simplegoal1 = new ChecklistGoal(description);
         _goals.Add(simplegoal1);
+
+        string input = null;
+        do{
+            Console.Clear();
+            Console.WriteLine("Please type an Item for the goal\nor Hit ENTER to Go Back: ");
+            input = Console.ReadLine();
+
+            if(input.ToLower() == ""){
+                break;
+            }            
+            simplegoal1.AddItem(input);
+
+        }while(input != "");
     }
 
     public void DisplayGoals(){
@@ -75,7 +88,7 @@ class Manager{
                     }
                     Console.WriteLine(i + ". " + goal.GetDescription());                    
                     Console.ResetColor();
-                    Console.WriteLine("Type: Simple Goal");
+                    Console.WriteLine("    Simple Goal");
                     Console.WriteLine("Created: " + goal.GetDateCreated());
                     if(goal.GetGoalStatus()){
                         Console.WriteLine("COMPLETED: " + goal.GetDateCompleted());
@@ -87,13 +100,22 @@ class Manager{
                     Console.ForegroundColor = ConsoleColor.Blue;
                     Console.WriteLine(i + ". " + goal.GetDescription());                    
                     Console.ResetColor();
-                    Console.WriteLine("Type: Eternal Goal");
+                    Console.WriteLine("    Eternal Goal");
                     Console.WriteLine("Created: " + goal.GetDateCreated());
                     Console.WriteLine("Points: " + goal.GetPoints());
                     goal.DisplayGoal();
                     Console.ResetColor();
                     break;
+                    
                 case "Checklist Goal":
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.WriteLine(i + ". " + goal.GetDescription());                    
+                    Console.ResetColor();
+                    Console.WriteLine("    Checklist Goal");
+                    Console.WriteLine("Created: " + goal.GetDateCreated());
+                    Console.WriteLine("Points: " + goal.GetPoints());
+                    goal.DisplayGoal();
+                    Console.ResetColor();
                     break;
                 default:
                     Console.WriteLine("Goal Type not found");
@@ -110,6 +132,13 @@ class Manager{
 
     public Goal GetGoal(int selected){
         return _goals[selected-1];
+    }
+    public int GetScore(){
+        int total = 0;
+        foreach(Goal goal in _goals){
+            total += goal.GetPoints();
+        }
+        return total;
     }
 
     public void RecordEvent(int goalSelected){

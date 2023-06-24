@@ -11,6 +11,7 @@ class EternalGoal : Goal{
 
     public override void RecordEvent(Boolean completed){
         _records.Add(DateTime.Now, completed);
+        _points += 50;
     }
     public override void DisplayGoal(){
         foreach(var record in _records){

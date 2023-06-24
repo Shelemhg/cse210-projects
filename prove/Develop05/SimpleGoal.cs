@@ -16,7 +16,7 @@ class SimpleGoal : Goal{
         Console.WriteLine("Points: " + _points);
     }
 
-    public void CompleteSimpleGoal(){
+    public override void MarkCompleted(){
         _completed = true;
         _points = 100;
     }
