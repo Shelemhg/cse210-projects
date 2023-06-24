@@ -17,10 +17,10 @@ class EternalGoal : Goal{
         foreach(var record in _records){
             if(record.Value == true){  
                 Console.ForegroundColor = ConsoleColor.Green;              
-                Console.WriteLine(record.Key + " : Completed");
+                Console.WriteLine("    " + record.Key + " : Completed");
             }else{
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine(record.Key + " : Not completed");
+                Console.WriteLine("    " + record.Key + " : Not completed");
             }
 
         }

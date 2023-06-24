@@ -8,10 +8,7 @@ class ChecklistGoal : Goal{
         _dateCreated = DateTime.Now;
         _records = new Dictionary<string, bool>();
     }
-
-    // public override void RecordEvent(Boolean completed){
-    //     _records.Add(DateTime.Now, completed);
-    // }
+    
     public override void DisplayGoal(){
         int i = 1;
         foreach(var record in _records){
@@ -26,7 +23,7 @@ class ChecklistGoal : Goal{
         }
     }
 
-    public void AddItem(string description){
+    public override void AddItem(string description){
         _records.Add(description, false);
     }
 

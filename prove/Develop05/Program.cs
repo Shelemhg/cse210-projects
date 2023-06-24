@@ -11,6 +11,7 @@ class Program
         string input = null;
         do{
             manager1.DisplayMenu();
+            manager1.DisplayTotalScore();
             Console.WriteLine("Select one option or 0 to quit: ");
             input = Console.ReadLine();
 
@@ -50,11 +51,7 @@ class Program
                     Console.WriteLine("- -    G O A L S    - -");
                     Console.WriteLine("- - - - - - - - - - - -\n"); 
                     manager1.DisplayGoals();
-                    Console.WriteLine("- - - - - - - - - - - - -");
-                    Console.WriteLine("- - - - - - - - - - - - -\n");
-                    Console.WriteLine("TOTAL SCORE: " + manager1.GetScore());
-                    Console.WriteLine("\n- - - - - - - - - - - - -");         
-                    Console.WriteLine("- - - - - - - - - - - - -");           
+                    manager1.DisplayTotalScore();        
                     Console.WriteLine("Press Enter to continue.");
                     Console.ReadLine();
                     break;
@@ -70,11 +67,7 @@ class Program
                         Console.WriteLine("- -  A D D   E V E N T - -");
                         Console.WriteLine("- - - - - - - - - - - - - -\n");
                         manager1.DisplayGoals();
-                        Console.WriteLine("- - - - - - - - - - - - -");
-                        Console.WriteLine("- - - - - - - - - - - - -\n");
-                        Console.WriteLine("TOTAL SCORE: " + manager1.GetScore());
-                        Console.WriteLine("- - - - - - - - - - - - -");
-                        Console.WriteLine("\n- - - - - - - - - - - - -");      
+                        manager1.DisplayTotalScore();   
                         Console.WriteLine("Select the Goal to modify (Hit ENTER to Go Back): ");
                         input3 = Console.ReadLine();
                         Console.Clear();
@@ -99,7 +92,7 @@ class Program
                                         }else{
                                             do{
                                                 Console.Clear();
-                                                Console.Write("Was the goal COMPLETED? (y/n):");
+                                                Console.Write("Was the goal '" + goal1.GetDescription() + "' Completed? (y/n):");
                                                 res = Console.ReadLine();
 
                                                 if(res.ToLower() =="y"){
@@ -122,7 +115,7 @@ class Program
 
                                         do{
                                             Console.Clear();
-                                            Console.Write("Did you complete the goal today? (y/n):");
+                                            Console.Write("Did you complete the goal '" + goal1.GetDescription() + "' today? (y/n):");
                                             res = Console.ReadLine();
 
                                             if(res.ToLower() =="y"){
@@ -178,8 +171,43 @@ class Program
 
                     break;
 
-                
+                //  Add to Checklist
                 case "4":
+                    string input4;
+
+                    do{
+                        Console.Clear();        
+                        Console.WriteLine("- - - - - - - - - - - - - -");
+                        Console.WriteLine("- -  A D D   T O   C H E C K L I S T - -");
+                        Console.WriteLine("- - - - - - - - - - - - - -\n");
+                        manager1.DisplayChecklists();
+                        manager1.DisplayTotalScore();   
+                        Console.WriteLine("Select the Goal to modify\nor Hit ENTER to Go Back): \n");
+                        input4 = Console.ReadLine();
+
+                        if(input4 == ""){
+                            break;
+                        }
+                        Console.Clear();
+                        int goalSelected;
+
+                        if(int.TryParse(input4, out goalSelected)){
+
+                            if(goalSelected <= manager1.GetNumberOfGoals()){
+                                ;
+                                if(manager1.GetGoal(goalSelected).GetTypeOfGoal() != "Checklist Goal"){
+                                    break;
+                                }
+
+                                manager1.AddItemToChecklist(manager1.GetGoal(goalSelected));
+                                
+                            }else{
+                                Console.Write("Goal " + goalSelected +" not found. Please try again.");
+                                Thread.Sleep(3000);
+                            }
+                        }
+
+                    }while(input4 != "");
                     break;
                 default:
                     break;

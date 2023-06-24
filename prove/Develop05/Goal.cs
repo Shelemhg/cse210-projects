@@ -34,7 +34,7 @@ class Goal {
     public int GetPoints(){
         return _points;
     }
-    public virtual void MarkCompleted(){
-    }
+    public virtual void MarkCompleted(){}
     public virtual void UpdateItem(int itemSelected){}
+    public virtual void AddItem(string description){}
 }
