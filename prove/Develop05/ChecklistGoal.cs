@@ -1,7 +1,7 @@
-class EternalGoal : Goal{
+class ChecklistGoal : Goal{
     private Dictionary<DateTime, Boolean> _records;
 
-    public EternalGoal(string description) : base(description){
+    public ChecklistGoal(string description) : base(description){
         _goalType = "Eternal Goal";
         _goalDescription = description;
         _points = 0;

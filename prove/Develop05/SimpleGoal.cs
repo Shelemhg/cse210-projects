@@ -1,5 +1,5 @@
 class SimpleGoal : Goal{
-    private Boolean _completed;
+    // public Boolean _completed;
 
     public SimpleGoal(string description) : base(description){
         _goalType = "Simple Goal";
@@ -16,9 +16,8 @@ class SimpleGoal : Goal{
         Console.WriteLine("Points: " + _points);
     }
 
-    public override void RecordEvent(){
+    public void CompleteSimpleGoal(){
         _completed = true;
         _points = 100;
     }
-
 }

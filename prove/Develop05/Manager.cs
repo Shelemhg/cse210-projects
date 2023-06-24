@@ -28,30 +28,32 @@ class Manager{
         Console.WriteLine("2. Eternal Goal");
         Console.WriteLine("3. Checklist Goal");
         Console.WriteLine(". . . . . . . . . . . .");
-        Console.WriteLine("0. Exit\n");
+        Console.WriteLine("Hit ENTER to Go Back\n");
     }
 
     public void CreateSimpleGoal(){
-        Console.Clear();
-        Console.Write("Please type the description of the goal: ");
+        
+        Console.Write("Please type the description of the goal:\n\n");
         string description = Console.ReadLine();
         SimpleGoal simplegoal1 = new SimpleGoal(description);
         _goals.Add(simplegoal1);
     }
 
     public void CreateEternalGoal(){
-
+        Console.Write("Please type the description of the goal:\n\n");
+        string description = Console.ReadLine();
+        EternalGoal simplegoal1 = new EternalGoal(description);
+        _goals.Add(simplegoal1);
     }
 
     public void CreateChecklistGoal(){
-
+        Console.Write("Please type the description of the goal:\n\n");
+        string description = Console.ReadLine();
+        EternalGoal simplegoal1 = new EternalGoal(description);
+        _goals.Add(simplegoal1);
     }
 
     public void DisplayGoals(){
-        Console.Clear();        
-        Console.WriteLine("- - - - - - - - - - - - - -");
-        Console.WriteLine("- -  A D D   E V E N T - -");
-        Console.WriteLine("- - - - - - - - - - - - - -\n\n");
 
         if(_goals.Count() == 0){
             Console.WriteLine("No Goals saved. Try Adding a new goal.");
@@ -63,13 +65,33 @@ class Manager{
 
         foreach(var goal in _goals){
             Console.WriteLine("- - - - - - - - - - ");
+            
             switch(goal.GetTypeOfGoal()){
                 case "Simple Goal":
-                    Console.WriteLine(i + ". " + goal.GetDescription());
+                    if(goal.GetGoalStatus()){
+                        Console.ForegroundColor = ConsoleColor.Green;
+                    }else{
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                    }
+                    Console.WriteLine(i + ". " + goal.GetDescription());                    
+                    Console.ResetColor();
                     Console.WriteLine("Type: Simple Goal");
-                    Console.WriteLine("Date: " + goal.GetDateCreated());
+                    Console.WriteLine("Created: " + goal.GetDateCreated());
+                    if(goal.GetGoalStatus()){
+                        Console.WriteLine("COMPLETED: " + goal.GetDateCompleted());
+                    }
+                    Console.WriteLine("Points: " + goal.GetPoints());
                     break;
+                
                 case "Eternal Goal":
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine(i + ". " + goal.GetDescription());                    
+                    Console.ResetColor();
+                    Console.WriteLine("Type: Eternal Goal");
+                    Console.WriteLine("Created: " + goal.GetDateCreated());
+                    Console.WriteLine("Points: " + goal.GetPoints());
+                    goal.DisplayGoal();
+                    Console.ResetColor();
                     break;
                 case "Checklist Goal":
                     break;
@@ -78,9 +100,19 @@ class Manager{
                     break;
             }
             i++;
-            Thread.Sleep(1000);
-
+            // Thread.Sleep(500);
         }
-        Thread.Sleep(2000);
+    }
+
+    public int GetNumberOfGoals(){
+        return _goals.Count();
+    }
+
+    public Goal GetGoal(int selected){
+        return _goals[selected-1];
+    }
+
+    public void RecordEvent(int goalSelected){
+
     }
 }

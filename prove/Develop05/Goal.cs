@@ -2,16 +2,19 @@ class Goal {
     protected string _goalType;
     protected string _goalDescription;    
     protected DateTime _dateCreated;
+    protected DateTime _dateCompleted;
     protected int _points;
+
+    protected Boolean _completed;
 
     public Goal(string description){
         _goalDescription = description;
     }
-    public virtual void RecordEvent(){}
     public virtual void SaveGoal(){}
     public virtual void LoadGoal(){}
     public virtual void DisplayScore(){}
     public virtual void DisplayGoal(){}
+    public virtual void RecordEvent(Boolean completed){}
 
     public string GetTypeOfGoal(){
         return _goalType;
@@ -21,5 +24,18 @@ class Goal {
     }
     public DateTime GetDateCreated(){
         return _dateCreated;
+    }
+    public DateTime GetDateCompleted(){
+        return _dateCompleted;
+    }
+    public Boolean GetGoalStatus(){
+        return _completed;
+    }
+    public int GetPoints(){
+        return _points;
+    }
+    public void MarkCompleted(){
+        _dateCompleted = DateTime.Now;
+        _completed = true;
     }
 }
