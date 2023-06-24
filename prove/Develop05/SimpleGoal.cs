@@ -1,7 +1,7 @@
 class SimpleGoal : Goal{
-    // public Boolean _completed;
 
     public SimpleGoal(string description) : base(description){
+       
         _goalType = "Simple Goal";
         _goalDescription = description;
         _points = 0;
@@ -9,6 +9,7 @@ class SimpleGoal : Goal{
     }
 
     public override void DisplayGoal(){
+        
         Console.Clear();
         Console.WriteLine("Goal: " + _goalDescription);
         Console.WriteLine("Completed: " + _completed);
@@ -17,6 +18,7 @@ class SimpleGoal : Goal{
     }
 
     public override void MarkCompleted(){
+        
         _completed = true;
         _points = 100;
     }

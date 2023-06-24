@@ -4,14 +4,13 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Console.WriteLine("Hello Develop05 World!");
-        Manager manager1 = new Manager();
-
-        
+        Manager manager1 = new Manager();        
         string input = null;
+
         do{
             manager1.DisplayMenu();
             manager1.DisplayTotalScore();
+            
             Console.WriteLine("Select one option or 0 to quit: ");
             input = Console.ReadLine();
 
@@ -209,10 +208,6 @@ class Program
 
                     }while(input4 != "");
                     break;
-                default:
-                    break;
-                
-                
             }
 
         }while(input != "0");
