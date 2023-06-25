@@ -10,15 +10,6 @@ class Goal {
     public Goal(string description){
         _goalDescription = description;
     }
-
-    public virtual void AddItem(string description, Boolean completed){}
-    
-    public virtual void DisplayItemsOnChecklist(){}
-    public virtual void DisplaySingleChecklist(Goal checklist){}
-    
-    public virtual int GetBonusPoints(){
-        return 0;
-    }
     
     public DateTime GetDateCompleted(){
         return _dateCompleted;
@@ -39,15 +30,7 @@ class Goal {
     public string GetGoalType(){
         return _goalType;
     }
-    
-    public virtual int GetNumberOfItems(){
-        return 0;
-    }
-    
-    public virtual int GetPorcentCompleted(){
-        return 0;
-    }
-    
+       
     public int GetPoints(){
         return _points;
     }
@@ -57,12 +40,6 @@ class Goal {
     }
     
     public virtual void MarkCompleted(){}
-    
-    public virtual void RecordEvent(DateTime date, Boolean completed){}
-
-    public virtual void UpdateItem(int itemSelected){}
-
-    public virtual void SetBonusPoints(int points){}
 
     public void SetCompleted(Boolean completed){
         _completed = completed;

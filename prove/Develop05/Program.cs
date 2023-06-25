@@ -148,59 +148,60 @@ class Program
 
                                     case "Eternal Goal":
 
-                                        do{
-                                            Console.Clear();
-                                            Console.Write("Did you complete the goal '" + goal1.GetGoalDescription() + "' today? (y/n):");
-                                            res = Console.ReadLine();
-
-                                            if(res.ToLower() =="y"){
-                                                goal1.RecordEvent(DateTime.Now, true);
-                                                Console.Write("\nThe goal was marked as COMPLETED!!\n");
-                                                Thread.Sleep(2000);
+                                        if(goal1 is EternalGoal eternalGoal){
+                                            do{
                                                 Console.Clear();
-                                                break;
-                                            }
-                                            else if(res.ToLower() == "n"){
-                                                Console.Write("Event recorded.\n");
-                                                Console.Write("\nNo problem, keep it up! :D\n\n");
-                                                goal1.RecordEvent(DateTime.Now, false);
-                                                Thread.Sleep(3000);
-                                                break;
-                                            }
-                                        }while(res != "y" || res !="n");
+                                                Console.Write("Did you complete the goal '" + eternalGoal.GetGoalDescription() + "' today? (y/n):");
+                                                res = Console.ReadLine();
+
+                                                if(res.ToLower() =="y"){
+                                                    eternalGoal.RecordEvent(DateTime.Now, true);
+                                                    Console.Write("\nThe goal was marked as COMPLETED!!\n");
+                                                    Thread.Sleep(2000);
+                                                    Console.Clear();
+                                                    break;
+                                                }
+                                                else if(res.ToLower() == "n"){
+                                                    Console.Write("Event recorded.\n");
+                                                    Console.Write("\nNo problem, keep it up! :D\n\n");
+                                                    eternalGoal.RecordEvent(DateTime.Now, false);
+                                                    Thread.Sleep(3000);
+                                                    break;
+                                                }
+                                            }while(res != "y" || res !="n");
+                                        }
                                         break;
                                     
                                     case "Checklist Goal":
                                         
-                                        string selection;
+                                        if(goal1 is ChecklistGoal checklistGoal){
+                                            string selection;
 
-                                        do{
-                                            Console.Clear();
-                                            Console.ForegroundColor = ConsoleColor.Magenta;
-                                            Console.WriteLine(goal1.GetGoalDescription());                    
-                                            Console.ResetColor();
-                                            Console.WriteLine("    Checklist Goal");
-                                            Console.WriteLine("Created: " + goal1.GetDateCreated());
-                                            Console.WriteLine("Points: " + goal1.GetPoints());
-                                            goal1.DisplayItemsOnChecklist();
-                                            Console.ResetColor();
+                                            do{
+                                                Console.Clear();
+                                                Console.ForegroundColor = ConsoleColor.Magenta;
+                                                Console.WriteLine(goal1.GetGoalDescription());                    
+                                                Console.ResetColor();
+                                                Console.WriteLine("    Checklist Goal");
+                                                Console.WriteLine("Created: " + goal1.GetDateCreated());
+                                                Console.WriteLine("Points: " + goal1.GetPoints());
+                                                checklistGoal.DisplayItemsOnChecklist();
+                                                
+                                                Console.ResetColor();
 
-                                            int numberSelected;
-                                        
-                                            Console.WriteLine("Select one Item to mark as done, or Hit ENTER to go Back:\n");
-                                            selection = Console.ReadLine();
+                                                int numberSelected;
+                                            
+                                                Console.WriteLine("Select one Item to mark as done, or Hit ENTER to go Back:\n");
+                                                selection = Console.ReadLine();
 
-                                            if(selection != "" && int.TryParse(selection, out numberSelected)){
-                                                goal1.UpdateItem(numberSelected);
-                                            }
-                                        }while(selection != "");
+                                                if(selection != "" && int.TryParse(selection, out numberSelected)){
+                                                    checklistGoal.UpdateItem(numberSelected);
+                                                }
+                                            }while(selection != "");
+                                        }
                                         break;
                                 }
                             }
-                            // else{
-                            //     Console.Write("Goal " + goalSelected +" not found. Please try again.");
-                            //     Thread.Sleep(3000);
-                            // }
                         }
 
                     }while(input3 != "");
@@ -219,9 +220,9 @@ class Program
 
                     do{
                         Console.Clear();        
-                        Console.WriteLine("- - - - - - - - - - - - - -");
-                        Console.WriteLine("- -  A D D   T O   C H E C K L I S T - -");
-                        Console.WriteLine("- - - - - - - - - - - - - -\n");
+                        Console.WriteLine("- - - - - - - - - - - - - - - - -");
+                        Console.WriteLine(" A D D   T O   C H E C K L I S T");
+                        Console.WriteLine("- - - - - - - - - - - - - - - - -\n");
                         manager1.DisplayAllChecklists();
                         manager1.DisplayTotalScore();   
                         Console.WriteLine("Select the Cheklist in Pink to modify\nor Hit ENTER to Go Back): \n");
@@ -238,7 +239,9 @@ class Program
                             if(goalSelected <= manager1.GetNumberOfGoals()){
                                 ;
                                 if(manager1.GetGoal(goalSelected).GetTypeOfGoal() == "Checklist Goal"){
-                                    manager1.AddItemToChecklist(manager1.GetGoal(goalSelected));
+                                    if(manager1.GetGoal(goalSelected) is ChecklistGoal checklistGoal){
+                                        manager1.AddItemToChecklist(checklistGoal);
+                                    }
                                 }
                             }
                         }

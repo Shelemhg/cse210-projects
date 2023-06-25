@@ -10,7 +10,7 @@ class Manager{
         _totalNumberOfChecklists = 0;
     }
 
-    public void AddItemToChecklist(Goal checklistGoal1){
+    public void AddItemToChecklist(ChecklistGoal checklistGoal1){
         
         string input;
         do{
@@ -118,7 +118,9 @@ class Manager{
         Console.WriteLine("    Checklist Goal");
         Console.WriteLine("Created: " + checklist.GetDateCreated());
         Console.WriteLine("Points: " + checklist.GetPoints());
-        checklist.DisplayItemsOnChecklist();
+        if(checklist is ChecklistGoal checklistGoal){
+            checklistGoal.DisplayItemsOnChecklist();
+        }
         Console.ResetColor();
     }
 
@@ -159,7 +161,9 @@ class Manager{
                     Console.WriteLine("    Eternal Goal");
                     Console.WriteLine("Created: " + goal.GetDateCreated());
                     Console.WriteLine("Points: " + goal.GetPoints());
-                    goal.DisplayItemsOnChecklist();
+                    if(goal is EternalGoal eternalGoal){
+                        eternalGoal.DisplayItemsOnChecklist();
+                    }
                     Console.ResetColor();
                     break;
                     
@@ -170,18 +174,24 @@ class Manager{
                     Console.WriteLine("    Checklist Goal");
                     Console.WriteLine("Created: " + goal.GetDateCreated());
 
-                    if(goal.GetPorcentCompleted() == 100){
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("Completed: "+ goal.GetPorcentCompleted() + " %");
+                    if(goal is ChecklistGoal checklistGoal){
+
+                        if(checklistGoal.GetPorcentCompleted() == 100){
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("Completed: "+ checklistGoal.GetPorcentCompleted() + " %");
+                            Console.ResetColor();
+                        }
+                        else{
+                            Console.WriteLine("Completed: "+ checklistGoal.GetPorcentCompleted() + " %");
+                        }
+
+                        Console.WriteLine("Possible Bonus Points: " + checklistGoal.GetBonusPoints());
+                        Console.WriteLine("Points: " + goal.GetPoints());
+
+                        checklistGoal.DisplayItemsOnChecklist();
+                        
                         Console.ResetColor();
                     }
-                    else{
-                        Console.WriteLine("Completed: "+ goal.GetPorcentCompleted() + " %");
-                    }
-                    Console.WriteLine("Possible Bonus Points: " + goal.GetBonusPoints());
-                    Console.WriteLine("Points: " + goal.GetPoints());
-                    goal.DisplayItemsOnChecklist();
-                    Console.ResetColor();
                     break;
                 default:
                     Console.WriteLine("Goal Type not found");
@@ -300,7 +310,8 @@ class Manager{
                         bool isCompleted = bool.Parse(reader.ReadLine());
                         checklistGoal.AddItem(item, isCompleted);
                     }
-                    goal.SetBonusPoints(bonusPoints);
+                    checklistGoal.SetBonusPoints(bonusPoints);
+                    _totalNumberOfChecklists++;
                 }
                 else if (goal is EternalGoal eternalGoal){
 
@@ -333,7 +344,7 @@ class Manager{
 
                 if (goal is ChecklistGoal checklistGoal){
                     
-                    writer.WriteLine(goal.GetBonusPoints());
+                    writer.WriteLine(checklistGoal.GetBonusPoints());
                     writer.WriteLine(checklistGoal.GetChecklistItems().Count);
 
                     foreach (var item in checklistGoal.GetChecklistItems()){
