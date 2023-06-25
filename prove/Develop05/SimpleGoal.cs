@@ -8,7 +8,7 @@ class SimpleGoal : Goal{
         _dateCreated = DateTime.Now;
     }
 
-    public override void DisplayChecklistItems(){
+    public override void DisplayItemsOnChecklist(){
         
         Console.Clear();
         Console.WriteLine("Goal: " + _goalDescription);

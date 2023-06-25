@@ -16,7 +16,7 @@ class ChecklistGoal : Goal{
         _records.Add(description, completed);
     }
 
-    public override void DisplayChecklistItems(){
+    public override void DisplayItemsOnChecklist(){
         
         int i = 1;
         foreach(var record in _records){

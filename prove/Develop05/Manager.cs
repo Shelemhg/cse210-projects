@@ -86,7 +86,7 @@ class Manager{
         }while(string.IsNullOrWhiteSpace(description));  
     }
 
-    public void DisplayChecklists(){
+    public void DisplayAllChecklists(){
         
         if(_totalNumberOfChecklists == 0){
             Console.WriteLine("No Checklists saved. Try Adding a new one.");
@@ -118,11 +118,11 @@ class Manager{
         Console.WriteLine("    Checklist Goal");
         Console.WriteLine("Created: " + checklist.GetDateCreated());
         Console.WriteLine("Points: " + checklist.GetPoints());
-        checklist.DisplayChecklistItems();
+        checklist.DisplayItemsOnChecklist();
         Console.ResetColor();
     }
 
-    public void DisplayGoals(){
+    public void DisplayAllGoals(){
 
         if(_goals.Count() == 0){
             Console.WriteLine("No Goals saved. Try Adding a new goal.");
@@ -159,7 +159,7 @@ class Manager{
                     Console.WriteLine("    Eternal Goal");
                     Console.WriteLine("Created: " + goal.GetDateCreated());
                     Console.WriteLine("Points: " + goal.GetPoints());
-                    goal.DisplayChecklistItems();
+                    goal.DisplayItemsOnChecklist();
                     Console.ResetColor();
                     break;
                     
@@ -180,7 +180,7 @@ class Manager{
                     }
                     Console.WriteLine("Possible Bonus Points: " + goal.GetBonusPoints());
                     Console.WriteLine("Points: " + goal.GetPoints());
-                    goal.DisplayChecklistItems();
+                    goal.DisplayItemsOnChecklist();
                     Console.ResetColor();
                     break;
                 default:

@@ -80,7 +80,7 @@ class Program
                     Console.WriteLine("- - - - - - - - - - - -");
                     Console.WriteLine("- -    G O A L S    - -");
                     Console.WriteLine("- - - - - - - - - - - -\n"); 
-                    manager1.DisplayGoals();
+                    manager1.DisplayAllGoals();
                     manager1.DisplayTotalScore();        
                     Console.WriteLine("Press Enter to go back.");
                     Console.ReadLine();
@@ -100,7 +100,7 @@ class Program
                         Console.WriteLine("- - - - - - - - - - - - - -");
                         Console.WriteLine("- -  R E C O R D   E V E N T - -");
                         Console.WriteLine("- - - - - - - - - - - - - -\n");
-                        manager1.DisplayGoals();
+                        manager1.DisplayAllGoals();
                         manager1.DisplayTotalScore();   
                         Console.WriteLine("Select the Goal to modify (Hit ENTER to Go Back): ");
                         input3 = Console.ReadLine();
@@ -181,7 +181,7 @@ class Program
                                             Console.WriteLine("    Checklist Goal");
                                             Console.WriteLine("Created: " + goal1.GetDateCreated());
                                             Console.WriteLine("Points: " + goal1.GetPoints());
-                                            goal1.DisplayChecklistItems();
+                                            goal1.DisplayItemsOnChecklist();
                                             Console.ResetColor();
 
                                             int numberSelected;
@@ -221,7 +221,7 @@ class Program
                         Console.WriteLine("- - - - - - - - - - - - - -");
                         Console.WriteLine("- -  A D D   T O   C H E C K L I S T - -");
                         Console.WriteLine("- - - - - - - - - - - - - -\n");
-                        manager1.DisplayChecklists();
+                        manager1.DisplayAllChecklists();
                         manager1.DisplayTotalScore();   
                         Console.WriteLine("Select the Cheklist in Pink to modify\nor Hit ENTER to Go Back): \n");
                         input4 = Console.ReadLine();
@@ -320,7 +320,7 @@ class Program
                                             if(File.Exists(fileNameToLoad + ".txt")){
                                                 manager1.LoadGoalsFromFile(fileNameToLoad);
                                                 Console.Clear();
-                                                manager1.DisplayGoals();
+                                                manager1.DisplayAllGoals();
                                                 Console.WriteLine("\n\nPress ENTER to go back");
                                                 Console.ReadLine();
                                                 break;
@@ -343,7 +343,7 @@ class Program
                                 if(File.Exists(fileNameToLoad + ".txt")){
                                                 manager1.LoadGoalsFromFile(fileNameToLoad + ".txt");
                                                 Console.Clear();
-                                                manager1.DisplayGoals();
+                                                manager1.DisplayAllGoals();
                                                 Console.WriteLine("\n\nPress ENTER to go back");
                                                 Console.ReadLine();
                                                 break;

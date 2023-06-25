@@ -13,7 +13,7 @@ class Goal {
 
     public virtual void AddItem(string description, Boolean completed){}
     
-    public virtual void DisplayChecklistItems(){}
+    public virtual void DisplayItemsOnChecklist(){}
     public virtual void DisplaySingleChecklist(Goal checklist){}
     
     public virtual int GetBonusPoints(){

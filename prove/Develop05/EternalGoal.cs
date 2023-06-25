@@ -10,7 +10,7 @@ class EternalGoal : Goal{
         _records = new Dictionary<DateTime, bool>();
     }
 
-    public override void DisplayChecklistItems(){
+    public override void DisplayItemsOnChecklist(){
         
         foreach(var record in _records){
             if(record.Value == true){  
