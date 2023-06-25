@@ -1,5 +1,6 @@
 class ChecklistGoal : Goal{
     private Dictionary<string, Boolean> _records;
+    private int _bonusPoints;
 
     public ChecklistGoal(string description) : base(description){
         
@@ -10,12 +11,12 @@ class ChecklistGoal : Goal{
         _records = new Dictionary<string, bool>();
     }
 
-    public override void AddItem(string description){
+    public override void AddItem(string description, Boolean completed){
         
-        _records.Add(description, false);
+        _records.Add(description, completed);
     }
 
-    public override void DisplayGoal(){
+    public override void DisplayChecklistItems(){
         
         int i = 1;
         foreach(var record in _records){
@@ -28,11 +29,27 @@ class ChecklistGoal : Goal{
             }
             i++;
         }
+        Console.ResetColor();
     }
 
     public override int GetNumberOfItems(){
         return _records.Count();
     }
+
+    public Dictionary<string, Boolean> GetChecklistItems(){
+        return _records;
+    }
+    
+
+    public override int GetBonusPoints(){
+        return _bonusPoints;
+    }
+    public bool GetItemCompletionStatus(string item){
+        if (_records.ContainsKey(item))
+            return _records[item];
+        return false;
+    }
+
     public override int GetPorcentCompleted(){
         double total = 0;
         int percent = 0;
@@ -44,8 +61,14 @@ class ChecklistGoal : Goal{
         }
         total = itemsCompleted /_records.Count() * 100;
         percent = (int)Math.Round(total);
+
+        if(percent == 100){
+            _completed = true;
+            _points += _bonusPoints;
+        }
         return percent;
     }
+    
     public override void UpdateItem(int itemSelected){
         
         int i = 1;
@@ -57,5 +80,8 @@ class ChecklistGoal : Goal{
             }
             i++;
         }
+    }
+    public override void SetBonusPoints(int points){
+         _bonusPoints = points;
     }
 }

@@ -10,7 +10,7 @@ class EternalGoal : Goal{
         _records = new Dictionary<DateTime, bool>();
     }
 
-    public override void DisplayGoal(){
+    public override void DisplayChecklistItems(){
         
         foreach(var record in _records){
             if(record.Value == true){  
@@ -23,10 +23,14 @@ class EternalGoal : Goal{
 
         }
     }
+
+    public Dictionary<DateTime, Boolean> GetRecordedEvents(){
+        return _records;
+    }
     
-    public override void RecordEvent(Boolean completed){
+    public override void RecordEvent(DateTime date, Boolean completed){
         
-        _records.Add(DateTime.Now, completed);
+        _records.Add(date, completed);
         _points += 50;
     }
     

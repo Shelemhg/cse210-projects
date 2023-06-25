@@ -40,7 +40,7 @@ class Program
             input = Console.ReadLine();
 
             switch(input){
-                // Create New Goal
+                // CREATE NEW GOAL
                 case "1":
                     string input2 = null;
 
@@ -68,7 +68,7 @@ class Program
                     }while(input2 != "");
                     break;
                 
-                //  Display Goals
+                //  DISPLAY  GOALS
                 case "2":
                     
                     if(manager1.GetNumberOfGoals() == 0){
@@ -82,11 +82,11 @@ class Program
                     Console.WriteLine("- - - - - - - - - - - -\n"); 
                     manager1.DisplayGoals();
                     manager1.DisplayTotalScore();        
-                    Console.WriteLine("Press Enter to continue.");
+                    Console.WriteLine("Press Enter to go back.");
                     Console.ReadLine();
                     break;
 
-                // Add Event
+                // ADD EVENT
                 case "3":                            
                     if(manager1.GetNumberOfGoals() == 0){
                         Console.WriteLine("\nNo Goals saved. Try Adding a new goal.");
@@ -126,7 +126,7 @@ class Program
                                         }else{
                                             do{
                                                 Console.Clear();
-                                                Console.Write("Was the goal '" + goal1.GetDescription() + "' Completed? (y/n):");
+                                                Console.Write("Was the goal '" + goal1.GetGoalDescription() + "' Completed? (y/n):");
                                                 res = Console.ReadLine();
 
                                                 if(res.ToLower() =="y"){
@@ -149,11 +149,11 @@ class Program
 
                                         do{
                                             Console.Clear();
-                                            Console.Write("Did you complete the goal '" + goal1.GetDescription() + "' today? (y/n):");
+                                            Console.Write("Did you complete the goal '" + goal1.GetGoalDescription() + "' today? (y/n):");
                                             res = Console.ReadLine();
 
                                             if(res.ToLower() =="y"){
-                                                goal1.RecordEvent(true);
+                                                goal1.RecordEvent(DateTime.Now, true);
                                                 Console.Write("\nThe goal was marked as COMPLETED!!\n");
                                                 Thread.Sleep(2000);
                                                 Console.Clear();
@@ -162,7 +162,7 @@ class Program
                                             else if(res.ToLower() == "n"){
                                                 Console.Write("Event recorded.\n");
                                                 Console.Write("\nNo problem, keep it up! :D\n\n");
-                                                goal1.RecordEvent(false);
+                                                goal1.RecordEvent(DateTime.Now, false);
                                                 Thread.Sleep(3000);
                                                 break;
                                             }
@@ -176,12 +176,12 @@ class Program
                                         do{
                                             Console.Clear();
                                             Console.ForegroundColor = ConsoleColor.Magenta;
-                                            Console.WriteLine(goal1.GetDescription());                    
+                                            Console.WriteLine(goal1.GetGoalDescription());                    
                                             Console.ResetColor();
                                             Console.WriteLine("    Checklist Goal");
                                             Console.WriteLine("Created: " + goal1.GetDateCreated());
                                             Console.WriteLine("Points: " + goal1.GetPoints());
-                                            goal1.DisplayGoal();
+                                            goal1.DisplayChecklistItems();
                                             Console.ResetColor();
 
                                             int numberSelected;
@@ -206,7 +206,7 @@ class Program
 
                     break;
 
-                //  Add to Checklist
+                //  ADD TO CHECKLIST
                 case "4":
                     if(manager1.GetNumberOfChecklists() == 0){
                         // Console.Clear();
@@ -244,9 +244,126 @@ class Program
 
                     }while(input4 != "");
                     break;
+
+                // SAVE to file
+                case "5":
+                    
+                    if(manager1.GetNumberOfGoals() == 0){
+                        Console.WriteLine("No goals found. Try creating a new Goal.");
+                        Thread.Sleep(2000);
+                        break;
+                    }
+
+                    string fileName;
+                    do{
+                        Console.Clear();
+                        Console.WriteLine("- - - - - - - - - - - - - - - -");
+                        Console.WriteLine("- - S A V E   T O   F I L E - -");
+                        Console.WriteLine("- - - - - - - - - - - - - - - -\n\n"); 
+                        Console.WriteLine("Type the name of the file to save: ");
+                        fileName = Console.ReadLine();
+
+                        if(!string.IsNullOrWhiteSpace(fileName)){
+
+                            if(File.Exists(fileName + ".txt")){                            
+                                string res;
+
+                                do{
+                                    Console.WriteLine("\nA file with that name was found. Would you like  to overwrite it? (y/n)\nTHIS WILL PERMANENTLY DELETE ALL THE INFORMATION IN IT.");
+                                    res = Console.ReadLine();
+
+                                    if(res.ToLower() == "y"){
+                                        manager1.SaveToFile(fileName);
+                                        Console.WriteLine("\n\nGoals saved to file.");
+                                        Thread.Sleep(2000);
+                                        break;
+                                    }
+
+                                }while(res.ToLower() != "n");
+                            }
+                            else{
+                                manager1.SaveToFile(fileName);
+                                Console.WriteLine("\n\nGoals saved to file.");
+                                Thread.Sleep(2000);
+                                break;
+                            }
+                        }
+                    }while(string.IsNullOrWhiteSpace(fileName));
+
+                    break;
+                
+                //  LOAD from file
+                case "6":
+
+                    string fileNameToLoad = null;
+                    string res2 = null;
+                    do{
+                        Console.Clear();
+                        Console.WriteLine("- - - - - - - - - - - - - - - - - -");
+                        Console.WriteLine("- - L O A D   F R O M   F I L E - -");
+                        Console.WriteLine("- - - - - - - - - - - - - - - - - -\n\n");
+
+                        
+
+                        if(manager1.GetNumberOfGoals()!= 0){
+                            
+                            Console.WriteLine("\nThere are UNSAVED goals. Would you like to load the file anyways? (y/n)\nTHIS WILL PERMANENTLY DELETE ALL THE EXISTING GOALS IN THE PROGRAM.");
+                                res2 = Console.ReadLine();
+
+                                if(res2.ToLower() == "y"){
+                                    do{
+                                        Console.WriteLine("Type the name of the file to load (Do not include the extension)");
+                                        fileNameToLoad = Console.ReadLine();
+
+                                        if(!string.IsNullOrWhiteSpace(fileNameToLoad)){
+                                            
+                                            if(File.Exists(fileNameToLoad + ".txt")){
+                                                manager1.LoadGoalsFromFile(fileNameToLoad);
+                                                Console.Clear();
+                                                manager1.DisplayGoals();
+                                                Console.WriteLine("\n\nPress ENTER to go back");
+                                                Console.ReadLine();
+                                                break;
+                                            }else{
+                                                Console.WriteLine("File " + fileNameToLoad + " NOT found. Please try again.");
+                                                Thread.Sleep(2000);
+                                            }
+                                        }
+                                    }while(string.IsNullOrWhiteSpace(fileNameToLoad));
+                                }
+                                else if(res2.ToLower() == "n"){
+                                    break;
+                                }                            
+                        }
+                        else{
+                            Console.WriteLine("Type the name of the file to load. \n(Do not include the extension)\n");
+                            fileNameToLoad = Console.ReadLine();
+
+                            if(!string.IsNullOrWhiteSpace(fileNameToLoad)){
+                                if(File.Exists(fileNameToLoad + ".txt")){
+                                                manager1.LoadGoalsFromFile(fileNameToLoad + ".txt");
+                                                Console.Clear();
+                                                manager1.DisplayGoals();
+                                                Console.WriteLine("\n\nPress ENTER to go back");
+                                                Console.ReadLine();
+                                                break;
+                                            }else{
+                                                Console.WriteLine("File " + fileNameToLoad + " NOT found. Please try again.");
+                                                Thread.Sleep(2000);
+                                            }
+                            }
+                        }
+                        
+                        if(string.IsNullOrWhiteSpace(fileNameToLoad)){
+                            break;
+                        }
+                    }while(string.IsNullOrWhiteSpace(fileNameToLoad) || !File.Exists(fileNameToLoad + ".txt") || res2 != "n");
+
+                    break;
             }
 
         }while(input != "0");
         Console.Clear();
+        Console.ResetColor();
     }
 }

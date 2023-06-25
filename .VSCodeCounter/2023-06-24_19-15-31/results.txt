@@ -1,0 +1,32 @@
+Date : 2023-06-24 19:15:31
+Directory : c:\Users\Yarko\OneDrive\Documentos\BYU\CSE 210 Programming with Classes\cse210-projects\prove\Develop02
+Total : 6 files,  263 codes, 29 comments, 45 blanks, all 337 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| C#       |          4 |        202 |         29 |         41 |        272 |
+| Draw.io  |          1 |         53 |          0 |          0 |         53 |
+| XML      |          1 |          8 |          0 |          4 |         12 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                     | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                        |          6 |        263 |         29 |         45 |        337 |
++--------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                                                 | language | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| c:\Users\Yarko\OneDrive\Documentos\BYU\CSE 210 Programming with Classes\cse210-projects\prove\Develop02\Classes.drawio   | Draw.io  |         53 |          0 |          0 |         53 |
+| c:\Users\Yarko\OneDrive\Documentos\BYU\CSE 210 Programming with Classes\cse210-projects\prove\Develop02\Develop02.csproj | XML      |          8 |          0 |          4 |         12 |
+| c:\Users\Yarko\OneDrive\Documentos\BYU\CSE 210 Programming with Classes\cse210-projects\prove\Develop02\DisplayMenu.cs   | C#       |          0 |          9 |          3 |         12 |
+| c:\Users\Yarko\OneDrive\Documentos\BYU\CSE 210 Programming with Classes\cse210-projects\prove\Develop02\Entry.cs         | C#       |          8 |          1 |          3 |         12 |
+| c:\Users\Yarko\OneDrive\Documentos\BYU\CSE 210 Programming with Classes\cse210-projects\prove\Develop02\Journal.cs       | C#       |         70 |          2 |         17 |         89 |
+| c:\Users\Yarko\OneDrive\Documentos\BYU\CSE 210 Programming with Classes\cse210-projects\prove\Develop02\Program.cs       | C#       |        124 |         17 |         18 |        159 |
+| Total                                                                                                                    |          |        263 |         29 |         45 |        337 |
++--------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
