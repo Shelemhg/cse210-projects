@@ -2,10 +2,6 @@
 EXCEEDING REQUIREMENTS:
 
 
-
-RIDICULOOUSLY LARGE AMOUNT OF EFFORT
-- By far my most meticoulous program. Great attention to the detail to achieve great UX experience and a very robust product.
-
 DATE RECORD
 - The program stores and shows when each goal was created.
 
