@@ -259,6 +259,7 @@ class Program
                     }
 
                     string fileName;
+
                     do{
                         Console.Clear();
                         Console.WriteLine("- - - - - - - - - - - - - - - -");
@@ -301,73 +302,43 @@ class Program
 
                     string fileNameToLoad = null;
                     string res2 = null;
+
                     do{
                         Console.Clear();
                         Console.WriteLine("- - - - - - - - - - - - - - - - - -");
                         Console.WriteLine("- - L O A D   F R O M   F I L E - -");
-                        Console.WriteLine("- - - - - - - - - - - - - - - - - -\n\n");
+                        Console.WriteLine("- - - - - - - - - - - - - - - - - -\n");
 
-                        
+                        if(manager1.GetNumberOfGoals() == 0){
 
-                        if(manager1.GetNumberOfGoals()!= 0){
-                            
-                            Console.WriteLine("\nThere are UNSAVED goals. Would you like to load the file anyways? (y/n)\nTHIS WILL PERMANENTLY DELETE ALL THE EXISTING GOALS IN THE PROGRAM.");
-                                res2 = Console.ReadLine();
-
-                                if(res2.ToLower() == "y"){
-                                    do{
-                                        Console.WriteLine("Type the name of the file to load (Do not include the extension)");
-                                        fileNameToLoad = Console.ReadLine();
-
-                                        if(!string.IsNullOrWhiteSpace(fileNameToLoad)){
-                                            
-                                            if(File.Exists(fileNameToLoad + ".txt")){
-                                                manager1.LoadGoalsFromFile(fileNameToLoad);
-                                                Console.Clear();
-                                                manager1.DisplayAllGoals();
-                                                Console.WriteLine("\n\nPress ENTER to go back");
-                                                Console.ReadLine();
-                                                break;
-                                            }else{
-                                                Console.WriteLine("File " + fileNameToLoad + " NOT found. Please try again.");
-                                                Thread.Sleep(2000);
-                                            }
-                                        }
-                                    }while(string.IsNullOrWhiteSpace(fileNameToLoad));
-                                }
-                                else if(res2.ToLower() == "n"){
-                                    break;
-                                }                            
+                            fileNameToLoad = manager1.StartFileLoad(fileNameToLoad);             
                         }
                         else{
-                            Console.WriteLine("Type the name of the file to load. \n(Do not include the extension)\n");
-                            fileNameToLoad = Console.ReadLine();
+                            
+                            do{
+                                Console.Clear();
+                                if(res2 == null || res2 != "y" || res2 != "n"){
+                                    Console.WriteLine("\nThere are UNSAVED goals. Would you like to load the file anyways? (y/n)\nTHIS WILL PERMANENTLY DELETE ALL THE EXISTING GOALS IN THE PROGRAM.");
+                                    res2 = Console.ReadLine();
+                                }
 
-                            if(!string.IsNullOrWhiteSpace(fileNameToLoad)){
-                                if(File.Exists(fileNameToLoad + ".txt")){
-                                                manager1.LoadGoalsFromFile(fileNameToLoad + ".txt");
-                                                Console.Clear();
-                                                manager1.DisplayAllGoals();
-                                                Console.WriteLine("\n\nPress ENTER to go back");
-                                                Console.ReadLine();
-                                                break;
-                                            }else{
-                                                Console.WriteLine("File " + fileNameToLoad + " NOT found. Please try again.");
-                                                Thread.Sleep(2000);
-                                            }
-                            }
+                                if(res2.ToLower() == "y"){
+                                    fileNameToLoad = manager1.StartFileLoad(fileNameToLoad);
+                                }
+                                else if(res2.ToLower() == "n"){
+                                    fileNameToLoad = "";
+                                    break;
+                                } 
+                            }while(fileNameToLoad != "");  
                         }
                         
-                        if(string.IsNullOrWhiteSpace(fileNameToLoad)){
-                            break;
-                        }
-                    }while(string.IsNullOrWhiteSpace(fileNameToLoad) || !File.Exists(fileNameToLoad + ".txt") || res2 != "n");
+                    }while(fileNameToLoad != "");
 
                     break;
             }
 
         }while(input != "0");
+
         Console.Clear();
-        Console.ResetColor();
     }
 }

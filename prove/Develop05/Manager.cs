@@ -331,6 +331,33 @@ class Manager{
         
     }
 
+    public string StartFileLoad(string fileNameToLoad){
+        
+        do{
+            Console.Clear();
+            Console.WriteLine("Type the name of the file to load (Do not include the extension)\n\nHit ENTER to go Back.\n");
+            fileNameToLoad = Console.ReadLine();
+
+            if(!string.IsNullOrWhiteSpace(fileNameToLoad)){
+                
+                if(File.Exists(fileNameToLoad + ".txt")){
+                    LoadGoalsFromFile(fileNameToLoad + ".txt");
+                    Console.Clear();
+                    DisplayAllGoals();
+                    Console.WriteLine("\n\nPress ENTER to go back");
+                    Console.ReadLine();
+                }
+                else{
+                    Console.WriteLine("File \"" + fileNameToLoad + "\" NOT found. Please try again.");
+                    Thread.Sleep(2000);
+                    // fileNameToLoad = "Repeat Loop";
+                }
+            }
+        }while(fileNameToLoad !="");
+        
+        return fileNameToLoad;
+    }
+
     public void SaveToFile(string fileName){
         
         using (StreamWriter writer = new StreamWriter(fileName + ".txt")){
