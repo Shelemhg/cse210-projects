@@ -187,9 +187,7 @@ class Manager{
         Console.WriteLine("Possible Points per Item: " + checklist.GetPossiblePoints());
         Console.WriteLine("Points: " + checklist.GetPoints());
         
-        if(checklist is ChecklistGoal checklistGoal){
-            checklistGoal.DisplayItemsOnChecklist();
-        }
+        checklist.DisplayItemsOnChecklist();
 
         Console.ResetColor();
     }

@@ -198,20 +198,7 @@ class Program
 
                                             do{
                                                 Console.Clear();
-                                                Console.ForegroundColor = ConsoleColor.Magenta;
-                                                Console.WriteLine(checklistGoal.GetGoalDescription());                    
-                                                Console.ResetColor();
-
-                                                Console.WriteLine("    Checklist Goal");
-                                                Console.WriteLine("Created: " + checklistGoal.GetDateCreated());
-                                                Console.WriteLine("Completed: "+ checklistGoal.GetPercentCompleted() + " %");
-                                                Console.WriteLine("Possible Bonus Points: " + checklistGoal.GetBonusPoints());
-                                                Console.WriteLine("Possible Points per Item: " + checklistGoal.GetPossiblePoints());
-                                                Console.WriteLine("Points: " + checklistGoal.GetPoints());
-                                                checklistGoal.DisplayItemsOnChecklist();
-                                                
-                                                Console.ResetColor();
-
+                                                manager1.DisplaySingleChecklist(checklistGoal);
                                                 int numberSelected;
                                             
                                                 Console.WriteLine("Select one Item to mark as done, or Hit ENTER to go Back:\n");
