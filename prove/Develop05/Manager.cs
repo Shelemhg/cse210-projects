@@ -13,6 +13,7 @@ class Manager{
     public void AddItemToChecklist(ChecklistGoal checklistGoal1){
         
         string input;
+        
         do{
             
             Console.Clear();
@@ -30,11 +31,14 @@ class Manager{
     }
 
     public void CreateChecklistGoal(){
+        
         string description;
+
         do{
             Console.Clear();
             Console.Write("Please type the name of the goal:\n\n");
             description = Console.ReadLine();
+            
             if(!string.IsNullOrWhiteSpace(description)){
                 ChecklistGoal checklistGoal1 = new ChecklistGoal(description);
                 _goals.Add(checklistGoal1);
@@ -45,8 +49,9 @@ class Manager{
                 do{
                     Console.Clear();
                     DisplaySingleChecklist(checklistGoal1);
-                    Console.WriteLine("\nHow many Bonus Points should you gain upon completion?");
+                    Console.WriteLine("\nHow many Bonus Points should you gain upon completion?\n");
                     string res3 = Console.ReadLine();
+                    
                     if(int.TryParse(res3, out bonusPoints)){                        
                         checklistGoal1.SetBonusPoints(bonusPoints);
                     }
@@ -118,9 +123,11 @@ class Manager{
         Console.WriteLine("    Checklist Goal");
         Console.WriteLine("Created: " + checklist.GetDateCreated());
         Console.WriteLine("Points: " + checklist.GetPoints());
+        
         if(checklist is ChecklistGoal checklistGoal){
             checklistGoal.DisplayItemsOnChecklist();
         }
+
         Console.ResetColor();
     }
 
@@ -253,15 +260,18 @@ class Manager{
     }
 
     public int GetNumberOfChecklists(){
+        
         return _totalNumberOfChecklists;
     }
     
     public int GetScore(){
         
         int total = 0;
+
         foreach(Goal goal in _goals){
             total += goal.GetPoints();
         }
+
         return total;
     }
 
@@ -335,7 +345,7 @@ class Manager{
         
         do{
             Console.Clear();
-            Console.WriteLine("Type the name of the file to load (Do not include the extension)\n\nHit ENTER to go Back.\n");
+            Console.WriteLine("Type the name of the file to load\n(Do not include the extension)\n\nHit ENTER to go Back.\n");
             fileNameToLoad = Console.ReadLine();
 
             if(!string.IsNullOrWhiteSpace(fileNameToLoad)){
@@ -354,7 +364,7 @@ class Manager{
                 }
             }
         }while(fileNameToLoad !="");
-        
+
         return fileNameToLoad;
     }
 

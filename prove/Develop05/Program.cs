@@ -43,6 +43,7 @@ class Program
             switch(input){
                 // CREATE NEW GOAL
                 case "1":
+
                     string input2 = null;
 
                     do{
@@ -67,6 +68,7 @@ class Program
                                 break;
                         }
                     }while(input2 != "");
+
                     break;
                 
                 //  DISPLAY  GOALS
@@ -77,23 +79,27 @@ class Program
                         Thread.Sleep(2000);
                         break;
                     }
+
                     Console.Clear();
                     Console.WriteLine("- - - - - - - - - - - -");
                     Console.WriteLine("- -    G O A L S    - -");
                     Console.WriteLine("- - - - - - - - - - - -\n"); 
                     manager1.DisplayAllGoals();
                     manager1.DisplayTotalScore();        
-                    Console.WriteLine("Press Enter to go back.");
+                    Console.WriteLine("Press ENTER to go back.");
                     Console.ReadLine();
+
                     break;
 
                 // ADD EVENT
-                case "3":                            
+                case "3":
+
                     if(manager1.GetNumberOfGoals() == 0){
                         Console.WriteLine("\nNo Goals saved. Try Adding a new goal.");
                         Thread.Sleep(2000);
                         break;
                     }
+                    
                     string input3;
 
                     do{
@@ -102,14 +108,17 @@ class Program
                         Console.WriteLine("- -  R E C O R D   E V E N T - -");
                         Console.WriteLine("- - - - - - - - - - - - - -\n");
                         manager1.DisplayAllGoals();
-                        manager1.DisplayTotalScore();   
+                        manager1.DisplayTotalScore(); 
+
                         Console.WriteLine("Select the Goal to modify (Hit ENTER to Go Back): ");
                         input3 = Console.ReadLine();
                         Console.Clear();
                         int goalSelected;
 
                         if(int.TryParse(input3, out goalSelected)){
+
                             if(goalSelected == 0){
+
                                 break;
                             }
 
@@ -119,12 +128,16 @@ class Program
                                 string res;
                                 
                                 switch(goal1.GetTypeOfGoal()){
+                                    
                                     case "Simple Goal":
+                                        
                                         if(goal1.GetGoalStatus()){
                                             Console.Write("Goal already Completed\n");
                                             Thread.Sleep(1000);
                                             Console.Clear();
+
                                         }else{
+
                                             do{
                                                 Console.Clear();
                                                 Console.Write("Was the goal '" + goal1.GetGoalDescription() + "' Completed? (y/n):");
@@ -144,11 +157,13 @@ class Program
                                                 }
                                             }while(res != "y" || res !="n");
                                         }
+
                                         break;
 
                                     case "Eternal Goal":
 
                                         if(goal1 is EternalGoal eternalGoal){
+                                            
                                             do{
                                                 Console.Clear();
                                                 Console.Write("Did you complete the goal '" + eternalGoal.GetGoalDescription() + "' today? (y/n):");
@@ -170,6 +185,7 @@ class Program
                                                 }
                                             }while(res != "y" || res !="n");
                                         }
+
                                         break;
                                     
                                     case "Checklist Goal":
@@ -182,6 +198,7 @@ class Program
                                                 Console.ForegroundColor = ConsoleColor.Magenta;
                                                 Console.WriteLine(goal1.GetGoalDescription());                    
                                                 Console.ResetColor();
+
                                                 Console.WriteLine("    Checklist Goal");
                                                 Console.WriteLine("Created: " + goal1.GetDateCreated());
                                                 Console.WriteLine("Points: " + goal1.GetPoints());
@@ -274,7 +291,7 @@ class Program
                                 string res;
 
                                 do{
-                                    Console.WriteLine("\nA file with that name was found. Would you like  to overwrite it? (y/n)\nTHIS WILL PERMANENTLY DELETE ALL THE INFORMATION IN IT.");
+                                    Console.WriteLine("\nA file with that name was found. Would you like  to overwrite it? (y/n)\n\nTHIS WILL PERMANENTLY DELETE ALL THE INFORMATION IN IT.\n");
                                     res = Console.ReadLine();
 
                                     if(res.ToLower() == "y"){
