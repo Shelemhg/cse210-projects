@@ -34,6 +34,7 @@ class Program
         string input = null;
 
         do{
+            Console.Clear();
             manager1.DisplayMenu();
             manager1.DisplayTotalScore();
             
@@ -81,9 +82,9 @@ class Program
                     }
 
                     Console.Clear();
-                    Console.WriteLine("- - - - - - - - - - - -");
-                    Console.WriteLine("- -    G O A L S    - -");
-                    Console.WriteLine("- - - - - - - - - - - -\n"); 
+                    manager1.DisplayHorizontalLine();
+                    Console.WriteLine("- - -            G O A L S            - - -");
+                    manager1.DisplayHorizontalLine();
                     manager1.DisplayAllGoals();
                     manager1.DisplayTotalScore();        
                     Console.WriteLine("Press ENTER to go back.");
@@ -104,9 +105,9 @@ class Program
 
                     do{
                         Console.Clear();        
-                        Console.WriteLine("- - - - - - - - - - - - - -");
-                        Console.WriteLine("- -  R E C O R D   E V E N T - -");
-                        Console.WriteLine("- - - - - - - - - - - - - -\n");
+                        manager1.DisplayHorizontalLine();
+                        Console.WriteLine("- - - -   R E C O R D   E V E N T   - - - -");
+                        manager1.DisplayHorizontalLine();
                         manager1.DisplayAllGoals();
                         manager1.DisplayTotalScore(); 
 
@@ -231,9 +232,9 @@ class Program
 
                     do{
                         Console.Clear();        
-                        Console.WriteLine("- - - - - - - - - - - - - - - - -");
-                        Console.WriteLine(" A D D   T O   C H E C K L I S T");
-                        Console.WriteLine("- - - - - - - - - - - - - - - - -\n");
+                        manager1.DisplayHorizontalLine();
+                        Console.WriteLine("- -  A D D   T O   C H E C K L I S T  - - -");
+                        manager1.DisplayHorizontalLine();
                         manager1.DisplayAllChecklists();
                         manager1.DisplayTotalScore();   
                         Console.WriteLine("Select the Cheklist in Pink to modify\nor Hit ENTER to Go Back): \n");
@@ -273,10 +274,10 @@ class Program
 
                     do{
                         Console.Clear();
-                        Console.WriteLine("- - - - - - - - - - - - - - - -");
-                        Console.WriteLine("- - S A V E   T O   F I L E - -");
-                        Console.WriteLine("- - - - - - - - - - - - - - - -\n"); 
-                        Console.WriteLine("Type the name of the file to save and hit ENTER:\n");
+                        manager1.DisplayHorizontalLine();
+                        Console.WriteLine("- - -     S A V E   T O   F I L E     - - -");
+                        manager1.DisplayHorizontalLine(); 
+                        Console.WriteLine("\nType the name of the file to save and hit ENTER:\n");
                         fileName = Console.ReadLine();
 
                         if(!string.IsNullOrWhiteSpace(fileName)){
@@ -286,10 +287,10 @@ class Program
 
                                 do{
                                     Console.Clear();
-                                    Console.WriteLine("- - - - - - - - - - - - - - - -");
-                                    Console.WriteLine("- - S A V E   T O   F I L E - -");
-                                    Console.WriteLine("- - - - - - - - - - - - - - - -\n"); 
-                                    Console.WriteLine("Type the name of the file to save and hit ENTER:\n");
+                                    manager1.DisplayHorizontalLine();
+                            Console.WriteLine("- - -     S A V E   T O   F I L E     - - -");
+                            manager1.DisplayHorizontalLine(); 
+                                    Console.WriteLine("\nType the name of the file to save and hit ENTER:\n");
                                     Console.WriteLine("\nA file with that name was found. Would you like  to overwrite it? (y/n)\n\nTHIS WILL PERMANENTLY DELETE ALL THE INFORMATION IN IT.\n");
                                     res = Console.ReadLine();
 
@@ -333,10 +334,12 @@ class Program
                             
                             do{
                                 Console.Clear();
-                                Console.WriteLine("- - - - - - - - - - - - - - - - - -");
-                                Console.WriteLine("- - L O A D   F R O M   F I L E - -");
-                                Console.WriteLine("- - - - - - - - - - - - - - - - - -\n");
-                                Console.WriteLine("There are UNSAVED goals.\nWould you like to load the file anyways? (y/n)\n\nThis will PERMANENTLY DELETE all existing goal in the program.\n");
+                                manager1.DisplayHorizontalLine();
+                                
+                                manager1.DisplayHorizontalLine();
+                                Console.WriteLine("- - -   L O A D   F R O M   F I L E   - - -");
+                                manager1.DisplayHorizontalLine();
+                                Console.WriteLine("\nThere are UNSAVED goals.\nWould you like to load the file anyways? (y/n)\n\nThis will PERMANENTLY DELETE all existing goal in the program.\n");
                                 res2 = Console.ReadLine();
 
                                 if(res2.ToLower() == "y"){

@@ -203,7 +203,8 @@ class Manager{
         int i = 1;
 
         foreach(var goal in _goals){
-            Console.WriteLine("- - - - - - - - - - ");
+            Console.WriteLine("");
+            DisplayHorizontalLine();
             
             switch(goal.GetTypeOfGoal()){
                 case "Simple Goal":
@@ -280,15 +281,25 @@ class Manager{
         }
     }
 
+    public void DisplayHorizontalLine(){
+        
+        Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - -");
+    }
+
+    private void DisplayHorizontalDots(){
+        
+        Console.WriteLine(". . . . . . . . . . . . . . . . . . . . . .");
+    }
+
     public void DisplayMenu(){
         
         Console.Clear();
 
         if(_goals.Count() == 0){
             
-            Console.WriteLine("- - - - - - - - - - - - - - - - - - - ");
-            Console.WriteLine("-    E T E R N A L     Q U E S T    -");
-            Console.WriteLine("- - - - - - - - - - - - - - - - - - -");
+            DisplayHorizontalLine();
+            Console.WriteLine("- - -    E T E R N A L    Q U E S T   - - -");
+            DisplayHorizontalLine();
             Console.WriteLine("1. Create New Goal");
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("2. Display Goals");
@@ -296,18 +307,18 @@ class Manager{
             Console.WriteLine("4. Add Items to Existing Checklist Goal");
             Console.ResetColor();
             
-            Console.WriteLine(". . . . . . . . . . . .");
+            DisplayHorizontalDots();
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("5. Save Goals to File");
             Console.ResetColor();
             Console.WriteLine("6. Load Goals from File");
-            Console.WriteLine(". . . . . . . . . . . .");
-            Console.WriteLine("0. Exit\n");
+            DisplayHorizontalDots();
+            Console.WriteLine("0. Exit");
 
         }else{
-            Console.WriteLine("- - - - - - - - - - - - - - - - - - - ");
-            Console.WriteLine("-    E T E R N A L     Q U E S T    -");
-            Console.WriteLine("- - - - - - - - - - - - - - - - - - -");
+            DisplayHorizontalLine();
+            Console.WriteLine("- - -    E T E R N A L    Q U E S T   - - -");
+            DisplayHorizontalLine();
             Console.WriteLine("1. Create New Goal");
             Console.WriteLine("2. Display Goals");
             Console.WriteLine("3. Record Event");
@@ -321,11 +332,11 @@ class Manager{
                 Console.WriteLine("4. Add Items to Existing Checklist Goal");
             }
 
-            Console.WriteLine(". . . . . . . . . . . .");
+            DisplayHorizontalDots();
             Console.WriteLine("5. Save Goals to File");
             Console.WriteLine("6. Load Goals from File");
-            Console.WriteLine(". . . . . . . . . . . .");
-            Console.WriteLine("0. Exit\n");
+            DisplayHorizontalDots();
+            Console.WriteLine("0. Exit");
         }
     }
     
@@ -339,28 +350,30 @@ class Manager{
         Console.WriteLine("2. Eternal Goal");
         Console.WriteLine("3. Checklist Goal");
         Console.WriteLine(". . . . . . . . . . . .");
-        Console.WriteLine("Hit ENTER to Go Back\n");
+        Console.WriteLine("\nHit ENTER to Go Back\n");
     }
 
     public void DisplayTotalScore(){
         
-        Console.WriteLine("- - - - - - - - - - - - - - - -");
+        Console.WriteLine("");
+        DisplayHorizontalLine();
+
         if(_lastFileUsed != ""){
             Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine("  Last File Used: \"" + _lastFileUsed + "\"");
+            Console.WriteLine("         Last File Used: \"" + _lastFileUsed + "\"");
             Console.ResetColor();
         }
-        Console.WriteLine("- - - - - - - - - - - - - - - -\n");
+        DisplayHorizontalLine();
         Console.ForegroundColor = ConsoleColor.DarkGreen;
-        Console.WriteLine("        TOTAL SCORE: " + GetScore());
+        Console.WriteLine("              TOTAL SCORE: " + GetScore());
         Console.ResetColor();
-        Console.WriteLine("\n- - - - - - - - - - - - - - - -");
+        DisplayHorizontalLine();
         if(_unsavedChanges){
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine("   Changes Pending To Be Saved");
+            Console.WriteLine("        Changes Pending To Be Saved");
             Console.ResetColor();
         }
-        Console.WriteLine("- - - - - - - - - - - - - - - -\n");   
+        DisplayHorizontalLine();   
     }
     
     public Goal GetGoal(int selected){
@@ -470,10 +483,10 @@ class Manager{
         
         do{
             Console.Clear();
-            Console.WriteLine("- - - - - - - - - - - - - - - - - -");
-            Console.WriteLine("- - L O A D   F R O M   F I L E - -");
-            Console.WriteLine("- - - - - - - - - - - - - - - - - -\n");
-            Console.WriteLine("Type the name of the file to load and hit ENTER\n(Do not include the file extension)\n\nOr just hit ENTER to go Back.\n");
+            DisplayHorizontalLine();
+            Console.WriteLine("- - -   L O A D   F R O M   F I L E   - - -");
+            DisplayHorizontalLine();
+            Console.WriteLine("\nType the name of the file to load and hit ENTER\n(Do not include the file extension)\n\nOr just hit ENTER to go Back.\n");
             fileNameToLoad = Console.ReadLine();
 
             if(!string.IsNullOrWhiteSpace(fileNameToLoad)){
