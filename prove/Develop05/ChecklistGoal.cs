@@ -20,14 +20,18 @@ class ChecklistGoal : Goal{
     public void DisplayItemsOnChecklist(){
         
         int i = 1;
+
         foreach(var record in _records){
+
             if(record.Value == true){  
                 Console.ForegroundColor = ConsoleColor.Green;              
                 Console.WriteLine("      " + i + ". "+ record.Key + " - Completed");
+
             }else{
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("      " + i + ". "+ record.Key + " - Pending");
             }
+            
             i++;
         }
         Console.ResetColor();
@@ -52,6 +56,7 @@ class ChecklistGoal : Goal{
     }
 
     public int GetPercentCompleted(){
+        
         double total = 0;
         int percent = 0;
         int itemsCompleted = 0;
@@ -84,6 +89,7 @@ class ChecklistGoal : Goal{
     }
     
     public void SetBonusPoints(int points){
-         _bonusPoints = points;
+        
+        _bonusPoints = points;
     }
 }

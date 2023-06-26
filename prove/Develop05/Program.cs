@@ -157,6 +157,7 @@ class Program
                                                     Thread.Sleep(3000);
                                                     break;
                                                 }
+                                                
                                             }while(res != "y" || res !="n");
                                         }
 
@@ -243,14 +244,16 @@ class Program
                         if(checklistSelected == ""){
                             break;
                         }
+
                         Console.Clear();
                         int goalSelected;
 
                         if(int.TryParse(checklistSelected, out goalSelected)){
 
                             if(goalSelected <= manager.GetNumberOfGoals()){
-                                ;
+                                
                                 if(manager.GetGoal(goalSelected).GetTypeOfGoal() == "Checklist Goal"){
+
                                     if(manager.GetGoal(goalSelected) is ChecklistGoal checklistGoal){
                                         manager.AddItemToChecklist(checklistGoal);
                                     }

@@ -3,7 +3,6 @@ class Manager{
     private int _totalNumberOfChecklists;
     private List<Goal> _goals;
     private string _lastFileUsed;
-
     private Boolean _unsavedChanges;
 
     public Manager(){
@@ -391,7 +390,7 @@ class Manager{
         return _totalNumberOfChecklists;
     }
     
-    public int GetScore(){
+    private int GetScore(){
         
         int total = 0;
 
@@ -402,7 +401,7 @@ class Manager{
         return total;
     }
     
-    public void SaveChanges(){
+    private void SaveChanges(){
         
         _unsavedChanges = false;
     }
@@ -411,7 +410,7 @@ class Manager{
         return _unsavedChanges;
     }
 
-    public void LoadGoalsFromFile(string fileName){
+    private void LoadGoalsFromFile(string fileName){
 
         _goals.Clear();
         
