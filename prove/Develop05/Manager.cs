@@ -2,6 +2,7 @@ class Manager{
     private int _totalScore;
     private int _totalNumberOfChecklists;
     private List<Goal> _goals;
+    private string _lastFileSaved;
 
     private Boolean _unsavedGoals;
 
@@ -11,6 +12,7 @@ class Manager{
         _goals = new List<Goal>();
         _totalNumberOfChecklists = 0;
         _unsavedGoals = false;
+        _lastFileSaved = "";
     }
 
     public void AddItemToChecklist(ChecklistGoal checklistGoal1){
@@ -283,6 +285,9 @@ class Manager{
     public void DisplayTotalScore(){
         
         Console.WriteLine("- - - - - - - - - - - - - - - -");
+        if(_lastFileSaved != ""){
+            Console.WriteLine("  Last File Saved: \"" + _lastFileSaved + "\"");
+        }
         Console.WriteLine("- - - - - - - - - - - - - - - -\n");
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("        TOTAL SCORE: " + GetScore());
@@ -464,6 +469,7 @@ class Manager{
                     }
                 }
             }
+            _lastFileSaved = fileName;
         }
     }
 }

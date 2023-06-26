@@ -291,6 +291,11 @@ class Program
                                 string res;
 
                                 do{
+                                    Console.Clear();
+                                    Console.WriteLine("- - - - - - - - - - - - - - - -");
+                                    Console.WriteLine("- - S A V E   T O   F I L E - -");
+                                    Console.WriteLine("- - - - - - - - - - - - - - - -\n"); 
+                                    Console.WriteLine("Type the name of the file to save and hit ENTER:\n");
                                     Console.WriteLine("\nA file with that name was found. Would you like  to overwrite it? (y/n)\n\nTHIS WILL PERMANENTLY DELETE ALL THE INFORMATION IN IT.\n");
                                     res = Console.ReadLine();
 
@@ -298,6 +303,7 @@ class Program
                                         manager1.SaveToFile(fileName);
                                         Console.WriteLine("\n\nGoals saved to file.");
                                         Thread.Sleep(2000);
+                                        fileName = "";
                                         break;
                                     }
 
