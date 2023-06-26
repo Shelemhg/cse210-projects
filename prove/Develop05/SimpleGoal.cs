@@ -20,6 +20,6 @@ class SimpleGoal : Goal{
     public override void MarkCompleted(){
         
         _completed = true;
-        _points = 100;
+        _points = _possiblePoints;
     }
 }

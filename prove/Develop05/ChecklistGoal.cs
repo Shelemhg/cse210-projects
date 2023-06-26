@@ -7,6 +7,7 @@ class ChecklistGoal : Goal{
         _goalType = "Checklist Goal";
         _goalDescription = description;
         _points = 0;
+        _possiblePoints = 0;
         _dateCreated = DateTime.Now;
         _records = new Dictionary<string, bool>();
     }
@@ -22,10 +23,10 @@ class ChecklistGoal : Goal{
         foreach(var record in _records){
             if(record.Value == true){  
                 Console.ForegroundColor = ConsoleColor.Green;              
-                Console.WriteLine("    " + i + ". "+ record.Key + " - Completed");
+                Console.WriteLine("      " + i + ". "+ record.Key + " - Completed");
             }else{
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("    " + i + ". "+ record.Key + " - Pending");
+                Console.WriteLine("      " + i + ". "+ record.Key + " - Pending");
             }
             i++;
         }
@@ -40,17 +41,17 @@ class ChecklistGoal : Goal{
         return _records;
     }
     
-
     public int GetBonusPoints(){
         return _bonusPoints;
     }
+    
     public bool GetItemCompletionStatus(string item){
         if (_records.ContainsKey(item))
             return _records[item];
         return false;
     }
 
-    public int GetPorcentCompleted(){
+    public int GetPercentCompleted(){
         double total = 0;
         int percent = 0;
         int itemsCompleted = 0;
@@ -59,7 +60,7 @@ class ChecklistGoal : Goal{
                 itemsCompleted ++;
             }
         }
-        total = itemsCompleted /_records.Count() * 100;
+        total = itemsCompleted * 100/_records.Count() ;
         percent = (int)Math.Round(total);
 
         if(percent == 100){
@@ -75,12 +76,13 @@ class ChecklistGoal : Goal{
         foreach(KeyValuePair<string, Boolean> item in _records){
             if(i == itemSelected && _records[item.Key] == false ){
                 _records[item.Key] = true;
-                _points += 20;
+                _points += _possiblePoints;
                 break;
             }
             i++;
         }
     }
+    
     public void SetBonusPoints(int points){
          _bonusPoints = points;
     }

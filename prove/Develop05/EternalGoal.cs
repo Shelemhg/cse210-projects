@@ -6,6 +6,7 @@ class EternalGoal : Goal{
         _goalType = "Eternal Goal";
         _goalDescription = description;
         _points = 0;
+        _possiblePoints = 0;
         _dateCreated = DateTime.Now;
         _records = new Dictionary<DateTime, bool>();
     }
@@ -15,10 +16,10 @@ class EternalGoal : Goal{
         foreach(var record in _records){
             if(record.Value == true){  
                 Console.ForegroundColor = ConsoleColor.Green;              
-                Console.WriteLine("    " + record.Key + " : Completed");
+                Console.WriteLine("      " + record.Key + " : Completed");
             }else{
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("    " + record.Key + " : Not completed");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("      " + record.Key + " : Not completed");
             }
 
         }
@@ -31,7 +32,14 @@ class EternalGoal : Goal{
     public void RecordEvent(DateTime date, Boolean completed){
         
         _records.Add(date, completed);
-        _points += 50;
+
+        if(completed){
+            _points += _possiblePoints;
+        }
+    }
+    public void SaveEvent(DateTime date, Boolean completed){
+        
+        _records.Add(date, completed);
     }
     
 }

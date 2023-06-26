@@ -1,0 +1,45 @@
+Simple Goal
+Clean my Room
+6/26/2023 5:26:52 AM
+1/1/0001 12:00:00 AM
+100
+0
+False
+Eternal Goal
+Pray Daily
+6/26/2023 5:27:16 AM
+1/1/0001 12:00:00 AM
+20
+20
+False
+3
+6/26/2023 5:29:12 AM
+False
+6/26/2023 5:29:20 AM
+True
+6/26/2023 5:29:26 AM
+False
+Checklist Goal
+Shopping List
+6/26/2023 5:27:32 AM
+1/1/0001 12:00:00 AM
+5
+10
+False
+100
+4
+Milk
+True
+Cereal
+False
+Eggs
+True
+Cookies
+False
+Simple Goal
+Finish HW
+6/26/2023 5:28:23 AM
+1/1/0001 12:00:00 AM
+150
+150
+True

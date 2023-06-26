@@ -2,17 +2,17 @@ class Manager{
     private int _totalScore;
     private int _totalNumberOfChecklists;
     private List<Goal> _goals;
-    private string _lastFileSaved;
+    private string _lastFileUsed;
 
-    private Boolean _unsavedGoals;
+    private Boolean _unsavedChanges;
 
     public Manager(){
         
         _totalScore = 0;
         _goals = new List<Goal>();
         _totalNumberOfChecklists = 0;
-        _unsavedGoals = false;
-        _lastFileSaved = "";
+        _unsavedChanges = false;
+        _lastFileUsed = "";
     }
 
     public void AddItemToChecklist(ChecklistGoal checklistGoal1){
@@ -33,6 +33,11 @@ class Manager{
         }while(!string.IsNullOrWhiteSpace(input) || checklistGoal1.GetNumberOfItems() == 0);
     }
 
+    public void AddUnsavedChanges(){
+
+        _unsavedChanges = true;
+    }
+
     public void CreateChecklistGoal(){
         
         string description;
@@ -43,17 +48,32 @@ class Manager{
             description = Console.ReadLine();
             
             if(!string.IsNullOrWhiteSpace(description)){
-                AddPendingGoals();
+                AddUnsavedChanges();
                 ChecklistGoal checklistGoal1 = new ChecklistGoal(description);
                 _goals.Add(checklistGoal1);
                 AddItemToChecklist(checklistGoal1);
                 _totalNumberOfChecklists++;
+
+                string res;
+                int points = 0;
+                
+                do{
+                    Console.Clear();
+                    Console.WriteLine("\nHow many Points should you gain upon the completion of each item?\n");
+                    res = Console.ReadLine();
+                    
+                    if(int.TryParse(res, out points)){                        
+                        checklistGoal1.SetPossiblePoints(points);
+                    }
+                    Console.Clear();
+                }while(points == 0);
+
                 int bonusPoints = 0;
                 
                 do{
                     Console.Clear();
                     DisplaySingleChecklist(checklistGoal1);
-                    Console.WriteLine("\nHow many Bonus Points should you gain upon completion?\n");
+                    Console.WriteLine("\nHow many Bonus Points should you gain upon Full Completion?\n");
                     string res3 = Console.ReadLine();
                     
                     if(int.TryParse(res3, out bonusPoints)){                        
@@ -75,9 +95,23 @@ class Manager{
             Console.Write("Please type the description of the Eternal goal:\n\n");
             description = Console.ReadLine();
             if(!string.IsNullOrWhiteSpace(description)){
-                AddPendingGoals();
+                AddUnsavedChanges();
                 EternalGoal simplegoal1 = new EternalGoal(description);
                 _goals.Add(simplegoal1);
+
+                string res;
+                int possiblePoints = 0;
+                
+                do{
+                    Console.Clear();
+                    Console.WriteLine("How many Points should you gain upon each completion?\n");
+                    res = Console.ReadLine();
+                    
+                    if(int.TryParse(res, out possiblePoints)){                        
+                        simplegoal1.SetPossiblePoints(possiblePoints);
+                    }
+                    Console.Clear();
+                }while(possiblePoints == 0);
 
                 break;
             }
@@ -94,9 +128,23 @@ class Manager{
             description = Console.ReadLine();
 
             if(!string.IsNullOrWhiteSpace(description)){
-                AddPendingGoals();
+                AddUnsavedChanges();
                 SimpleGoal simplegoal1 = new SimpleGoal(description);
                 _goals.Add(simplegoal1);
+
+                string res;
+                int points = 0;
+                
+                do{
+                    Console.Clear();
+                    Console.WriteLine("How many Points should you gain upon completion?\n");
+                    res = Console.ReadLine();
+                    
+                    if(int.TryParse(res, out points)){                        
+                        simplegoal1.SetPossiblePoints(points);
+                    }
+                    Console.Clear();
+                }while(points == 0);
 
                 break;
             }
@@ -115,25 +163,28 @@ class Manager{
 
         foreach(var goal in _goals){
 
-            if(goal.GetTypeOfGoal() == "Checklist Goal"){
+            if(goal is ChecklistGoal checklistGoal){
                 
                 Console.WriteLine("- - - - - - - - - - ");
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.Write(i + ". ");
                 Console.ResetColor();
-                DisplaySingleChecklist(goal);
+                DisplaySingleChecklist(checklistGoal);
             }
             i++;
         }
     }
 
-    public void DisplaySingleChecklist(Goal checklist){
+    public void DisplaySingleChecklist(ChecklistGoal checklist){
 
         Console.ForegroundColor = ConsoleColor.Magenta;
         Console.WriteLine(checklist.GetGoalDescription());                    
         Console.ResetColor();
         Console.WriteLine("    Checklist Goal");
-        Console.WriteLine("Created: " + checklist.GetDateCreated());
+        Console.WriteLine("Created: " + checklist.GetDateCreated()); 
+        Console.WriteLine("Completed: "+ checklist.GetPercentCompleted() + " %");       
+        Console.WriteLine("Possible Bonus Points: " + checklist.GetBonusPoints());
+        Console.WriteLine("Possible Points per Item: " + checklist.GetPossiblePoints());
         Console.WriteLine("Points: " + checklist.GetPoints());
         
         if(checklist is ChecklistGoal checklistGoal){
@@ -160,26 +211,34 @@ class Manager{
                 case "Simple Goal":
                     if(goal.GetGoalStatus()){
                         Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine(i + ". " + goal.GetGoalDescription() + "  -  COMPLETED");
                     }else{
                         Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine(i + ". " + goal.GetGoalDescription() + "  -  Pending");    
                     }
-                    Console.WriteLine(i + ". " + goal.GetGoalDescription() + "  -  Pending");                    
+                                    
                     Console.ResetColor();
-                    Console.WriteLine("    Simple Goal");
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.WriteLine("      Simple Goal");
                     Console.WriteLine("Created: " + goal.GetDateCreated());
                     if(goal.GetGoalStatus()){
                         Console.WriteLine("COMPLETED: " + goal.GetDateCompleted());
                     }
-                    Console.WriteLine("Points: " + goal.GetPoints());
+                    Console.WriteLine("Possible Points: " + goal.GetPossiblePoints());
+                    Console.ResetColor();
+                    Console.WriteLine("POINTS: " + goal.GetPoints());
                     break;
                 
                 case "Eternal Goal":
                     Console.ForegroundColor = ConsoleColor.Blue;
                     Console.WriteLine(i + ". " + goal.GetGoalDescription());                    
                     Console.ResetColor();
-                    Console.WriteLine("    Eternal Goal");
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.WriteLine("      Eternal Goal");
                     Console.WriteLine("Created: " + goal.GetDateCreated());
-                    Console.WriteLine("Points: " + goal.GetPoints());
+                    Console.WriteLine("Possible Points per Event: " + goal.GetPossiblePoints());
+                    Console.ResetColor();
+                    Console.WriteLine("POINTS: " + goal.GetPoints());
                     if(goal is EternalGoal eternalGoal){
                         eternalGoal.DisplayItemsOnChecklist();
                     }
@@ -190,22 +249,25 @@ class Manager{
                     Console.ForegroundColor = ConsoleColor.Magenta;
                     Console.WriteLine(i + ". " + goal.GetGoalDescription());                    
                     Console.ResetColor();
-                    Console.WriteLine("    Checklist Goal");
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.WriteLine("      Checklist Goal");
                     Console.WriteLine("Created: " + goal.GetDateCreated());
 
                     if(goal is ChecklistGoal checklistGoal){
 
-                        if(checklistGoal.GetPorcentCompleted() == 100){
+                        if(checklistGoal.GetPercentCompleted() == 100){
                             Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("Completed: "+ checklistGoal.GetPorcentCompleted() + " %");
+                            Console.WriteLine("Completed: "+ checklistGoal.GetPercentCompleted() + " %");
                             Console.ResetColor();
                         }
                         else{
-                            Console.WriteLine("Completed: "+ checklistGoal.GetPorcentCompleted() + " %");
+                            Console.WriteLine("Completed: "+ checklistGoal.GetPercentCompleted() + " %");
                         }
 
                         Console.WriteLine("Possible Bonus Points: " + checklistGoal.GetBonusPoints());
-                        Console.WriteLine("Points: " + goal.GetPoints());
+                        Console.WriteLine("Possible Points per Item: " + goal.GetPossiblePoints());
+                        Console.ResetColor();
+                        Console.WriteLine("POINTS: " + goal.GetPoints());
 
                         checklistGoal.DisplayItemsOnChecklist();
                         
@@ -285,16 +347,20 @@ class Manager{
     public void DisplayTotalScore(){
         
         Console.WriteLine("- - - - - - - - - - - - - - - -");
-        if(_lastFileSaved != ""){
-            Console.WriteLine("  Last File Saved: \"" + _lastFileSaved + "\"");
+        if(_lastFileUsed != ""){
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("  Last File Used: \"" + _lastFileUsed + "\"");
+            Console.ResetColor();
         }
         Console.WriteLine("- - - - - - - - - - - - - - - -\n");
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("        TOTAL SCORE: " + GetScore());
         Console.ResetColor();
         Console.WriteLine("\n- - - - - - - - - - - - - - - -");
-        if(_unsavedGoals){
-            Console.WriteLine("   Goals Pending To Be Saved");
+        if(_unsavedChanges){
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("   Changes Pending To Be Saved");
+            Console.ResetColor();
         }
         Console.WriteLine("- - - - - - - - - - - - - - - -\n");   
     }
@@ -324,19 +390,14 @@ class Manager{
 
         return total;
     }
-
-    private void AddPendingGoals(){
-
-        _unsavedGoals = true;
-    }
     
-    public void GoalsSaved(){
+    public void SaveChanges(){
         
-        _unsavedGoals = false;
+        _unsavedChanges = false;
     }
 
-    public Boolean GetUnsavedGoals(){
-        return _unsavedGoals;
+    public Boolean GetUnsavedChanges(){
+        return _unsavedChanges;
     }
 
     public void LoadGoalsFromFile(string fileName){
@@ -350,6 +411,7 @@ class Manager{
                 string goalDescription = reader.ReadLine();
                 DateTime dateCreated = DateTime.Parse(reader.ReadLine());
                 DateTime dateCompleted = DateTime.Parse(reader.ReadLine());
+                int possiblePoints = int.Parse(reader.ReadLine());
                 int points = int.Parse(reader.ReadLine());
                 bool completed = bool.Parse(reader.ReadLine());
 
@@ -372,6 +434,7 @@ class Manager{
 
                 goal.SetDateCreated(dateCreated);
                 goal.SetDateCompleted(dateCompleted);
+                goal.SetPossiblePoints(possiblePoints);
                 goal.SetPoints(points);
                 goal.SetCompleted(completed);
 
@@ -394,14 +457,14 @@ class Manager{
                     for (int i = 0; i < eventCount; i++){
                         DateTime eventDate = DateTime.Parse(reader.ReadLine());
                         bool isCompleted = bool.Parse(reader.ReadLine());
-                        eternalGoal.RecordEvent(eventDate, isCompleted);
+                        eternalGoal.SaveEvent(eventDate, isCompleted);
                     }
                 }
 
                 _goals.Add(goal);
             }
         }
-        Console.WriteLine("Goals loaded from file.");
+        Console.WriteLine("\nGoals loaded from file.");
         
     }
 
@@ -418,13 +481,16 @@ class Manager{
             if(!string.IsNullOrWhiteSpace(fileNameToLoad)){
                 
                 if(File.Exists(fileNameToLoad + ".txt")){
+
                     LoadGoalsFromFile(fileNameToLoad + ".txt");
+                    _lastFileUsed = fileNameToLoad;
                     Console.Clear();
                     DisplayAllGoals();
+                    DisplayTotalScore();
                     Console.WriteLine("\n\nPress ENTER to go back");
                     Console.ReadLine();
                     fileNameToLoad = "";
-                    GoalsSaved();
+                    SaveChanges();
                     break;
                 }
                 else{
@@ -439,13 +505,14 @@ class Manager{
 
     public void SaveToFile(string fileName){
         
-        GoalsSaved();
+        SaveChanges();
         using (StreamWriter writer = new StreamWriter(fileName + ".txt")){
             foreach (Goal goal in _goals){
                 writer.WriteLine(goal.GetGoalType());
                 writer.WriteLine(goal.GetGoalDescription());
                 writer.WriteLine(goal.GetDateCreated());
                 writer.WriteLine(goal.GetDateCompleted());
+                writer.WriteLine(goal.GetPossiblePoints());
                 writer.WriteLine(goal.GetPoints());
                 writer.WriteLine(goal.GetGoalStatus());
 
@@ -469,7 +536,7 @@ class Manager{
                     }
                 }
             }
-            _lastFileSaved = fileName;
+            _lastFileUsed = fileName;
         }
     }
 }

@@ -91,7 +91,7 @@ class Program
 
                     break;
 
-                // ADD EVENT
+                // RECORD EVENT
                 case "3":
 
                     if(manager1.GetNumberOfGoals() == 0){
@@ -144,6 +144,7 @@ class Program
                                                 res = Console.ReadLine();
 
                                                 if(res.ToLower() =="y"){
+                                                    manager1.AddUnsavedChanges();
                                                     goal1.MarkCompleted();
                                                     Console.Write("\nThe goal was marked as COMPLETED!!\n");
                                                     Thread.Sleep(2000);
@@ -171,15 +172,17 @@ class Program
 
                                                 if(res.ToLower() =="y"){
                                                     eternalGoal.RecordEvent(DateTime.Now, true);
+                                                    manager1.AddUnsavedChanges();
                                                     Console.Write("\nThe goal was marked as COMPLETED!!\n");
                                                     Thread.Sleep(2000);
                                                     Console.Clear();
                                                     break;
                                                 }
                                                 else if(res.ToLower() == "n"){
+                                                    eternalGoal.RecordEvent(DateTime.Now, false);
+                                                    manager1.AddUnsavedChanges();
                                                     Console.Write("Event recorded.\n");
                                                     Console.Write("\nNo problem, keep it up! :D\n\n");
-                                                    eternalGoal.RecordEvent(DateTime.Now, false);
                                                     Thread.Sleep(3000);
                                                     break;
                                                 }
@@ -196,12 +199,15 @@ class Program
                                             do{
                                                 Console.Clear();
                                                 Console.ForegroundColor = ConsoleColor.Magenta;
-                                                Console.WriteLine(goal1.GetGoalDescription());                    
+                                                Console.WriteLine(checklistGoal.GetGoalDescription());                    
                                                 Console.ResetColor();
 
                                                 Console.WriteLine("    Checklist Goal");
-                                                Console.WriteLine("Created: " + goal1.GetDateCreated());
-                                                Console.WriteLine("Points: " + goal1.GetPoints());
+                                                Console.WriteLine("Created: " + checklistGoal.GetDateCreated());
+                                                Console.WriteLine("Completed: "+ checklistGoal.GetPercentCompleted() + " %");
+                                                Console.WriteLine("Possible Bonus Points: " + checklistGoal.GetBonusPoints());
+                                                Console.WriteLine("Possible Points per Item: " + checklistGoal.GetPossiblePoints());
+                                                Console.WriteLine("Points: " + checklistGoal.GetPoints());
                                                 checklistGoal.DisplayItemsOnChecklist();
                                                 
                                                 Console.ResetColor();
@@ -213,6 +219,7 @@ class Program
 
                                                 if(selection != "" && int.TryParse(selection, out numberSelected)){
                                                     checklistGoal.UpdateItem(numberSelected);
+                                                    manager1.AddUnsavedChanges();
                                                 }
                                             }while(selection != "");
                                         }
@@ -301,7 +308,7 @@ class Program
 
                                     if(res.ToLower() == "y"){
                                         manager1.SaveToFile(fileName);
-                                        Console.WriteLine("\n\nGoals saved to file.");
+                                        Console.WriteLine("\nGoals saved to file.");
                                         Thread.Sleep(2000);
                                         fileName = "";
                                         break;
@@ -328,7 +335,7 @@ class Program
 
                     do{
                         
-                        if(!manager1.GetUnsavedGoals()){
+                        if(!manager1.GetUnsavedChanges()){
                             
                             fileNameToLoad = manager1.StartFileLoad(fileNameToLoad); 
 
@@ -363,7 +370,7 @@ class Program
                     break;
             }
 
-            if(manager1.GetNumberOfGoals() != 0 && input == "0" && manager1.GetUnsavedGoals()){
+            if(manager1.GetNumberOfGoals() != 0 && input == "0" && manager1.GetUnsavedChanges()){
             
                 Console.WriteLine("\nThere are UNSAVED GOALS that would be lost.\n\nWould you like to EXIT anyway? (y/n)\n");
                 input = Console.ReadLine();
