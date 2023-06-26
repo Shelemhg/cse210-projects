@@ -18,8 +18,6 @@ class Manager{
             
             Console.Clear();
             DisplaySingleChecklist(checklistGoal1);
-            // Console.ResetColor();
-            // checklistGoal1.DisplayChecklistItems();
             Console.WriteLine("\n\nAdd at least one Item for the goal\nor Hit ENTER to Go Back: \n");
             input = Console.ReadLine();
 
@@ -211,18 +209,50 @@ class Manager{
     public void DisplayMenu(){
         
         Console.Clear();
-        Console.WriteLine("- - - - - - - - - - - - - - - - - - - ");
-        Console.WriteLine("-    E T E R N A L     Q U E S T    -");
-        Console.WriteLine("- - - - - - - - - - - - - - - - - - -");
-        Console.WriteLine("1. Create New Goal");
-        Console.WriteLine("2. Display Goals");
-        Console.WriteLine("3. Record Event");
-        Console.WriteLine("4. Add Items to Existing Checklist Goal");
-        Console.WriteLine(". . . . . . . . . . . .");
-        Console.WriteLine("5. Save Goals to File");
-        Console.WriteLine("6. Load Goals from File");
-        Console.WriteLine(". . . . . . . . . . . .");
-        Console.WriteLine("0. Exit\n");
+        
+        if(_goals.Count() == 0){
+            
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - - ");
+            Console.WriteLine("-    E T E R N A L     Q U E S T    -");
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - -");
+            Console.WriteLine("1. Create New Goal");
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("2. Display Goals");
+            Console.WriteLine("3. Record Event");
+            Console.WriteLine("4. Add Items to Existing Checklist Goal");
+            Console.ResetColor();
+            
+            Console.WriteLine(". . . . . . . . . . . .");
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("5. Save Goals to File");
+            Console.ResetColor();
+            Console.WriteLine("6. Load Goals from File");
+            Console.WriteLine(". . . . . . . . . . . .");
+            Console.WriteLine("0. Exit\n");
+
+        }else{
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - - ");
+            Console.WriteLine("-    E T E R N A L     Q U E S T    -");
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - -");
+            Console.WriteLine("1. Create New Goal");
+            Console.WriteLine("2. Display Goals");
+            Console.WriteLine("3. Record Event");
+
+            if(_totalNumberOfChecklists == 0){
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("4. Add Items to Existing Checklist Goal");
+                Console.ResetColor();
+
+            }else{                
+                Console.WriteLine("4. Add Items to Existing Checklist Goal");
+            }
+
+            Console.WriteLine(". . . . . . . . . . . .");
+            Console.WriteLine("5. Save Goals to File");
+            Console.WriteLine("6. Load Goals from File");
+            Console.WriteLine(". . . . . . . . . . . .");
+            Console.WriteLine("0. Exit\n");
+        }
     }
     
     public void DisplayTypeOfGoals(){
