@@ -3,11 +3,14 @@ class Manager{
     private int _totalNumberOfChecklists;
     private List<Goal> _goals;
 
+    private Boolean _unsavedGoals;
+
     public Manager(){
         
         _totalScore = 0;
         _goals = new List<Goal>();
         _totalNumberOfChecklists = 0;
+        _unsavedGoals = false;
     }
 
     public void AddItemToChecklist(ChecklistGoal checklistGoal1){
@@ -18,7 +21,7 @@ class Manager{
             
             Console.Clear();
             DisplaySingleChecklist(checklistGoal1);
-            Console.WriteLine("\n\nAdd at least one Item for the goal\nor Hit ENTER to Go Back: \n");
+            Console.WriteLine("\n\nAdd at least one Item for the goal\nThen hit ENTER to finish: \n");
             input = Console.ReadLine();
 
             if(!string.IsNullOrWhiteSpace(input)){
@@ -34,10 +37,11 @@ class Manager{
 
         do{
             Console.Clear();
-            Console.Write("Please type the name of the goal:\n\n");
+            Console.Write("Please type the name of the Checklist goal:\n\n");
             description = Console.ReadLine();
             
             if(!string.IsNullOrWhiteSpace(description)){
+                AddPendingGoals();
                 ChecklistGoal checklistGoal1 = new ChecklistGoal(description);
                 _goals.Add(checklistGoal1);
                 AddItemToChecklist(checklistGoal1);
@@ -55,8 +59,10 @@ class Manager{
                     }
                     Console.Clear();
                 }while(bonusPoints == 0);
+
+                break;
             }
-        }while(string.IsNullOrWhiteSpace(description));        
+        }while(description != "");        
     }
 
     public void CreateEternalGoal(){
@@ -64,13 +70,16 @@ class Manager{
         string description;
         do{
             Console.Clear();
-            Console.Write("Please type the description of the goal:\n\n");
+            Console.Write("Please type the description of the Eternal goal:\n\n");
             description = Console.ReadLine();
             if(!string.IsNullOrWhiteSpace(description)){
+                AddPendingGoals();
                 EternalGoal simplegoal1 = new EternalGoal(description);
                 _goals.Add(simplegoal1);
+
+                break;
             }
-        }while(string.IsNullOrWhiteSpace(description));  
+        }while(description != "");  
     }
 
     public void CreateSimpleGoal(){
@@ -79,14 +88,17 @@ class Manager{
 
         do{
             Console.Clear();
-            Console.Write("Please type the description of the goal:\n\n");
+            Console.Write("Please type the description of the Simple goal:\n\n");
             description = Console.ReadLine();
 
             if(!string.IsNullOrWhiteSpace(description)){
+                AddPendingGoals();
                 SimpleGoal simplegoal1 = new SimpleGoal(description);
                 _goals.Add(simplegoal1);
+
+                break;
             }
-        }while(string.IsNullOrWhiteSpace(description));  
+        }while(description != "");  
     }
 
     public void DisplayAllChecklists(){
@@ -209,7 +221,7 @@ class Manager{
     public void DisplayMenu(){
         
         Console.Clear();
-        
+
         if(_goals.Count() == 0){
             
             Console.WriteLine("- - - - - - - - - - - - - - - - - - - ");
@@ -276,6 +288,9 @@ class Manager{
         Console.WriteLine("        TOTAL SCORE: " + GetScore());
         Console.ResetColor();
         Console.WriteLine("\n- - - - - - - - - - - - - - - -");
+        if(_unsavedGoals){
+            Console.WriteLine("   Goals Pending To Be Saved");
+        }
         Console.WriteLine("- - - - - - - - - - - - - - - -\n");   
     }
     
@@ -305,13 +320,27 @@ class Manager{
         return total;
     }
 
+    private void AddPendingGoals(){
+
+        _unsavedGoals = true;
+    }
+    
+    public void GoalsSaved(){
+        
+        _unsavedGoals = false;
+    }
+
+    public Boolean GetUnsavedGoals(){
+        return _unsavedGoals;
+    }
+
     public void LoadGoalsFromFile(string fileName){
 
         _goals.Clear();
         
         using (StreamReader reader = new StreamReader(fileName)){
 
-            while (!reader.EndOfStream){
+            while (!reader.EndOfStream){                
                 string goalType = reader.ReadLine();
                 string goalDescription = reader.ReadLine();
                 DateTime dateCreated = DateTime.Parse(reader.ReadLine());
@@ -375,7 +404,10 @@ class Manager{
         
         do{
             Console.Clear();
-            Console.WriteLine("Type the name of the file to load\n(Do not include the extension)\n\nHit ENTER to go Back.\n");
+            Console.WriteLine("- - - - - - - - - - - - - - - - - -");
+            Console.WriteLine("- - L O A D   F R O M   F I L E - -");
+            Console.WriteLine("- - - - - - - - - - - - - - - - - -\n");
+            Console.WriteLine("Type the name of the file to load and hit ENTER\n(Do not include the file extension)\n\nOr just hit ENTER to go Back.\n");
             fileNameToLoad = Console.ReadLine();
 
             if(!string.IsNullOrWhiteSpace(fileNameToLoad)){
@@ -386,11 +418,13 @@ class Manager{
                     DisplayAllGoals();
                     Console.WriteLine("\n\nPress ENTER to go back");
                     Console.ReadLine();
+                    fileNameToLoad = "";
+                    GoalsSaved();
+                    break;
                 }
                 else{
                     Console.WriteLine("File \"" + fileNameToLoad + "\" NOT found. Please try again.");
                     Thread.Sleep(2000);
-                    // fileNameToLoad = "Repeat Loop";
                 }
             }
         }while(fileNameToLoad !="");
@@ -400,6 +434,7 @@ class Manager{
 
     public void SaveToFile(string fileName){
         
+        GoalsSaved();
         using (StreamWriter writer = new StreamWriter(fileName + ".txt")){
             foreach (Goal goal in _goals){
                 writer.WriteLine(goal.GetGoalType());

@@ -140,7 +140,7 @@ class Program
 
                                             do{
                                                 Console.Clear();
-                                                Console.Write("Was the goal '" + goal1.GetGoalDescription() + "' Completed? (y/n):");
+                                                Console.Write("Was the goal '" + goal1.GetGoalDescription() + "' Completed? (y/n):\n\n");
                                                 res = Console.ReadLine();
 
                                                 if(res.ToLower() =="y"){
@@ -281,8 +281,8 @@ class Program
                         Console.Clear();
                         Console.WriteLine("- - - - - - - - - - - - - - - -");
                         Console.WriteLine("- - S A V E   T O   F I L E - -");
-                        Console.WriteLine("- - - - - - - - - - - - - - - -\n\n"); 
-                        Console.WriteLine("Type the name of the file to save: ");
+                        Console.WriteLine("- - - - - - - - - - - - - - - -\n"); 
+                        Console.WriteLine("Type the name of the file to save and hit ENTER:\n");
                         fileName = Console.ReadLine();
 
                         if(!string.IsNullOrWhiteSpace(fileName)){
@@ -310,7 +310,7 @@ class Program
                                 break;
                             }
                         }
-                    }while(string.IsNullOrWhiteSpace(fileName));
+                    }while(fileName != "");
 
                     break;
                 
@@ -318,40 +318,52 @@ class Program
                 case "6":
 
                     string fileNameToLoad = null;
-                    string res2 = null;
+                    
 
                     do{
-                        Console.Clear();
-                        Console.WriteLine("- - - - - - - - - - - - - - - - - -");
-                        Console.WriteLine("- - L O A D   F R O M   F I L E - -");
-                        Console.WriteLine("- - - - - - - - - - - - - - - - - -\n");
+                        
+                        if(!manager1.GetUnsavedGoals()){
+                            
+                            fileNameToLoad = manager1.StartFileLoad(fileNameToLoad); 
 
-                        if(manager1.GetNumberOfGoals() == 0){
-
-                            fileNameToLoad = manager1.StartFileLoad(fileNameToLoad);             
+                            break;            
                         }
                         else{
+                            string res2 = "";
                             
                             do{
                                 Console.Clear();
-                                if(res2 == null || res2 != "y" || res2 != "n"){
-                                    Console.WriteLine("\nThere are UNSAVED goals. Would you like to load the file anyways? (y/n)\nTHIS WILL PERMANENTLY DELETE ALL THE EXISTING GOALS IN THE PROGRAM.");
-                                    res2 = Console.ReadLine();
-                                }
+                                Console.WriteLine("- - - - - - - - - - - - - - - - - -");
+                                Console.WriteLine("- - L O A D   F R O M   F I L E - -");
+                                Console.WriteLine("- - - - - - - - - - - - - - - - - -\n");
+                                Console.WriteLine("There are UNSAVED goals.\nWould you like to load the file anyways? (y/n)\n\nThis will PERMANENTLY DELETE all existing goal in the program.\n");
+                                res2 = Console.ReadLine();
 
                                 if(res2.ToLower() == "y"){
+                                    
                                     fileNameToLoad = manager1.StartFileLoad(fileNameToLoad);
+                                    
+                                    break;
                                 }
                                 else if(res2.ToLower() == "n"){
                                     fileNameToLoad = "";
                                     break;
-                                } 
+                                }
                             }while(fileNameToLoad != "");  
                         }
                         
                     }while(fileNameToLoad != "");
 
                     break;
+            }
+
+            if(manager1.GetNumberOfGoals() != 0 && input == "0" && manager1.GetUnsavedGoals()){
+            
+                Console.WriteLine("\nThere are UNSAVED GOALS that would be lost.\n\nWould you like to EXIT anyway? (y/n)\n");
+                input = Console.ReadLine();
+                if(input.ToLower() == "y"){
+                    break;
+                }
             }
 
         }while(input != "0");
