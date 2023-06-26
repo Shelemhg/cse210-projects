@@ -96,8 +96,8 @@ class Manager{
             description = Console.ReadLine();
             if(!string.IsNullOrWhiteSpace(description)){
                 AddUnsavedChanges();
-                EternalGoal simplegoal1 = new EternalGoal(description);
-                _goals.Add(simplegoal1);
+                EternalGoal simpleGoal = new EternalGoal(description);
+                _goals.Add(simpleGoal);
 
                 string res;
                 int possiblePoints = 0;
@@ -108,7 +108,7 @@ class Manager{
                     res = Console.ReadLine();
                     
                     if(int.TryParse(res, out possiblePoints)){                        
-                        simplegoal1.SetPossiblePoints(possiblePoints);
+                        simpleGoal.SetPossiblePoints(possiblePoints);
                     }
                     Console.Clear();
                 }while(possiblePoints == 0);
@@ -129,8 +129,8 @@ class Manager{
 
             if(!string.IsNullOrWhiteSpace(description)){
                 AddUnsavedChanges();
-                SimpleGoal simplegoal1 = new SimpleGoal(description);
-                _goals.Add(simplegoal1);
+                SimpleGoal simpleGoal = new SimpleGoal(description);
+                _goals.Add(simpleGoal);
 
                 string res;
                 int points = 0;
@@ -141,7 +141,7 @@ class Manager{
                     res = Console.ReadLine();
                     
                     if(int.TryParse(res, out points)){                        
-                        simplegoal1.SetPossiblePoints(points);
+                        simpleGoal.SetPossiblePoints(points);
                     }
                     Console.Clear();
                 }while(points == 0);
@@ -175,19 +175,19 @@ class Manager{
         }
     }
 
-    public void DisplaySingleChecklist(ChecklistGoal checklist){
+    public void DisplaySingleChecklist(ChecklistGoal checklistGoal){
 
         Console.ForegroundColor = ConsoleColor.Magenta;
-        Console.WriteLine(checklist.GetGoalDescription());                    
+        Console.WriteLine(checklistGoal.GetGoalDescription());                    
         Console.ResetColor();
         Console.WriteLine("    Checklist Goal");
-        Console.WriteLine("Created: " + checklist.GetDateCreated()); 
-        Console.WriteLine("Completed: "+ checklist.GetPercentCompleted() + " %");       
-        Console.WriteLine("Possible Bonus Points: " + checklist.GetBonusPoints());
-        Console.WriteLine("Possible Points per Item: " + checklist.GetPossiblePoints());
-        Console.WriteLine("Points: " + checklist.GetPoints());
+        Console.WriteLine("Created: " + checklistGoal.GetDateCreated()); 
+        Console.WriteLine("Completed: "+ checklistGoal.GetPercentCompleted() + " %");       
+        Console.WriteLine("Possible Bonus Points: " + checklistGoal.GetBonusPoints());
+        Console.WriteLine("Possible Points per Item: " + checklistGoal.GetPossiblePoints());
+        Console.WriteLine("Points: " + checklistGoal.GetPoints());
         
-        checklist.DisplayItemsOnChecklist();
+        checklistGoal.DisplayItemsOnChecklist();
 
         Console.ResetColor();
     }
@@ -264,9 +264,9 @@ class Manager{
                         }
 
                         Console.WriteLine("Possible Bonus Points: " + checklistGoal.GetBonusPoints());
-                        Console.WriteLine("Possible Points per Item: " + goal.GetPossiblePoints());
+                        Console.WriteLine("Possible Points per Item: " + checklistGoal.GetPossiblePoints());
                         Console.ResetColor();
-                        Console.WriteLine("POINTS: " + goal.GetPoints());
+                        Console.WriteLine("POINTS: " + checklistGoal.GetPoints());
 
                         checklistGoal.DisplayItemsOnChecklist();
                         

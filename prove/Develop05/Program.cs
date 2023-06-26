@@ -30,63 +30,63 @@ class Program
 {
     static void Main(string[] args)
     {
-        Manager manager1 = new Manager();        
-        string input = null;
+        Manager manager = new Manager();        
+        string menuChoice = null;
 
         do{
             Console.Clear();
-            manager1.DisplayMenu();
-            manager1.DisplayTotalScore();
+            manager.DisplayMenu();
+            manager.DisplayTotalScore();
             
             Console.WriteLine("Select one option or 0 to quit:\n");
-            input = Console.ReadLine();
+            menuChoice = Console.ReadLine();
 
-            switch(input){
+            switch(menuChoice){
                 // CREATE NEW GOAL
                 case "1":
 
-                    string input2 = null;
+                    string subMenuChoice = null;
 
                     do{
-                        manager1.DisplayTypeOfGoals();
-                        input2 = Console.ReadLine();
+                        manager.DisplayTypeOfGoals();
+                        subMenuChoice = Console.ReadLine();
 
-                        switch(input2){
+                        switch(subMenuChoice){
                             //   Create Simple Goal
                             case "1":
                                 Console.Clear();
-                                manager1.CreateSimpleGoal();
+                                manager.CreateSimpleGoal();
                                 break;
                             //   Create Eternal Goal
                             case "2":
                                 Console.Clear();
-                                manager1.CreateEternalGoal();
+                                manager.CreateEternalGoal();
                                 break;
                             //   Create Checklist Goal
                             case "3":
                                 Console.Clear();
-                                manager1.CreateChecklistGoal();
+                                manager.CreateChecklistGoal();
                                 break;
                         }
-                    }while(input2 != "");
+                    }while(subMenuChoice != "");
 
                     break;
                 
                 //  DISPLAY  GOALS
                 case "2":
                     
-                    if(manager1.GetNumberOfGoals() == 0){
+                    if(manager.GetNumberOfGoals() == 0){
                         Console.WriteLine("\nNo Goals saved. Try Adding a new goal.");
                         Thread.Sleep(2000);
                         break;
                     }
 
                     Console.Clear();
-                    manager1.DisplayHorizontalLine();
+                    manager.DisplayHorizontalLine();
                     Console.WriteLine("- - -            G O A L S            - - -");
-                    manager1.DisplayHorizontalLine();
-                    manager1.DisplayAllGoals();
-                    manager1.DisplayTotalScore();        
+                    manager.DisplayHorizontalLine();
+                    manager.DisplayAllGoals();
+                    manager.DisplayTotalScore();        
                     Console.WriteLine("Press ENTER to go back.");
                     Console.ReadLine();
 
@@ -95,37 +95,37 @@ class Program
                 // RECORD EVENT
                 case "3":
 
-                    if(manager1.GetNumberOfGoals() == 0){
+                    if(manager.GetNumberOfGoals() == 0){
                         Console.WriteLine("\nNo Goals saved. Try Adding a new goal.");
                         Thread.Sleep(2000);
                         break;
                     }
                     
-                    string input3;
+                    string subMenuChoice3;
 
                     do{
                         Console.Clear();        
-                        manager1.DisplayHorizontalLine();
+                        manager.DisplayHorizontalLine();
                         Console.WriteLine("- - - -   R E C O R D   E V E N T   - - - -");
-                        manager1.DisplayHorizontalLine();
-                        manager1.DisplayAllGoals();
-                        manager1.DisplayTotalScore(); 
+                        manager.DisplayHorizontalLine();
+                        manager.DisplayAllGoals();
+                        manager.DisplayTotalScore(); 
 
                         Console.WriteLine("Select the Goal to modify (Hit ENTER to Go Back): ");
-                        input3 = Console.ReadLine();
+                        subMenuChoice3 = Console.ReadLine();
                         Console.Clear();
                         int goalSelected;
 
-                        if(int.TryParse(input3, out goalSelected)){
+                        if(int.TryParse(subMenuChoice3, out goalSelected)){
 
                             if(goalSelected == 0){
 
                                 break;
                             }
 
-                            if(goalSelected <= manager1.GetNumberOfGoals()){
+                            if(goalSelected <= manager.GetNumberOfGoals()){
 
-                                Goal goal1 = manager1.GetGoal(goalSelected);
+                                Goal goal1 = manager.GetGoal(goalSelected);
                                 string res;
                                 
                                 switch(goal1.GetTypeOfGoal()){
@@ -145,7 +145,7 @@ class Program
                                                 res = Console.ReadLine();
 
                                                 if(res.ToLower() =="y"){
-                                                    manager1.AddUnsavedChanges();
+                                                    manager.AddUnsavedChanges();
                                                     goal1.MarkCompleted();
                                                     Console.Write("\nThe goal was marked as COMPLETED!!\n");
                                                     Thread.Sleep(2000);
@@ -173,7 +173,7 @@ class Program
 
                                                 if(res.ToLower() =="y"){
                                                     eternalGoal.RecordEvent(DateTime.Now, true);
-                                                    manager1.AddUnsavedChanges();
+                                                    manager.AddUnsavedChanges();
                                                     Console.Write("\nThe goal was marked as COMPLETED!!\n");
                                                     Thread.Sleep(2000);
                                                     Console.Clear();
@@ -181,7 +181,7 @@ class Program
                                                 }
                                                 else if(res.ToLower() == "n"){
                                                     eternalGoal.RecordEvent(DateTime.Now, false);
-                                                    manager1.AddUnsavedChanges();
+                                                    manager.AddUnsavedChanges();
                                                     Console.Write("Event recorded.\n");
                                                     Console.Write("\nNo problem, keep it up! :D\n\n");
                                                     Thread.Sleep(3000);
@@ -199,7 +199,7 @@ class Program
 
                                             do{
                                                 Console.Clear();
-                                                manager1.DisplaySingleChecklist(checklistGoal);
+                                                manager.DisplaySingleChecklist(checklistGoal);
                                                 int numberSelected;
                                             
                                                 Console.WriteLine("Select one Item to mark as done, or Hit ENTER to go Back:\n");
@@ -207,7 +207,7 @@ class Program
 
                                                 if(selection != "" && int.TryParse(selection, out numberSelected)){
                                                     checklistGoal.UpdateItem(numberSelected);
-                                                    manager1.AddUnsavedChanges();
+                                                    manager.AddUnsavedChanges();
                                                 }
                                             }while(selection != "");
                                         }
@@ -216,102 +216,102 @@ class Program
                             }
                         }
 
-                    }while(input3 != "");
+                    }while(subMenuChoice3 != "");
 
                     break;
 
                 //  ADD TO CHECKLIST
                 case "4":
-                    if(manager1.GetNumberOfChecklists() == 0){
+                    if(manager.GetNumberOfChecklists() == 0){
                         // Console.Clear();
                         Console.WriteLine("\nNo checklists found. Try adding one from the main menu.");
                         Thread.Sleep(3000);
                         break;
                     }
-                    string input4;
+                    string checklistSelected;
 
                     do{
                         Console.Clear();        
-                        manager1.DisplayHorizontalLine();
+                        manager.DisplayHorizontalLine();
                         Console.WriteLine("- -  A D D   T O   C H E C K L I S T  - - -");
-                        manager1.DisplayHorizontalLine();
-                        manager1.DisplayAllChecklists();
-                        manager1.DisplayTotalScore();   
+                        manager.DisplayHorizontalLine();
+                        manager.DisplayAllChecklists();
+                        manager.DisplayTotalScore();   
                         Console.WriteLine("Select the Cheklist in Pink to modify\nor Hit ENTER to Go Back): \n");
-                        input4 = Console.ReadLine();
+                        checklistSelected = Console.ReadLine();
 
-                        if(input4 == ""){
+                        if(checklistSelected == ""){
                             break;
                         }
                         Console.Clear();
                         int goalSelected;
 
-                        if(int.TryParse(input4, out goalSelected)){
+                        if(int.TryParse(checklistSelected, out goalSelected)){
 
-                            if(goalSelected <= manager1.GetNumberOfGoals()){
+                            if(goalSelected <= manager.GetNumberOfGoals()){
                                 ;
-                                if(manager1.GetGoal(goalSelected).GetTypeOfGoal() == "Checklist Goal"){
-                                    if(manager1.GetGoal(goalSelected) is ChecklistGoal checklistGoal){
-                                        manager1.AddItemToChecklist(checklistGoal);
+                                if(manager.GetGoal(goalSelected).GetTypeOfGoal() == "Checklist Goal"){
+                                    if(manager.GetGoal(goalSelected) is ChecklistGoal checklistGoal){
+                                        manager.AddItemToChecklist(checklistGoal);
                                     }
                                 }
                             }
                         }
 
-                    }while(input4 != "");
+                    }while(checklistSelected != "");
                     break;
 
                 // SAVE to file
                 case "5":
                     
-                    if(manager1.GetNumberOfGoals() == 0){
+                    if(manager.GetNumberOfGoals() == 0){
                         Console.WriteLine("No goals found. Try creating a new Goal.");
                         Thread.Sleep(2000);
                         break;
                     }
 
-                    string fileName;
+                    string fileNameToSave;
 
                     do{
                         Console.Clear();
-                        manager1.DisplayHorizontalLine();
+                        manager.DisplayHorizontalLine();
                         Console.WriteLine("- - -     S A V E   T O   F I L E     - - -");
-                        manager1.DisplayHorizontalLine(); 
+                        manager.DisplayHorizontalLine(); 
                         Console.WriteLine("\nType the name of the file to save and hit ENTER:\n");
-                        fileName = Console.ReadLine();
+                        fileNameToSave = Console.ReadLine();
 
-                        if(!string.IsNullOrWhiteSpace(fileName)){
+                        if(!string.IsNullOrWhiteSpace(fileNameToSave)){
 
-                            if(File.Exists(fileName + ".txt")){                            
+                            if(File.Exists(fileNameToSave + ".txt")){                            
                                 string res;
 
                                 do{
                                     Console.Clear();
-                                    manager1.DisplayHorizontalLine();
+                                    manager.DisplayHorizontalLine();
                             Console.WriteLine("- - -     S A V E   T O   F I L E     - - -");
-                            manager1.DisplayHorizontalLine(); 
+                            manager.DisplayHorizontalLine(); 
                                     Console.WriteLine("\nType the name of the file to save and hit ENTER:\n");
                                     Console.WriteLine("\nA file with that name was found. Would you like  to overwrite it? (y/n)\n\nTHIS WILL PERMANENTLY DELETE ALL THE INFORMATION IN IT.\n");
                                     res = Console.ReadLine();
 
                                     if(res.ToLower() == "y"){
-                                        manager1.SaveToFile(fileName);
+                                        manager.SaveToFile(fileNameToSave);
                                         Console.WriteLine("\nGoals saved to file.");
                                         Thread.Sleep(2000);
-                                        fileName = "";
+                                        fileNameToSave = "";
                                         break;
                                     }
 
                                 }while(res.ToLower() != "n");
                             }
                             else{
-                                manager1.SaveToFile(fileName);
+                                manager.SaveToFile(fileNameToSave);
                                 Console.WriteLine("\n\nGoals saved to file.");
                                 Thread.Sleep(2000);
                                 break;
                             }
                         }
-                    }while(fileName != "");
+                    }while(fileNameToSave != "");
 
                     break;
                 
@@ -323,9 +323,9 @@ class Program
 
                     do{
                         
-                        if(!manager1.GetUnsavedChanges()){
+                        if(!manager.GetUnsavedChanges()){
                             
-                            fileNameToLoad = manager1.StartFileLoad(fileNameToLoad); 
+                            fileNameToLoad = manager.StartFileLoad(fileNameToLoad); 
 
                             break;            
                         }
@@ -334,17 +334,17 @@ class Program
                             
                             do{
                                 Console.Clear();
-                                manager1.DisplayHorizontalLine();
+                                manager.DisplayHorizontalLine();
                                 
-                                manager1.DisplayHorizontalLine();
+                                manager.DisplayHorizontalLine();
                                 Console.WriteLine("- - -   L O A D   F R O M   F I L E   - - -");
-                                manager1.DisplayHorizontalLine();
+                                manager.DisplayHorizontalLine();
                                 Console.WriteLine("\nThere are UNSAVED goals.\nWould you like to load the file anyways? (y/n)\n\nThis will PERMANENTLY DELETE all existing goal in the program.\n");
                                 res2 = Console.ReadLine();
 
                                 if(res2.ToLower() == "y"){
                                     
-                                    fileNameToLoad = manager1.StartFileLoad(fileNameToLoad);
+                                    fileNameToLoad = manager.StartFileLoad(fileNameToLoad);
                                     
                                     break;
                                 }
@@ -360,16 +360,16 @@ class Program
                     break;
             }
 
-            if(manager1.GetNumberOfGoals() != 0 && input == "0" && manager1.GetUnsavedChanges()){
+            if(manager.GetNumberOfGoals() != 0 && menuChoice == "0" && manager.GetUnsavedChanges()){
             
                 Console.WriteLine("\nThere are UNSAVED GOALS that would be lost.\n\nWould you like to EXIT anyway? (y/n)\n");
-                input = Console.ReadLine();
-                if(input.ToLower() == "y"){
+                menuChoice = Console.ReadLine();
+                if(menuChoice.ToLower() == "y"){
                     break;
                 }
             }
 
-        }while(input != "0");
+        }while(menuChoice != "0");
 
         Console.Clear();
     }
