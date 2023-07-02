@@ -78,7 +78,7 @@ class EternalGoal : Goal{
         string res;
         do{
             Console.Clear();
-            Console.Write("Did you complete the goal '" + GetGoalDescription() + "' today? (y/n):");
+            Console.Write("Did you complete the goal '" + GetGoalDescription() + "' today? (y/n):\n");
             res = Console.ReadLine();
 
             if(res.ToLower() =="y"){
@@ -90,7 +90,7 @@ class EternalGoal : Goal{
                 return true;
             }
             else if(res.ToLower() == "n"){
-                Console.Write("Event recorded.\n");
+                Console.Write("\nEvent recorded.\n");
                 Console.Write("\nNo problem, keep it up! :D\n\n");
                 Thread.Sleep(3000);
                 _records.Add(DateTime.Now, false);

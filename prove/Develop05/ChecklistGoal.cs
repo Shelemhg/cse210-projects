@@ -23,7 +23,12 @@ class ChecklistGoal : Goal{
 
     public void AddItem(string description, Boolean completed){
         
-        _records.Add(description, completed);
+        _records.Add(description, completed);        
+        if(_completed){
+            _completed = false;
+            _points -= _bonusPoints;
+        }
+        CalculatePercentCompleted();
     }
 
     private void CalculatePercentCompleted(){
