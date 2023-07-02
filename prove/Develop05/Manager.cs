@@ -411,7 +411,7 @@ class Manager{
                     break;
                 }
                 else{
-                    Console.WriteLine("File \"" + fileNameToLoad + "\" NOT found. Please try again.");
+                    Console.WriteLine("\nFile \"" + fileNameToLoad + "\" NOT found. Please try again.");
                     Thread.Sleep(2000);
                 }
             }
