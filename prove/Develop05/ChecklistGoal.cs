@@ -1,10 +1,14 @@
 class ChecklistGoal : Goal{
     private Dictionary<string, Boolean> _records;
     private int _bonusPoints;
+    private int _percentCompleted;
 
     public ChecklistGoal(){
         _goalType = "Checklist Goal";
         _records = new Dictionary<string, bool>();
+        _points = 0;
+        _possiblePoints = 0;
+        _percentCompleted = 0;
     }
 
     public ChecklistGoal(string description) : base(description){
@@ -20,6 +24,58 @@ class ChecklistGoal : Goal{
     public void AddItem(string description, Boolean completed){
         
         _records.Add(description, completed);
+    }
+
+    private void CalculatePercentCompleted(){
+        
+        double total = 0;
+        int percent = 0;
+        int itemsCompleted = 0;
+        foreach(KeyValuePair<string, Boolean> record in _records){
+            if(record.Value == true){
+                itemsCompleted ++;
+            }
+        }
+        // total = itemsCompleted * 100/_records.Count() ;
+        if(_records.Count() != 0){
+            total = itemsCompleted * 100/_records.Count();
+        }else{
+            total = 0;
+        }
+        percent = (int)Math.Round(total);
+
+        if(percent == 100){
+            _completed = true;
+            _points += _bonusPoints;
+        }
+        _percentCompleted = percent;
+    }
+
+    public override void DisplayGoal(int i){
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Console.WriteLine(i + ". " + GetGoalDescription());                    
+        Console.ResetColor();
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.WriteLine("      Checklist Goal");
+        Console.WriteLine("Created: " + GetDateCreated());
+
+        if(GetPercentCompleted() == 100){
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Completed: "+ GetPercentCompleted() + " %");
+            Console.ResetColor();
+        }
+        else{
+            Console.WriteLine("Completed: "+ GetPercentCompleted() + " %");
+        }
+
+        Console.WriteLine("Possible Bonus Points: " + GetBonusPoints());
+        Console.WriteLine("Possible Points per Item: " + GetPossiblePoints());
+        Console.ResetColor();
+        Console.WriteLine("POINTS: " + GetPoints());
+
+        DisplayItemsOnChecklist();
+        
+        Console.ResetColor();
     }
 
     public void DisplayItemsOnChecklist(){
@@ -39,6 +95,23 @@ class ChecklistGoal : Goal{
             
             i++;
         }
+        Console.ResetColor();
+    }
+
+    public void DisplaySingleChecklist(){
+
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Console.WriteLine(GetGoalDescription());                    
+        Console.ResetColor();
+        Console.WriteLine("    Checklist Goal");
+        Console.WriteLine("Created: " + GetDateCreated()); 
+        Console.WriteLine("Completed: "+ GetPercentCompleted() + " %");       
+        Console.WriteLine("Possible Bonus Points: " + GetBonusPoints());
+        Console.WriteLine("Possible Points per Item: " + GetPossiblePoints());
+        Console.WriteLine("Points: " + GetPoints());
+        
+        DisplayItemsOnChecklist();
+
         Console.ResetColor();
     }
 
@@ -62,27 +135,7 @@ class ChecklistGoal : Goal{
 
     public int GetPercentCompleted(){
         
-        double total = 0;
-        int percent = 0;
-        int itemsCompleted = 0;
-        foreach(KeyValuePair<string, Boolean> record in _records){
-            if(record.Value == true){
-                itemsCompleted ++;
-            }
-        }
-        // total = itemsCompleted * 100/_records.Count() ;
-        if(_records.Count() != 0){
-            total = itemsCompleted * 100/_records.Count();
-        }else{
-            total = 0;
-        }
-        percent = (int)Math.Round(total);
-
-        if(percent == 100){
-            _completed = true;
-            _points += _bonusPoints;
-        }
-        return percent;
+        return _percentCompleted;
     }
     
     public override void LoadGoal(StreamReader reader){
@@ -110,22 +163,52 @@ class ChecklistGoal : Goal{
             AddItem(item, isCompleted);
         }
         SetBonusPoints(bonusPoints);
+        CalculatePercentCompleted();
 
     }
 
-    public void UpdateItem(int itemSelected){
+    public Boolean UpdateItem(int itemSelected){
         
-        int i = 1;
+        int i = 0;
         foreach(KeyValuePair<string, Boolean> item in _records){
-            if(i == itemSelected && _records[item.Key] == false ){
-                _records[item.Key] = true;
-                _points += _possiblePoints;
-                break;
+            if(i+1 == itemSelected){
+                if(_records[item.Key] == false ){
+                    _records[item.Key] = true;
+                    _points += _possiblePoints;
+                    return true;
+                }else{
+                    Console.WriteLine("Item ALREADY COMPLETED, please select a different one.");
+                    Thread.Sleep(3000);
+                    return false;
+                }
             }
             i++;
         }
+        return false;
     }
     
+    public override Boolean RecordEvent(){
+        string selection;
+        Boolean changed = false;
+        do{
+            Console.Clear();
+            DisplaySingleChecklist();
+            int numberSelected;
+        
+            Console.WriteLine("Select one Item to mark as done, or Hit ENTER to go Back:\n");
+            selection = Console.ReadLine();
+
+            if(selection != "" && int.TryParse(selection, out numberSelected)){
+                Boolean updatedItem = UpdateItem(numberSelected);
+                if(updatedItem){
+                    changed = true;
+                    CalculatePercentCompleted();
+                }
+            }
+        }while(selection != "");
+        return changed;
+    }
+
     public void SetBonusPoints(int points){
         
         _bonusPoints = points;

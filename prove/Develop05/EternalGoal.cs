@@ -16,6 +16,21 @@ class EternalGoal : Goal{
         _records = new Dictionary<DateTime, bool>();
     }
 
+    public override void DisplayGoal(int i)
+    {
+        Console.ForegroundColor = ConsoleColor.Blue;
+        Console.WriteLine(i + ". " + GetGoalDescription());                    
+        Console.ResetColor();
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.WriteLine("      Eternal Goal");
+        Console.WriteLine("Created: " + GetDateCreated());
+        Console.WriteLine("Possible Points per Event: " + GetPossiblePoints());
+        Console.ResetColor();
+        Console.WriteLine("POINTS: " + GetPoints());
+        DisplayItemsOnChecklist();
+        Console.ResetColor();
+    }
+
     public void DisplayItemsOnChecklist(){
         
         foreach(var record in _records){
@@ -59,18 +74,39 @@ class EternalGoal : Goal{
         }
     }
 
-    public void RecordEvent(DateTime date, Boolean completed){
-        
-        _records.Add(date, completed);
+    public override Boolean RecordEvent(){
+        string res;
+        do{
+            Console.Clear();
+            Console.Write("Did you complete the goal '" + GetGoalDescription() + "' today? (y/n):");
+            res = Console.ReadLine();
 
-        if(completed){
-            _points += _possiblePoints;
-        }
+            if(res.ToLower() =="y"){
+                Console.Write("\nThe goal was marked as COMPLETED!!\n");
+                Thread.Sleep(2000);
+                Console.Clear();
+                _records.Add(DateTime.Now, true);
+                _points += _possiblePoints;
+                return true;
+            }
+            else if(res.ToLower() == "n"){
+                Console.Write("Event recorded.\n");
+                Console.Write("\nNo problem, keep it up! :D\n\n");
+                Thread.Sleep(3000);
+                _records.Add(DateTime.Now, false);
+                return false;
+            }
+        }while(res != "y" || res !="n");
+        
+        return false;
+
     }
+    
     public void SaveEvent(DateTime date, Boolean completed){
         
         _records.Add(date, completed);
     }
+    
     public override void SaveGoalInfo(StreamWriter writer){
         writer.WriteLine(GetGoalType());
         writer.WriteLine(GetGoalDescription());

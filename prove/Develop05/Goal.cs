@@ -14,6 +14,27 @@ class Goal {
         _goalDescription = description;
     }
     
+    public virtual void DisplayGoal(int i){
+        if(GetGoalStatus()){
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(i + ". " + GetGoalDescription() + "  -  COMPLETED");
+        }else{
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(i + ". " + GetGoalDescription() + "  -  Pending");    
+        }
+                        
+        Console.ResetColor();
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.WriteLine("      Simple Goal");
+        Console.WriteLine("Created: " + GetDateCreated());
+        if(GetGoalStatus()){
+            Console.WriteLine("COMPLETED: " + GetDateCompleted());
+        }
+        Console.WriteLine("Possible Points: " + GetPossiblePoints());
+        Console.ResetColor();
+        Console.WriteLine("POINTS: " + GetPoints());
+    }
+
     public DateTime GetDateCompleted(){
         return _dateCompleted;
     }
@@ -65,6 +86,31 @@ class Goal {
     }
     
     public virtual void MarkCompleted(){}
+
+    public virtual Boolean RecordEvent(){
+        string res;
+        do{
+            Console.Clear();
+            Console.Write("Was the goal '" + GetGoalDescription() + "' Completed? (y/n):\n\n");
+            res = Console.ReadLine();
+
+            if(res.ToLower() =="y"){
+                MarkCompleted();
+                Console.Write("\nThe goal was marked as COMPLETED!!\n");
+                Thread.Sleep(2000);
+                Console.Clear();
+                return true;
+            }
+            else if(res.ToLower() == "n"){
+                Console.Write("\nNo problem, keep it up! :D\n\n");
+                Thread.Sleep(3000);
+                return false;
+            }
+            
+        }while(res != "y" || res !="n");
+
+        return false;
+    }
 
     public virtual void SaveGoalInfo(StreamWriter writer){
         writer.WriteLine(GetGoalType());

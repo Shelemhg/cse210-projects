@@ -204,78 +204,13 @@ class Manager{
         foreach(var goal in _goals){
             Console.WriteLine("");
             DisplayHorizontalLine();
+
+            if(goal.GetTypeOfGoal() != "Simple Goal" && goal.GetTypeOfGoal() != "Eternal Goal" && goal.GetTypeOfGoal() != "Checklist Goal"){
+                Console.WriteLine("Goal Type not found");
+            }else{
+                goal.DisplayGoal(i);
+            }           
             
-            switch(goal.GetTypeOfGoal()){
-                case "Simple Goal":
-                    if(goal.GetGoalStatus()){
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine(i + ". " + goal.GetGoalDescription() + "  -  COMPLETED");
-                    }else{
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine(i + ". " + goal.GetGoalDescription() + "  -  Pending");    
-                    }
-                                    
-                    Console.ResetColor();
-                    Console.ForegroundColor = ConsoleColor.DarkGray;
-                    Console.WriteLine("      Simple Goal");
-                    Console.WriteLine("Created: " + goal.GetDateCreated());
-                    if(goal.GetGoalStatus()){
-                        Console.WriteLine("COMPLETED: " + goal.GetDateCompleted());
-                    }
-                    Console.WriteLine("Possible Points: " + goal.GetPossiblePoints());
-                    Console.ResetColor();
-                    Console.WriteLine("POINTS: " + goal.GetPoints());
-                    break;
-                
-                case "Eternal Goal":
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine(i + ". " + goal.GetGoalDescription());                    
-                    Console.ResetColor();
-                    Console.ForegroundColor = ConsoleColor.DarkGray;
-                    Console.WriteLine("      Eternal Goal");
-                    Console.WriteLine("Created: " + goal.GetDateCreated());
-                    Console.WriteLine("Possible Points per Event: " + goal.GetPossiblePoints());
-                    Console.ResetColor();
-                    Console.WriteLine("POINTS: " + goal.GetPoints());
-                    if(goal is EternalGoal eternalGoal){
-                        eternalGoal.DisplayItemsOnChecklist();
-                    }
-                    Console.ResetColor();
-                    break;
-                    
-                case "Checklist Goal":
-                    Console.ForegroundColor = ConsoleColor.Magenta;
-                    Console.WriteLine(i + ". " + goal.GetGoalDescription());                    
-                    Console.ResetColor();
-                    Console.ForegroundColor = ConsoleColor.DarkGray;
-                    Console.WriteLine("      Checklist Goal");
-                    Console.WriteLine("Created: " + goal.GetDateCreated());
-
-                    if(goal is ChecklistGoal checklistGoal){
-
-                        if(checklistGoal.GetPercentCompleted() == 100){
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("Completed: "+ checklistGoal.GetPercentCompleted() + " %");
-                            Console.ResetColor();
-                        }
-                        else{
-                            Console.WriteLine("Completed: "+ checklistGoal.GetPercentCompleted() + " %");
-                        }
-
-                        Console.WriteLine("Possible Bonus Points: " + checklistGoal.GetBonusPoints());
-                        Console.WriteLine("Possible Points per Item: " + checklistGoal.GetPossiblePoints());
-                        Console.ResetColor();
-                        Console.WriteLine("POINTS: " + checklistGoal.GetPoints());
-
-                        checklistGoal.DisplayItemsOnChecklist();
-                        
-                        Console.ResetColor();
-                    }
-                    break;
-                default:
-                    Console.WriteLine("Goal Type not found");
-                    break;
-            }
             i++;
         }
     }
@@ -417,17 +352,8 @@ class Manager{
         using (StreamReader reader = new StreamReader(fileName)){
 
             while (!reader.EndOfStream){  
-                
-                // Goal goal = new Goal();              
+                     
                 string goalType = reader.ReadLine();
-                // string goalDescription = reader.ReadLine();
-                // DateTime dateCreated = DateTime.Parse(reader.ReadLine());
-                // DateTime dateCompleted = DateTime.Parse(reader.ReadLine());
-                // int possiblePoints = int.Parse(reader.ReadLine());
-                // int points = int.Parse(reader.ReadLine());
-                // bool completed = bool.Parse(reader.ReadLine());
-
-                // Goal goal = null;
 
                 switch (goalType){
                     case "Simple Goal":
@@ -448,42 +374,11 @@ class Manager{
                         eternalGoal.LoadGoal(reader);
                         _goals.Add(eternalGoal);
                         break;
-                        
+
                     default:
                         // Skip unknown goal types
                         continue;
                 }
-
-                // goal.SetDateCreated(dateCreated);
-                // goal.SetDateCompleted(dateCompleted);
-                // goal.SetPossiblePoints(possiblePoints);
-                // goal.SetPoints(points);
-                // goal.SetCompleted(completed);
-
-                // if (goal is ChecklistGoal checklistGoal){
-                //     int bonusPoints = int.Parse(reader.ReadLine());
-                //     int itemCount = int.Parse(reader.ReadLine());
-
-                //     for (int i = 0; i < itemCount; i++){
-                //         string item = reader.ReadLine();
-                //         bool isCompleted = bool.Parse(reader.ReadLine());
-                //         checklistGoal.AddItem(item, isCompleted);
-                //     }
-                //     checklistGoal.SetBonusPoints(bonusPoints);
-                //     _totalNumberOfChecklists++;
-                // }
-                // else if (goal is EternalGoal eternalGoal){
-
-                //     int eventCount = int.Parse(reader.ReadLine());
-
-                //     for (int i = 0; i < eventCount; i++){
-                //         DateTime eventDate = DateTime.Parse(reader.ReadLine());
-                //         bool isCompleted = bool.Parse(reader.ReadLine());
-                //         eternalGoal.SaveEvent(eventDate, isCompleted);
-                //     }
-                // }
-                // goal.LoadGoal(reader);
-                // _goals.Add(goal);
             }
         }
         Console.WriteLine("\nGoals loaded from file.");

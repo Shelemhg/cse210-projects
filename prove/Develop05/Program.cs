@@ -111,9 +111,9 @@ class Program
                         manager.DisplayAllGoals();
                         manager.DisplayTotalScore(); 
 
-                        Console.WriteLine("Select the Goal to modify (Hit ENTER to Go Back): ");
+                        Console.WriteLine("Select the Goal to modify (Hit ENTER to Go Back):\n");
                         subMenuChoice3 = Console.ReadLine();
-                        Console.Clear();
+                        // Console.Clear();
                         int goalSelected;
 
                         if(int.TryParse(subMenuChoice3, out goalSelected)){
@@ -126,93 +126,19 @@ class Program
                             if(goalSelected <= manager.GetNumberOfGoals()){
 
                                 Goal goal1 = manager.GetGoal(goalSelected);
-                                string res;
                                 
-                                switch(goal1.GetTypeOfGoal()){
-                                    
-                                    case "Simple Goal":
-                                        
-                                        if(goal1.GetGoalStatus()){
-                                            Console.Write("Goal already Completed\n");
-                                            Thread.Sleep(1000);
-                                            Console.Clear();
+                                if(goal1.GetGoalStatus()){
+                                    Console.Write("\nGoal already COMPLETED\n");
+                                    Thread.Sleep(2000);
+                                    Console.Clear();
 
-                                        }else{
+                                }else{
 
-                                            do{
-                                                Console.Clear();
-                                                Console.Write("Was the goal '" + goal1.GetGoalDescription() + "' Completed? (y/n):\n\n");
-                                                res = Console.ReadLine();
+                                    Boolean changes = goal1.RecordEvent();
 
-                                                if(res.ToLower() =="y"){
-                                                    manager.AddUnsavedChanges();
-                                                    goal1.MarkCompleted();
-                                                    Console.Write("\nThe goal was marked as COMPLETED!!\n");
-                                                    Thread.Sleep(2000);
-                                                    Console.Clear();
-                                                    break;
-                                                }
-                                                else if(res.ToLower() == "n"){
-                                                    Console.Write("\nNo problem, keep it up! :D\n\n");
-                                                    Thread.Sleep(3000);
-                                                    break;
-                                                }
-                                                
-                                            }while(res != "y" || res !="n");
-                                        }
-
-                                        break;
-
-                                    case "Eternal Goal":
-
-                                        if(goal1 is EternalGoal eternalGoal){
-                                            
-                                            do{
-                                                Console.Clear();
-                                                Console.Write("Did you complete the goal '" + eternalGoal.GetGoalDescription() + "' today? (y/n):");
-                                                res = Console.ReadLine();
-
-                                                if(res.ToLower() =="y"){
-                                                    eternalGoal.RecordEvent(DateTime.Now, true);
-                                                    manager.AddUnsavedChanges();
-                                                    Console.Write("\nThe goal was marked as COMPLETED!!\n");
-                                                    Thread.Sleep(2000);
-                                                    Console.Clear();
-                                                    break;
-                                                }
-                                                else if(res.ToLower() == "n"){
-                                                    eternalGoal.RecordEvent(DateTime.Now, false);
-                                                    manager.AddUnsavedChanges();
-                                                    Console.Write("Event recorded.\n");
-                                                    Console.Write("\nNo problem, keep it up! :D\n\n");
-                                                    Thread.Sleep(3000);
-                                                    break;
-                                                }
-                                            }while(res != "y" || res !="n");
-                                        }
-
-                                        break;
-                                    
-                                    case "Checklist Goal":
-                                        
-                                        if(goal1 is ChecklistGoal checklistGoal){
-                                            string selection;
-
-                                            do{
-                                                Console.Clear();
-                                                manager.DisplaySingleChecklist(checklistGoal);
-                                                int numberSelected;
-                                            
-                                                Console.WriteLine("Select one Item to mark as done, or Hit ENTER to go Back:\n");
-                                                selection = Console.ReadLine();
-
-                                                if(selection != "" && int.TryParse(selection, out numberSelected)){
-                                                    checklistGoal.UpdateItem(numberSelected);
-                                                    manager.AddUnsavedChanges();
-                                                }
-                                            }while(selection != "");
-                                        }
-                                        break;
+                                    if(changes){
+                                        manager.AddUnsavedChanges();
+                                    }
                                 }
                             }
                         }
