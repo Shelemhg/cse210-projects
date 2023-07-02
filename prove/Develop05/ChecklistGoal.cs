@@ -203,9 +203,13 @@ class ChecklistGoal : Goal{
                 if(updatedItem){
                     changed = true;
                     CalculatePercentCompleted();
+                    if(_percentCompleted == 100){
+                        Console.WriteLine("\nCONGRATULATIONS!! YOU HAVE FINISHED THIS CHECLIST GOAL!!\n");
+                        Thread.Sleep(3000);
+                    }
                 }
             }
-        }while(selection != "");
+        }while(selection != "" && _percentCompleted != 100);
         return changed;
     }
 

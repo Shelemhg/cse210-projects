@@ -128,7 +128,7 @@ class Program
                                 Goal goal1 = manager.GetGoal(goalSelected);
                                 
                                 if(goal1.GetGoalStatus()){
-                                    Console.Write("\nGoal already COMPLETED\n");
+                                    Console.Write("\nGoal already COMPLETED.\n");
                                     Thread.Sleep(2000);
                                     Console.Clear();
 
