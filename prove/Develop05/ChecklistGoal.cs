@@ -36,7 +36,6 @@ class ChecklistGoal : Goal{
                 itemsCompleted ++;
             }
         }
-        // total = itemsCompleted * 100/_records.Count() ;
         if(_records.Count() != 0){
             total = itemsCompleted * 100/_records.Count();
         }else{
@@ -204,7 +203,7 @@ class ChecklistGoal : Goal{
                     changed = true;
                     CalculatePercentCompleted();
                     if(_percentCompleted == 100){
-                        Console.WriteLine("\nCONGRATULATIONS!! YOU HAVE FINISHED THIS CHECLIST GOAL!!\n");
+                        Console.WriteLine("\nCONGRATULATIONS!! YOU HAVE FINISHED THIS CHECKLIST GOAL!!\n");
                         Thread.Sleep(3000);
                     }
                 }
