@@ -1,5 +1,9 @@
 class SimpleGoal : Goal{
 
+    public SimpleGoal(){
+        _goalType = "Simple Goal";
+    }
+    
     public SimpleGoal(string description) : base(description){
        
         _goalType = "Simple Goal";

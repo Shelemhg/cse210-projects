@@ -2,6 +2,11 @@ class ChecklistGoal : Goal{
     private Dictionary<string, Boolean> _records;
     private int _bonusPoints;
 
+    public ChecklistGoal(){
+        _goalType = "Checklist Goal";
+        _records = new Dictionary<string, bool>();
+    }
+
     public ChecklistGoal(string description) : base(description){
         
         _goalType = "Checklist Goal";
@@ -65,7 +70,12 @@ class ChecklistGoal : Goal{
                 itemsCompleted ++;
             }
         }
-        total = itemsCompleted * 100/_records.Count() ;
+        // total = itemsCompleted * 100/_records.Count() ;
+        if(_records.Count() != 0){
+            total = itemsCompleted * 100/_records.Count();
+        }else{
+            total = 0;
+        }
         percent = (int)Math.Round(total);
 
         if(percent == 100){
@@ -75,6 +85,34 @@ class ChecklistGoal : Goal{
         return percent;
     }
     
+    public override void LoadGoal(StreamReader reader){
+        
+        string goalDescription = reader.ReadLine();
+        DateTime dateCreated = DateTime.Parse(reader.ReadLine());
+        DateTime dateCompleted = DateTime.Parse(reader.ReadLine());
+        int possiblePoints = int.Parse(reader.ReadLine());
+        int points = int.Parse(reader.ReadLine());
+        bool completed = bool.Parse(reader.ReadLine());
+
+        SetGoalDescription(goalDescription);
+        SetDateCreated(dateCreated);
+        SetDateCompleted(dateCompleted);
+        SetPossiblePoints(possiblePoints);
+        SetPoints(points);
+        SetCompleted(completed);
+
+        int bonusPoints = int.Parse(reader.ReadLine());
+        int itemCount = int.Parse(reader.ReadLine());
+
+        for (int i = 0; i < itemCount; i++){
+            string item = reader.ReadLine();
+            bool isCompleted = bool.Parse(reader.ReadLine());
+            AddItem(item, isCompleted);
+        }
+        SetBonusPoints(bonusPoints);
+
+    }
+
     public void UpdateItem(int itemSelected){
         
         int i = 1;
@@ -91,5 +129,23 @@ class ChecklistGoal : Goal{
     public void SetBonusPoints(int points){
         
         _bonusPoints = points;
+    }
+
+    public override void SaveGoalInfo(StreamWriter writer){
+        writer.WriteLine(GetGoalType());
+        writer.WriteLine(GetGoalDescription());
+        writer.WriteLine(GetDateCreated());
+        writer.WriteLine(GetDateCompleted());
+        writer.WriteLine(GetPossiblePoints());
+        writer.WriteLine(GetPoints());
+        writer.WriteLine(GetGoalStatus());
+            
+        writer.WriteLine(GetBonusPoints());
+        writer.WriteLine(GetChecklistItems().Count);
+
+        foreach (var item in GetChecklistItems()){
+            writer.WriteLine(item.Key);
+            writer.WriteLine(item.Value);
+        }
     }
 }

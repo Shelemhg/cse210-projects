@@ -8,6 +8,8 @@ class Goal {
     protected int _points;
     protected Boolean _completed;
          
+    public Goal(){}
+    
     public Goal(string description){
         _goalDescription = description;
     }
@@ -45,7 +47,34 @@ class Goal {
         return _goalType;
     }
     
+    public virtual void LoadGoal(StreamReader reader){
+        
+        string goalDescription = reader.ReadLine();
+        DateTime dateCreated = DateTime.Parse(reader.ReadLine());
+        DateTime dateCompleted = DateTime.Parse(reader.ReadLine());
+        int possiblePoints = int.Parse(reader.ReadLine());
+        int points = int.Parse(reader.ReadLine());
+        bool completed = bool.Parse(reader.ReadLine());
+
+        SetGoalDescription(goalDescription);
+        SetDateCreated(dateCreated);
+        SetDateCompleted(dateCompleted);
+        SetPossiblePoints(possiblePoints);
+        SetPoints(points);
+        SetCompleted(completed);
+    }
+    
     public virtual void MarkCompleted(){}
+
+    public virtual void SaveGoalInfo(StreamWriter writer){
+        writer.WriteLine(GetGoalType());
+        writer.WriteLine(GetGoalDescription());
+        writer.WriteLine(GetDateCreated());
+        writer.WriteLine(GetDateCompleted());
+        writer.WriteLine(GetPossiblePoints());
+        writer.WriteLine(GetPoints());
+        writer.WriteLine(GetGoalStatus());
+    }
 
     public void SetCompleted(Boolean completed){
         _completed = completed;
@@ -57,6 +86,10 @@ class Goal {
     
     public void SetDateCreated(DateTime dateCreated){
         _dateCreated = dateCreated;
+    }
+
+    public void SetGoalDescription(string description){
+        _goalDescription = description;
     }
 
     public void SetPoints(int points){

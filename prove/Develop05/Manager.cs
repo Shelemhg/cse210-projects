@@ -416,62 +416,74 @@ class Manager{
         
         using (StreamReader reader = new StreamReader(fileName)){
 
-            while (!reader.EndOfStream){                
+            while (!reader.EndOfStream){  
+                
+                // Goal goal = new Goal();              
                 string goalType = reader.ReadLine();
-                string goalDescription = reader.ReadLine();
-                DateTime dateCreated = DateTime.Parse(reader.ReadLine());
-                DateTime dateCompleted = DateTime.Parse(reader.ReadLine());
-                int possiblePoints = int.Parse(reader.ReadLine());
-                int points = int.Parse(reader.ReadLine());
-                bool completed = bool.Parse(reader.ReadLine());
+                // string goalDescription = reader.ReadLine();
+                // DateTime dateCreated = DateTime.Parse(reader.ReadLine());
+                // DateTime dateCompleted = DateTime.Parse(reader.ReadLine());
+                // int possiblePoints = int.Parse(reader.ReadLine());
+                // int points = int.Parse(reader.ReadLine());
+                // bool completed = bool.Parse(reader.ReadLine());
 
-                Goal goal;
+                // Goal goal = null;
 
                 switch (goalType){
                     case "Simple Goal":
-                        goal = new SimpleGoal(goalDescription);
+                        SimpleGoal goal = new SimpleGoal();                      
+                        goal.LoadGoal(reader);
+                        _goals.Add(goal);
                         break;
+
                     case "Checklist Goal":
-                        goal = new ChecklistGoal(goalDescription);
+                        ChecklistGoal checklistGoal = new ChecklistGoal();
+                        checklistGoal.LoadGoal(reader);
+                        _goals.Add(checklistGoal);
+                        _totalNumberOfChecklists++;                        
                         break;
+
                     case "Eternal Goal":
-                        goal = new EternalGoal(goalDescription);
+                        EternalGoal eternalGoal = new EternalGoal();
+                        eternalGoal.LoadGoal(reader);
+                        _goals.Add(eternalGoal);
                         break;
+                        
                     default:
                         // Skip unknown goal types
                         continue;
                 }
 
-                goal.SetDateCreated(dateCreated);
-                goal.SetDateCompleted(dateCompleted);
-                goal.SetPossiblePoints(possiblePoints);
-                goal.SetPoints(points);
-                goal.SetCompleted(completed);
+                // goal.SetDateCreated(dateCreated);
+                // goal.SetDateCompleted(dateCompleted);
+                // goal.SetPossiblePoints(possiblePoints);
+                // goal.SetPoints(points);
+                // goal.SetCompleted(completed);
 
-                if (goal is ChecklistGoal checklistGoal){
-                    int bonusPoints = int.Parse(reader.ReadLine());
-                    int itemCount = int.Parse(reader.ReadLine());
+                // if (goal is ChecklistGoal checklistGoal){
+                //     int bonusPoints = int.Parse(reader.ReadLine());
+                //     int itemCount = int.Parse(reader.ReadLine());
 
-                    for (int i = 0; i < itemCount; i++){
-                        string item = reader.ReadLine();
-                        bool isCompleted = bool.Parse(reader.ReadLine());
-                        checklistGoal.AddItem(item, isCompleted);
-                    }
-                    checklistGoal.SetBonusPoints(bonusPoints);
-                    _totalNumberOfChecklists++;
-                }
-                else if (goal is EternalGoal eternalGoal){
+                //     for (int i = 0; i < itemCount; i++){
+                //         string item = reader.ReadLine();
+                //         bool isCompleted = bool.Parse(reader.ReadLine());
+                //         checklistGoal.AddItem(item, isCompleted);
+                //     }
+                //     checklistGoal.SetBonusPoints(bonusPoints);
+                //     _totalNumberOfChecklists++;
+                // }
+                // else if (goal is EternalGoal eternalGoal){
 
-                    int eventCount = int.Parse(reader.ReadLine());
+                //     int eventCount = int.Parse(reader.ReadLine());
 
-                    for (int i = 0; i < eventCount; i++){
-                        DateTime eventDate = DateTime.Parse(reader.ReadLine());
-                        bool isCompleted = bool.Parse(reader.ReadLine());
-                        eternalGoal.SaveEvent(eventDate, isCompleted);
-                    }
-                }
-
-                _goals.Add(goal);
+                //     for (int i = 0; i < eventCount; i++){
+                //         DateTime eventDate = DateTime.Parse(reader.ReadLine());
+                //         bool isCompleted = bool.Parse(reader.ReadLine());
+                //         eternalGoal.SaveEvent(eventDate, isCompleted);
+                //     }
+                // }
+                // goal.LoadGoal(reader);
+                // _goals.Add(goal);
             }
         }
         Console.WriteLine("\nGoals loaded from file.");
@@ -517,34 +529,9 @@ class Manager{
         
         SaveChanges();
         using (StreamWriter writer = new StreamWriter(fileName + ".txt")){
+
             foreach (Goal goal in _goals){
-                writer.WriteLine(goal.GetGoalType());
-                writer.WriteLine(goal.GetGoalDescription());
-                writer.WriteLine(goal.GetDateCreated());
-                writer.WriteLine(goal.GetDateCompleted());
-                writer.WriteLine(goal.GetPossiblePoints());
-                writer.WriteLine(goal.GetPoints());
-                writer.WriteLine(goal.GetGoalStatus());
-
-                if (goal is ChecklistGoal checklistGoal){
-                    
-                    writer.WriteLine(checklistGoal.GetBonusPoints());
-                    writer.WriteLine(checklistGoal.GetChecklistItems().Count);
-
-                    foreach (var item in checklistGoal.GetChecklistItems()){
-                        writer.WriteLine(item.Key);
-                        writer.WriteLine(item.Value);
-                    }
-                }
-                else if (goal is EternalGoal eternalGoal)
-                {
-                    writer.WriteLine(eternalGoal.GetRecordedEvents().Count);
-                    foreach (KeyValuePair<DateTime, bool> record in eternalGoal.GetRecordedEvents())
-                    {
-                        writer.WriteLine(record.Key);
-                        writer.WriteLine(record.Value);
-                    }
-                }
+                goal.SaveGoalInfo(writer);
             }
             _lastFileUsed = fileName;
         }
