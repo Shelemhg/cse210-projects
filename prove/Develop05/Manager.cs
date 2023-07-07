@@ -173,25 +173,7 @@ class Manager{
             i++;
         }
     }
-
-    public void DisplaySingleChecklist(ChecklistGoal checklistGoal){
-
-        Console.ForegroundColor = ConsoleColor.Magenta;
-        Console.WriteLine(checklistGoal.GetGoalDescription());                    
-        Console.ResetColor();
-        Console.WriteLine("    Checklist Goal");
-        Console.WriteLine("Created: " + checklistGoal.GetDateCreated()); 
-        Console.WriteLine("Completed: "+ checklistGoal.GetPercentCompleted() + " %");       
-        Console.WriteLine("Possible Bonus Points: " + checklistGoal.GetBonusPoints());
-        Console.WriteLine("Possible Points per Item: " + checklistGoal.GetPossiblePoints());
-        Console.WriteLine("Points: " + checklistGoal.GetPoints());
-        
-        checklistGoal.DisplayItemsOnChecklist();
-
-        Console.ResetColor();
-    }
-
-    public void DisplayAllGoals(){
+     public void DisplayAllGoals(){
 
         if(_goals.Count() == 0){
             Console.WriteLine("No Goals saved. Try Adding a new goal.");
@@ -213,6 +195,23 @@ class Manager{
             
             i++;
         }
+    }
+
+    public void DisplaySingleChecklist(ChecklistGoal checklistGoal){
+
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Console.WriteLine(checklistGoal.GetGoalDescription());                    
+        Console.ResetColor();
+        Console.WriteLine("    Checklist Goal");
+        Console.WriteLine("Created: " + checklistGoal.GetDateCreated()); 
+        Console.WriteLine("Completed: "+ checklistGoal.GetPercentCompleted() + " %");       
+        Console.WriteLine("Possible Bonus Points: " + checklistGoal.GetBonusPoints());
+        Console.WriteLine("Possible Points per Item: " + checklistGoal.GetPossiblePoints());
+        Console.WriteLine("Points: " + checklistGoal.GetPoints());
+        
+        checklistGoal.DisplayItemsOnChecklist();
+
+        Console.ResetColor();
     }
 
     public void DisplayHorizontalLine(){

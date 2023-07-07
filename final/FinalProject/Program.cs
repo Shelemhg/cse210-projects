@@ -17,10 +17,18 @@ class Program
 
                 //  New Cart
                 case "1":
-
+                    pointOfSale.CreateNewCart();
                     break;
                 //  Check Item Price
                 case "2":
+                    
+                    break;
+                    //  Add Item
+                case "3":
+                    
+                    break;
+                    //  Check Item Price
+                case "4":
                     
                     break;
 

@@ -85,6 +85,7 @@ class Program
                     manager.DisplayHorizontalLine();
                     Console.WriteLine("- - -            G O A L S            - - -");
                     manager.DisplayHorizontalLine();
+                    
                     manager.DisplayAllGoals();
                     manager.DisplayTotalScore();        
                     Console.WriteLine("Press ENTER to go back.");

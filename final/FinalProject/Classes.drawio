@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="FJXhwHptYgPNuSuxnt-G" name="Page-1">
-        <mxGraphModel dx="2550" dy="2012" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="1724" dy="2012" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -31,7 +31,7 @@
                 <mxCell id="149" value="+Person()" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#333333;fontSize=14;" parent="146" vertex="1">
                     <mxGeometry y="164" width="210" height="34" as="geometry"/>
                 </mxCell>
-                <mxCell id="150" value="Cashier" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=14;" parent="1" vertex="1">
+                <mxCell id="150" value="Employee" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=14;" parent="1" vertex="1">
                     <mxGeometry x="-310" y="-405" width="210" height="198" as="geometry"/>
                 </mxCell>
                 <mxCell id="151" value="#_employeeID: int&#10;#_firstName: string&#10;#_lastName: string&#10;#_email: string&#10;#_phoneNumber: int&#10;#_address: stirng&#10;#_zipCode: string" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#333333;fontSize=14;" parent="150" vertex="1">
@@ -56,16 +56,16 @@
                     <mxGeometry y="188" width="210" height="34" as="geometry"/>
                 </mxCell>
                 <mxCell id="158" value="Product" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=14;" parent="1" vertex="1">
-                    <mxGeometry x="65" y="209" width="210" height="180" as="geometry"/>
+                    <mxGeometry x="65" y="209" width="210" height="244" as="geometry"/>
                 </mxCell>
-                <mxCell id="159" value="#_productID: int&#10;#_categoryID: string&#10;#_productName: string&#10;#_productDescription: string&#10;#_barcode: string&#10;#_stockQuantity: int" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#333333;fontSize=14;" parent="158" vertex="1">
-                    <mxGeometry y="26" width="210" height="116" as="geometry"/>
+                <mxCell id="159" value="#_productID: int&#10;#_barcode: int;&#10;#_categoryID: string&#10;#_productName: string&#10;#_productDescription: string&#10;#_barcode: string&#10;#_stockQuantity: int&#10;#_brand: string;&#10;#_createdAt: DateTime;&#10;#_modifiedAt: DateTime;" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#333333;fontSize=14;" parent="158" vertex="1">
+                    <mxGeometry y="26" width="210" height="180" as="geometry"/>
                 </mxCell>
                 <mxCell id="160" value="" style="line;strokeWidth=1;fillColor=#f5f5f5;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#666666;fontColor=#333333;fontSize=14;" parent="158" vertex="1">
-                    <mxGeometry y="142" width="210" height="8" as="geometry"/>
+                    <mxGeometry y="206" width="210" height="8" as="geometry"/>
                 </mxCell>
                 <mxCell id="161" value="+Product()" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#333333;fontSize=14;" parent="158" vertex="1">
-                    <mxGeometry y="150" width="210" height="30" as="geometry"/>
+                    <mxGeometry y="214" width="210" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="162" value="Store" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=14;" parent="1" vertex="1">
                     <mxGeometry x="-310" y="212" width="210" height="198" as="geometry"/>
@@ -98,7 +98,7 @@
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="177" value="Inventory" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=14;" parent="1" vertex="1">
-                    <mxGeometry x="65" y="472" width="210" height="100" as="geometry"/>
+                    <mxGeometry x="65" y="550" width="210" height="100" as="geometry"/>
                 </mxCell>
                 <mxCell id="178" value="#_Products : &lt;List&gt; Product" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#333333;fontSize=14;" parent="177" vertex="1">
                     <mxGeometry y="26" width="210" height="36" as="geometry"/>
@@ -112,7 +112,7 @@
                 <mxCell id="181" value="Cart" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=14;" parent="1" vertex="1">
                     <mxGeometry x="65" y="-92" width="210" height="226" as="geometry"/>
                 </mxCell>
-                <mxCell id="182" value="#_Items : List&lt;Product&gt;&#10;#_numberOfItems: int&#10;#_totalDiscount: float&#10;#_TAX :float&#10;#_totalCost: float" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#333333;fontSize=14;" parent="181" vertex="1">
+                <mxCell id="182" value="#_Items : List&lt;Product&gt;&#10;#_numberOfItems: int&#10;#_totalDiscount: float&#10;#_tax :float&#10;#_totalCost: float" style="text;strokeColor=#666666;fillColor=#f5f5f5;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#333333;fontSize=14;" parent="181" vertex="1">
                     <mxGeometry y="26" width="210" height="98" as="geometry"/>
                 </mxCell>
                 <mxCell id="183" value="" style="line;strokeWidth=1;fillColor=#f5f5f5;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#666666;fontColor=#333333;fontSize=14;" parent="181" vertex="1">
