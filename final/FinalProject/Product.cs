@@ -5,6 +5,7 @@ class Product{
     private int _categoryId;
     private string _productName;
     private string _productDescription;
+    private float _price;
     private int _stockQuantity;
     private string _brand;
     private DateTime _createdAt;
@@ -15,12 +16,13 @@ class Product{
         
     }
 
-    public Product(int barcode, int categoryId, string productName, string productDescription, int stockQuantity, string brand, DateTime createdAt, DateTime modifiedAt){
+    public Product(int barcode, int categoryId, string productName, string productDescription, float price, int stockQuantity, string brand, DateTime createdAt, DateTime modifiedAt){
 
         _barcode = barcode;
         _categoryId = categoryId;
         _productName = productName;
         _productDescription = productDescription;
+        _price = price;
         _stockQuantity = stockQuantity;
         _brand = brand;
         _createdAt = createdAt;
@@ -38,6 +40,8 @@ class Product{
     public string Brand { get { return _brand; } private set { _brand = value; } }
 
     public string ProductDescription { get { return _productDescription; } private set { _productDescription = value; } }
+
+    public float Price { get { return _price; } private set { _price = value; } }
 
     public string ProductName { get { return _productName; } private set { _productName = value; } }
 

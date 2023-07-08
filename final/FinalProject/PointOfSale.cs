@@ -5,7 +5,7 @@ class PointOfSale{
     private List<Cart> _carts;
 
     public PointOfSale(){
-        
+
         _carts = new List<Cart>();
     }
     
@@ -66,8 +66,10 @@ class PointOfSale{
     public void DisplayItems(Cart cart){
         
         int i = 1;
+
         foreach(Product item in cart.Items){
-            Console.WriteLine(i + ". " + item.ProductName + "  -  ");
+
+            Console.WriteLine(i + ". " + item.ProductName + "  -  $" + item.Price);
         }
 
     }
@@ -76,8 +78,8 @@ class PointOfSale{
 
         try{
             using (var connection = CreateDatabaseConnection()){
-                connection.Open();
 
+                connection.Open();
                 var product = RetrieveProductByBarcode(connection, barcode);
                 connection.Close();
 
@@ -100,12 +102,13 @@ class PointOfSale{
         int categoryId = reader.GetInt32(2);
         string productName = reader.GetString(3);
         string productDescription = reader.GetString(4);
-        int stock = reader.GetInt32(5);
-        string brand = reader.GetString(6);
-        DateTime createdAt = reader.GetDateTime(7);
-        DateTime modifiedAt = reader.GetDateTime(8);
+        float price = reader.GetFloat(5);
+        int stock = reader.GetInt32(6);
+        string brand = reader.GetString(7);
+        DateTime createdAt = reader.GetDateTime(8);
+        DateTime modifiedAt = reader.GetDateTime(9);
 
-        Product product = new Product(barcode, categoryId, productName, productDescription, stock, brand, createdAt, modifiedAt);
+        Product product = new Product(barcode, categoryId, productName, productDescription, price, stock, brand, createdAt, modifiedAt);
         return product;
     }
 
