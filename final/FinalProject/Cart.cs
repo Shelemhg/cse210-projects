@@ -28,5 +28,9 @@ class Cart{
         _items.Add(product);
     }
 
+    public void RemoveItem(){}
+    public void Checkout(){}
+    public void CreateTicket(){}
+
     
 }
