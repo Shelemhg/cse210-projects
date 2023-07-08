@@ -9,9 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.118" />
+  </ItemGroup>
+
+  <!-- <ItemGroup>
     <Reference Include="System.Data.SQLite">
       <HintPath>lib/System.Data.SQLite.dll</HintPath>
     </Reference>
-  </ItemGroup>
+  </ItemGroup> -->
+
+  
 
 </Project>

@@ -18,7 +18,7 @@ class Program
 
                 //  New Cart
                 case "1":
-                    pointOfSale.CreateNewCart();
+                    pointOfSale.LoadNewCart();
                     break;
                 //  Check Item Price
                 case "2":
