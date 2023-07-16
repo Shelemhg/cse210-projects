@@ -72,11 +72,12 @@ class Manager : Employee {
                             DisplayProductInfo(product);
                             DisplayHorizontalLine();
                             Console.WriteLine($"\n{inputNewStock} Items added to the stock of {product.Barcode}\n");
-                            Thread.Sleep(4000);
+                            Console.WriteLine("\n Press ENTER to continue.");
+                            Console.ReadLine();
                             break;
                         }
 
-                    }while(input != "");
+                    }while(inputNewStock != "");
                 }
             }
 

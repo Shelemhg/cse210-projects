@@ -40,7 +40,8 @@ class Employee : Person{
                         DisplayHorizontalLine();
                         Console.WriteLine("\n" + product.ProductName + "  -  $" + product.Price + "\n");
                         DisplayHorizontalLine();
-                        Thread.Sleep(2000);
+                        Console.WriteLine("\n Press ENTER to continue.");
+                        Console.ReadLine();
 
                     }else{
 
@@ -129,7 +130,8 @@ class Employee : Person{
                             }
 
                             Console.WriteLine("\nCome back soon!");
-                            Thread.Sleep(6000);
+                            Console.WriteLine("\n Press ENTER to continue.");
+                            Console.ReadLine();
                             return;
 
                         }else{
@@ -152,7 +154,9 @@ class Employee : Person{
                             
                             }else{
 
-                                Console.WriteLine("\nProduct NOT FOUND");
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine($"\nProduct \"{barcode}\"NOT FOUND");
+                                Console.ResetColor();
                                 Thread.Sleep(2000);
                             }
 

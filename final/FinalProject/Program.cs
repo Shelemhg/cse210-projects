@@ -67,13 +67,13 @@ class Program
             Employee employee = NewLogin(employeeNumber, password);
 
             if(employee != null){
-
+                
                 employee.LoadPointOfSale();
 
             }else{
                 
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("\nInvalid username or password\n");
+                Console.WriteLine("\nInvalid username or password");
                 Console.ResetColor();                          
                 attempts--;
                 Console.WriteLine($"\n{attempts} more attempts.");
