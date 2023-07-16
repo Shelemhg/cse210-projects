@@ -1,9 +1,3 @@
-using System;
-using System.Data.SQLite;
-
-using System.Security.Cryptography;
-using System.Text;
-
 class Program
 {
     static void Main(string[] args)
@@ -14,9 +8,16 @@ class Program
 
         do{
             Console.Clear();
+
+            //   LINE ONLY FOR TESTING
+            Console.WriteLine("\nTest users:  1001 & 1002\nPWD: 1234\n");
+            
+            
+            
             Console.WriteLine("- - - - - - - - - - - - - - - - - - -");
             Console.WriteLine(" - -          L O G I N           - -");
             Console.WriteLine("- - - - - - - - - - - - - - - - - - -\n");
+            Console.WriteLine("\nHit ENTER to quit or:\n");
             Console.WriteLine("Enter employee Number:\n");
             employeeNumber = Console.ReadLine();
 
@@ -26,25 +27,6 @@ class Program
 
             Console.WriteLine("\nEnter password:\n");
             string password = GetMaskedInput();
-
-
-        //     string password = Console.ReadLine();
-        //     DataBaseManager dataBaseManager = new DataBaseManager();
-
-        //     using (SHA256 sha256 = SHA256.Create())
-        // {
-        //     byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-        //     StringBuilder builder = new StringBuilder();
-        //     foreach (byte b in bytes)
-        //     {
-        //         builder.Append(b.ToString("x2"));
-        //     }
-            
-
-        //     Console.WriteLine(builder.ToString());
-        //     Thread.Sleep(5000);             
-        // }
-
 
             Employee employee = NewLogin(employeeNumber, password);
 
@@ -61,42 +43,6 @@ class Program
             }
 
         }while(attempts > 0 && employeeNumber != "");
-
-
-        // PointOfSale pointOfSale = new PointOfSale();
-        // Store store = new Store();
-        
-        // string menuChoice = null;
-
-        // do{
-        //     Console.Clear();
-        //     pointOfSale.DisplayMenu();
-        //     Console.WriteLine("Select one option or 0 to quit:\n");
-        //     menuChoice = Console.ReadLine();
-
-        //     switch(menuChoice){
-
-        //         //  New Cart
-        //         case "1":
-        //             pointOfSale.LoadNewCart();
-        //             break;
-        //         //  Check Item Price
-        //         case "2":
-                    
-        //             break;
-        //             //  Add Item
-        //         case "3":
-                    
-        //             break;
-        //             //  Check Item Price
-        //         case "4":
-                    
-        //             break;
-
-        //     }
-
-
-        // }while(menuChoice != "0");
 
         Console.Clear();
 

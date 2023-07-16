@@ -56,7 +56,7 @@ class DataBaseManager{
 
             connection.Open();
 
-            string query = "SELECT password FROM employees WHERE EmployeeNumber = @empNumber;";
+            string query = "SELECT * FROM employee WHERE id = @id;";
             using (var command = new SQLiteCommand(query, connection)){
 
                 command.Parameters.AddWithValue("@id", employeeNumber);
@@ -65,18 +65,18 @@ class DataBaseManager{
 
                     if (reader.Read()){
 
-                        int id = (int)reader["Id"];
-                        string firstName = (string)reader["FirstName"];
-                        string lastName = (string)reader["LastName"];
-                        string email = (string)reader["Email"];
-                        string phoneNumber = (string)reader["PhoneNumber"];
-                        string address = (string)reader["Address"];
-                        string zipCode = (string)reader["ZipCode"];
-                        string city = (string)reader["City"];
-                        string state = (string)reader["State"];
-                        string country = (string)reader["Country"];
+                        string id = (string)reader["id"];
+                        string firstName = (string)reader["first_Name"];
+                        string lastName = (string)reader["last_name"];
+                        string email = (string)reader["email"];
+                        string phoneNumber = (string)reader["phone_number"];
+                        string address = (string)reader["address"];
+                        string zipCode = (string)reader["zip_code"];
+                        string city = (string)reader["city"];
+                        string state = (string)reader["state"];
+                        string country = (string)reader["country"];
                         string position = (string)reader["position"];
-                        string storedHash = (string)reader["PasswordHash"];
+                        string storedHash = (string)reader["password"];
 
                         string hashedPassword = GetHashedPassword(password);
 

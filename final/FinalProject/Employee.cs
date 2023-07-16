@@ -1,5 +1,3 @@
-using System.Data.SQLite;
-
 class Employee : Person{
 
     protected string _position;
@@ -53,6 +51,52 @@ class Employee : Person{
         return false;
     }
 
+    private void CheckPrice(){
+        
+        Cart cart = new Cart();
+        
+        string input = null;
+        // Boolean itemFound;
+        int barcode = 0;
+
+        do{
+            Console.Clear();
+            DisplayHorizontalLine();
+            Console.WriteLine("- - -   C H E C K    P R I C E   - - -");
+            DisplayHorizontalLine();
+
+            Console.WriteLine("\nType Barcode:\n");
+            input = Console.ReadLine();
+
+            if(int.TryParse(input, out barcode)){
+                                      
+                try{
+                            
+                    Product product = _dataBaseManager.SearchBarcode(barcode, cart);
+
+                    if(product != null){
+                        Console.WriteLine("\n" + product.ProductName + "  -  $" + product.Price);
+                        Thread.Sleep(4000);
+                    }else{
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\nProduct NOT FOUND");
+                        Console.ResetColor();
+                    }
+                    
+                }catch(Exception ex){
+                    HandleException(ex);
+                }
+            }else{
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nProduct NOT FOUND");
+                Console.ResetColor();
+                Thread.Sleep(2000);
+            }
+            
+
+        }while(input != "");
+    }
+
     private void CompleteTransaction(Store store, DateTime date, Cart cart){
         
         PrintRecit(store, date, cart);
@@ -81,12 +125,14 @@ class Employee : Person{
         DisplayHorizontalLine();
         Console.WriteLine("- -   P O I N T   O F   S A L E   - -");
         DisplayHorizontalLine();
-        Console.WriteLine($"{FirstName} {LastName} - {Position}");
+         Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine($"        {FirstName} {LastName} - {Position}");
+        Console.ResetColor();
         DisplayHorizontalLine();
         Console.WriteLine("1. New Cart");
         Console.WriteLine("2. Check Item Price");
         DisplayHorizontalDots();
-        Console.WriteLine("0. Logout");
+        Console.WriteLine("0. Logout\n");
     }
     
     private void DisplayItems(Cart cart){
@@ -191,17 +237,8 @@ class Employee : Person{
                     break;
                 //  Check Item Price
                 case "2":
-                    
+                    CheckPrice();
                     break;
-                    //  Add Item
-                case "3":
-                    
-                    break;
-                    //  Check Item Price
-                case "4":
-                    
-                    break;
-
             }
 
 

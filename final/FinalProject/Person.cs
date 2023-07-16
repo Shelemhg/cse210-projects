@@ -1,6 +1,6 @@
 class Person
 {
-    protected int _id;
+    protected string _id;
     protected string _firstName;
     protected string _lastName;
     protected string _email;
@@ -11,7 +11,7 @@ class Person
     protected string _state;
     protected string _country;
 
-    public int ID { get { return _id; } private set { _id = value; } }
+    public string ID { get { return _id; } private set { _id = value; } }
 
     public string FirstName { get { return _firstName; } set { _firstName = value; } }
 
