@@ -46,14 +46,14 @@ class Program
             Console.Clear();
 
             //   LINE ONLY FOR TESTING
-            Console.WriteLine("\nTest users:  1001 & 1002\nPWD: 1234\n");
+            Console.WriteLine("\nTest employee #:  1001 & 1002\npassword: 1234\n");
             
             
             
             Console.WriteLine("- - - - - - - - - - - - - - - - - - -");
             Console.WriteLine(" - -          L O G I N           - -");
             Console.WriteLine("- - - - - - - - - - - - - - - - - - -\n");
-            Console.WriteLine("\nHit ENTER to quit or:\n");
+            Console.WriteLine("\nHit ENTER to Quit or:\n");
             Console.WriteLine("Enter employee Number:\n");
             employeeNumber = Console.ReadLine();
 
@@ -64,7 +64,7 @@ class Program
             Console.WriteLine("\nEnter password:\n");
             string password = GetMaskedInput();
 
-            Employee employee = NewLogin(employeeNumber, password);
+            Employee employee = NewLogin(employeeNumber.TrimEnd(), password);
 
             if(employee != null){
                 
