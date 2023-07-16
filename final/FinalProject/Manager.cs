@@ -97,10 +97,11 @@ class Manager : Employee {
         Console.ForegroundColor = ConsoleColor.Blue;
         Console.WriteLine($"{i++}. Add/Update Item");
         Console.WriteLine($"{i++}. Delete Item From Database");
+        Console.ForegroundColor = ConsoleColor.DarkGray;
         Console.WriteLine($"{i++}. Show Store Inventory");
-        Console.ResetColor();
+        
         DisplayHorizontalLine();
-        Console.ForegroundColor = ConsoleColor.Red;
+        // Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine($"{i++}. Add New Employee");
         Console.WriteLine($"{i++}. Show Employees' Info");
         Console.ResetColor();

@@ -82,9 +82,14 @@ class Employee : Person{
                     Product product = _dataBaseManager.SearchBarcode(barcode);
 
                     if(product != null){
-                        Console.WriteLine("\n" + product.ProductName + "  -  $" + product.Price);
+
+                        DisplayHorizontalLine();
+                        Console.WriteLine("\n" + product.ProductName + "  -  $" + product.Price + "\n");
+                        DisplayHorizontalLine();
                         Thread.Sleep(2000);
+
                     }else{
+
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("\nProduct NOT FOUND");
                         Console.ResetColor();
@@ -105,7 +110,7 @@ class Employee : Person{
     }
 
     private void CompleteTransaction(Store store, DateTime date, Cart cart){
-        
+        Console.Clear();
         PrintRecit(store, date, cart);
 
         foreach(var item in cart.Items){
@@ -114,7 +119,7 @@ class Employee : Person{
         }
 
         Console.WriteLine("Come back soon!");
-        Thread.Sleep(4000);
+        Thread.Sleep(5000);
     }
 
     protected void DisplayHorizontalLine(){
@@ -277,7 +282,10 @@ class Employee : Person{
     private void PrintRecit(Store store, DateTime date, Cart cart){
 
         DisplayHorizontalLine();
-        Console.WriteLine("- -      " + store.Name + "     - -");
+        Console.WriteLine("- -          R E C E I P T        - -");
+        Console.WriteLine("- - - - - - - - - - - - - - - - - - -");
+        Console.WriteLine("- -   C O R N E R    S T O R E    - -");
+        Console.WriteLine("- - - - - - - - - - - - - - - - - - -");
         Console.WriteLine(date);
         // Console.WriteLine(store.Address + " - " + store.PhoneNumber);
         // Console.WriteLine("ST# {store.ID} OP# {employee.ID} ");
