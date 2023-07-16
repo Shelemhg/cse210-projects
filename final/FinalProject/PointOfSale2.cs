@@ -106,70 +106,70 @@ class PointOfSale{
         DisplayHorizontalDots();
     }
 
-    public void LoadNewCart(){
+    // public void LoadNewCart(){
         
-        Cart cart = new Cart();
+    //     Cart cart = new Cart();
         
-        string input = null;
-        // Boolean itemFound;
-        int barcode = 0;
+    //     string input = null;
+    //     // Boolean itemFound;
+    //     int barcode = 0;
 
-        do{
-            Console.Clear();
-            DisplayHorizontalLine();
-            Console.WriteLine("- - -      L O A D    I T E M S       - - -");
-            DisplayHorizontalLine();
+    //     do{
+    //         Console.Clear();
+    //         DisplayHorizontalLine();
+    //         Console.WriteLine("- - -      L O A D    I T E M S       - - -");
+    //         DisplayHorizontalLine();
             
-            DisplayItems(cart);
-            DisplayTotal(cart);
+    //         DisplayItems(cart);
+    //         DisplayTotal(cart);
 
-            Console.WriteLine("\nPress \"0\" and hit ENTER to go to Checkout.");
-            Console.WriteLine("Press \"3\" to scan and DELETE an Item.");
-            Console.WriteLine("\nType Barcode:\n");
-            input = Console.ReadLine();
+    //         Console.WriteLine("\nPress \"0\" and hit ENTER to go to Checkout.");
+    //         Console.WriteLine("Press \"3\" to scan and DELETE an Item.");
+    //         Console.WriteLine("\nType Barcode:\n");
+    //         input = Console.ReadLine();
 
-            if(int.TryParse(input, out barcode)){
+    //         if(int.TryParse(input, out barcode)){
                                       
-                switch(input){
+    //             switch(input){
 
-                    case "0":
-                        Boolean result = Checkout(cart);
+    //                 case "0":
+    //                     Boolean result = Checkout(cart);
 
-                        if(result){
-                            return;
-                        }else{
-                            break;
-                        }                        
+    //                     if(result){
+    //                         return;
+    //                     }else{
+    //                         break;
+    //                     }                        
                     
-                    case "3":
-                        // DeleteItem(barcode);
-                        break;
+    //                 case "3":
+    //                     // DeleteItem(barcode);
+    //                     break;
                     
-                    default:
+    //                 default:
 
-                        try{
+    //                     try{
                             
-                            Product product = _dataBaseManager.SearchBarcode(barcode, cart);
+    //                         Product product = _dataBaseManager.SearchBarcode(barcode, cart);
 
-                            if(product != null){
-                                cart.AddItem(product);
-                            }else{
-                                Console.WriteLine("\nProduct NOT FOUND");
-                                Thread.Sleep(2000);
-                            }
-                            // itemFound = SearchBarcode(barcode, cart);
-                        }catch(Exception ex){
-                            HandleException(ex);
-                        }
+    //                         if(product != null){
+    //                             cart.AddItem(product);
+    //                         }else{
+    //                             Console.WriteLine("\nProduct NOT FOUND");
+    //                             Thread.Sleep(2000);
+    //                         }
+    //                         // itemFound = SearchBarcode(barcode, cart);
+    //                     }catch(Exception ex){
+    //                         HandleException(ex);
+    //                     }
 
-                        break;
+    //                     break;
 
-                }
-            }
+    //             }
+    //         }
             
 
-        }while(input != "");
-    }
+    //     }while(input != "");
+    // }
 
     private void DisplayBarcodeNotFoundMessage(){
         

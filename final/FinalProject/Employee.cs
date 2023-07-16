@@ -3,7 +3,7 @@ class Employee : Person{
     protected string _position;
     private List<Cart> _carts;
     private Store _store;
-    private DataBaseManager _dataBaseManager;
+    protected DataBaseManager _dataBaseManager;
 
     public string Position { get { return _position; }}
 
@@ -51,7 +51,7 @@ class Employee : Person{
         return false;
     }
 
-    private void CheckPrice(){
+    protected void CheckPrice(){
         
         Cart cart = new Cart();
         
@@ -72,7 +72,7 @@ class Employee : Person{
                                       
                 try{
                             
-                    Product product = _dataBaseManager.SearchBarcode(barcode, cart);
+                    Product product = _dataBaseManager.SearchBarcode(barcode);
 
                     if(product != null){
                         Console.WriteLine("\n" + product.ProductName + "  -  $" + product.Price);
@@ -154,7 +154,7 @@ class Employee : Person{
         DisplayHorizontalDots();
     }
 
-    private void LoadNewCart(){
+    protected void LoadNewCart(){
         
         Cart cart = new Cart();
         
@@ -197,7 +197,7 @@ class Employee : Person{
 
                         try{
                             
-                            Product product = _dataBaseManager.SearchBarcode(barcode, cart);
+                            Product product = _dataBaseManager.SearchBarcode(barcode);
 
                             if(product != null){
                                 cart.AddItem(product);
@@ -246,6 +246,7 @@ class Employee : Person{
 
         Console.Clear();
     }
+    
     private void DisplayBarcodeNotFoundMessage(){
         
         Console.WriteLine("Barcode not found.");

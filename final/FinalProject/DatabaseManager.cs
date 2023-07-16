@@ -6,26 +6,96 @@ class DataBaseManager{
 
     private const string connectionString = "Data Source=posdb.db";
 
+    public void AddProductToDatabase(Product product){
+
+        using (var connection = CreateDatabaseConnection()){
+
+            connection.Open();
+            int rowsAffected;
+
+            using (var command = connection.CreateCommand()){
+
+                command.CommandText = "INSERT INTO product (barcode, category_id, product_name, product_description, price, stock, brand, created_at, modified_at) " +
+                                    "VALUES (@Barcode, @CategoryId, @ProductName, @ProductDescription, @Price, @Stock, @Brand, @CreatedAt, @ModifiedAt)";
+                
+                command.Parameters.AddWithValue("@Barcode", product.Barcode);
+                command.Parameters.AddWithValue("@CategoryId", product.CategoryId);
+                command.Parameters.AddWithValue("@ProductName", product.ProductName);
+                command.Parameters.AddWithValue("@ProductDescription", product.ProductDescription);
+                // command.Parameters.AddWithValue("@Price", product.Price);
+                command.Parameters.AddWithValue("@Price", product.Price.ToString("F2"));
+                // command.Parameters.AddWithValue("@price", String.Format("{0:F2}", product.Price));
+
+                command.Parameters.AddWithValue("@Stock", product.Stock);
+                command.Parameters.AddWithValue("@Brand", product.Brand);
+                command.Parameters.AddWithValue("@CreatedAt", product.CreatedAt);
+                command.Parameters.AddWithValue("@ModifiedAt", product.ModifiedAt);
+
+                rowsAffected = command.ExecuteNonQuery();
+            }
+
+            connection.Close();
+
+            if (rowsAffected == 1){
+
+                Console.WriteLine("Product ADDED to the Database SUCCESSFULLY.");
+                Thread.Sleep(3000);
+                
+            }else{
+
+                Console.WriteLine("FAILED to add the product to the database.");
+                Thread.Sleep(3000);
+            }
+        }
+    }
+
     private Product CreateProductFromReader(SQLiteDataReader reader){
         
-        int barcode = reader.GetInt32(1);
-        int categoryId = reader.GetInt32(2);
-        string productName = reader.GetString(3);
-        string productDescription = reader.GetString(4);
-        float price = reader.GetFloat(5);
-        int stock = reader.GetInt32(6);
-        string brand = reader.GetString(7);
-        DateTime createdAt = reader.GetDateTime(8);
-        DateTime modifiedAt = reader.GetDateTime(9);
+        int barcode = (int)reader["barcode"];
+        int categoryId = (int)reader["category_id"];
+        string productName = (string)reader["product_name"];
+        string productDescription = (string)reader["product_description"];
+        // float price = (float)reader["price"];
+        string priceAsString = (string)reader["price"];
+        float price = float.Parse(priceAsString);
+        int stock = (int)reader["stock"];
+        string brand = (string)reader["brand"];
+        DateTime createdAt = (DateTime)reader["created_at"];
+        DateTime modifiedAt = (DateTime)reader["modified_at"];
 
         Product product = new Product(barcode, categoryId, productName, productDescription, price, stock, brand, createdAt, modifiedAt);
         return product;
     }
 
-    
     public SQLiteConnection CreateDatabaseConnection(){
 
         return new SQLiteConnection(connectionString);
+    }
+
+    public void DeleteProductFromDatabase(int barcode){
+
+        using (var connection = CreateDatabaseConnection()){
+
+            connection.Open();
+
+            using (var command = connection.CreateCommand()){
+
+                command.CommandText = "DELETE FROM product WHERE barcode = @Barcode";
+                command.Parameters.AddWithValue("@Barcode", barcode);
+
+                int rowsAffected = command.ExecuteNonQuery();
+
+                if (rowsAffected == 1){
+
+                    Console.WriteLine("Product DELETED successfully.");
+                }else{
+
+                    Console.WriteLine($"Product {barcode} NOT FOUND.");
+                }
+            }
+
+            connection.Close();
+        }
     }
 
     static string GetHashedPassword(string password)
@@ -124,31 +194,32 @@ class DataBaseManager{
    public void UpdateProductStock(int barcode, int stockDifference){
 
         using (var connection = CreateDatabaseConnection()){
-            
             connection.Open();
 
             using (var command = connection.CreateCommand()){
 
-                command.CommandText = "UPDATE product SET stock = stock + @StockDifference WHERE barcode = @Barcode";
+                command.CommandText = "UPDATE product SET stock = stock + @StockDifference, modified_at = @ModifiedAt WHERE barcode = @Barcode";
                 command.Parameters.AddWithValue("@StockDifference", stockDifference);
+                command.Parameters.AddWithValue("@ModifiedAt", DateTime.Now); // Set the modified date to the current date
                 command.Parameters.AddWithValue("@Barcode", barcode);
 
                 int rowsAffected = command.ExecuteNonQuery();
+
                 if (rowsAffected == 1){
-                    
-                    Console.WriteLine("Stock UPDATED successfully.");
+
+                    Console.WriteLine("Stock and Modified Date UPDATED successfully.");
+
                 }else{
-                    
+
                     Console.WriteLine("Stock update FAILED. Item not found.");
                 }
             }
 
             connection.Close();
         }
-        
     }
 
-    public Product SearchBarcode(int barcode, Cart cart){
+    public Product SearchBarcode(int barcode){
 
         using (var connection = CreateDatabaseConnection()){
 
