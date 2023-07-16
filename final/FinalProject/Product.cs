@@ -1,12 +1,12 @@
 public class Product{
 
     private int _productId;
-    private int _barcode;
-    private int _categoryId;
+    private long _barcode;
+    private long _categoryId;
     private string _productName;
     private string _productDescription;
     private float _price;
-    private int _stockQuantity;
+    private long _stockQuantity;
     private string _brand;
     private DateTime _createdAt;
     private DateTime _modifiedAt;
@@ -16,7 +16,7 @@ public class Product{
         
     }
 
-    public Product(int barcode, int categoryId, string productName, string productDescription, float price, int stockQuantity, string brand, DateTime createdAt, DateTime modifiedAt){
+    public Product(long barcode, long categoryId, string productName, string productDescription, float price, long stockQuantity, string brand, DateTime createdAt, DateTime modifiedAt){
 
         _barcode = barcode;
         _categoryId = categoryId;
@@ -29,9 +29,9 @@ public class Product{
         _modifiedAt = modifiedAt;
     }
 
-    public int Barcode { get { return _barcode; } private set { _barcode = value; } }
+    public long Barcode { get { return _barcode; } private set { _barcode = value; } }
 
-    public int CategoryId { get { return _categoryId; } private set { _categoryId = value; } }
+    public long CategoryId { get { return _categoryId; } private set { _categoryId = value; } }
 
     public DateTime CreatedAt { get { return _createdAt; } private set { _createdAt = value; } }
 
@@ -47,7 +47,7 @@ public class Product{
 
     public int ProductId { get { return _productId; } private set { _productId = value; } }
 
-    public int Stock { get { return _stockQuantity; } private set { _stockQuantity = value; } }
+    public long Stock { get { return _stockQuantity; } private set { _stockQuantity = value; } }
 
 
 }

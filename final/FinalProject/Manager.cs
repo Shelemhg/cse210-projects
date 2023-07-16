@@ -108,16 +108,20 @@ class Manager : Employee {
 
     private void DisplayProductInfo(Product product){
 
-        Console.WriteLine($"Barcode: {product.Barcode}");
-        Console.WriteLine($"Category ID: {product.CategoryId}");
-        Console.WriteLine($"Product Name: {product.ProductName}");
-        Console.WriteLine($"Description: {product.ProductDescription}");
-        Console.WriteLine($"Price: {product.Price:C2}");
-        Console.WriteLine($"Stock: {product.Stock}");
-        Console.WriteLine($"Brand: {product.Brand}");
-        Console.WriteLine($"Created At: {product.CreatedAt}");
-        Console.WriteLine($"Modified At: {product.ModifiedAt}");
+        Console.WriteLine("Product Information:");
+        DisplayHorizontalLine();
 
+        Console.WriteLine($"Barcode: {product.Barcode,-15} | Category ID: {product.CategoryId,-15} | Product Name: {product.ProductName}");
+        DisplayHorizontalDots();
+
+        Console.WriteLine($"Description: {product.ProductDescription}");
+        DisplayHorizontalDots();
+
+        Console.WriteLine($"Price: {product.Price:C2,-15} | Stock: {product.Stock,-15} | Brand: {product.Brand}");
+        DisplayHorizontalDots();
+
+        Console.WriteLine($"Created At: {product.CreatedAt,-15} | Modified At: {product.ModifiedAt,-15}");
+        DisplayHorizontalDots();
     }
     
     private bool DeleteItem(){

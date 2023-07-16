@@ -51,19 +51,23 @@ class DataBaseManager{
 
     private Product CreateProductFromReader(SQLiteDataReader reader){
         
-        int barcode = (int)reader["barcode"];
-        int categoryId = (int)reader["category_id"];
+        long barcode = (long)reader["barcode"];
+        long categoryId = (long)reader["category_id"];
         string productName = (string)reader["product_name"];
         string productDescription = (string)reader["product_description"];
         // float price = (float)reader["price"];
-        string priceAsString = (string)reader["price"];
-        float price = float.Parse(priceAsString);
-        int stock = (int)reader["stock"];
+        // string priceAsString = (string)reader["price"];
+        // float price = float.Parse(priceAsString);
+        decimal price = (decimal)reader["price"];
+        long stock = (long)reader["stock"];
         string brand = (string)reader["brand"];
-        DateTime createdAt = (DateTime)reader["created_at"];
-        DateTime modifiedAt = (DateTime)reader["modified_at"];
+        
+        string createdAtString = (string)reader["created_at"];
+        DateTime createdAt = DateTime.Parse(createdAtString);
+        string modifiedAtString = (string)reader["modified_at"];
+        DateTime modifiedAt = DateTime.Parse(modifiedAtString);
 
-        Product product = new Product(barcode, categoryId, productName, productDescription, price, stock, brand, createdAt, modifiedAt);
+        Product product = new Product(barcode, categoryId, productName, productDescription, (float)price, stock, brand, createdAt, modifiedAt);
         return product;
     }
 
@@ -191,7 +195,7 @@ class DataBaseManager{
         }
     }
 
-   public void UpdateProductStock(int barcode, int stockDifference){
+   public void UpdateProductStock(long barcode, int stockDifference){
 
         using (var connection = CreateDatabaseConnection()){
             connection.Open();
