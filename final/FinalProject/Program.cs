@@ -114,8 +114,6 @@ class Program
         
             Employee employee = dataBaseManager.IsLoginValid(employeeNumber, password);
             
-
-        // return null;
         return employee;
     }
 }

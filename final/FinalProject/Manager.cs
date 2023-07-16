@@ -12,12 +12,14 @@ class Manager : Employee {
         _state = state;
         _country = country;
         _position = position;
+        _dataBaseManager = new DataBaseManager();
     }
 
     private Boolean AddNewItem(){
 
         string input = "";
         int barcode;
+
         do{
             Console.Clear();
             DisplayHorizontalLine();
@@ -59,10 +61,11 @@ class Manager : Employee {
                         Console.Clear();
                         DisplayProductInfo(product);
                         DisplayHorizontalLine();
-                        Console.WriteLine("How many NEW ITEMS should be added to STOCK?\n");
+                        Console.WriteLine("\nHow many NEW ITEMS should be added to STOCK?\n");
                         inputNewStock = Console.ReadLine(); 
                         
                         if(int.TryParse(inputNewStock, out newStock)){
+                            
                             _dataBaseManager.UpdateProductStock(product.Barcode, newStock);
                             Console.Clear();
                             product = _dataBaseManager.SearchBarcode(barcode);
@@ -72,6 +75,7 @@ class Manager : Employee {
                             Thread.Sleep(4000);
                             break;
                         }
+
                     }while(input != "");
                 }
             }
@@ -91,6 +95,7 @@ class Manager : Employee {
         Console.WriteLine($"        {FirstName} {LastName} - {Position}");
         Console.ResetColor();
         DisplayHorizontalLine();
+
         Console.WriteLine($"{i++}. New Cart");
         Console.WriteLine($"{i++}. Check Item Price");
         DisplayHorizontalLine();
@@ -114,17 +119,25 @@ class Manager : Employee {
         Console.WriteLine("Product Information:");
         DisplayHorizontalLine();
 
-        Console.WriteLine($"Barcode: {product.Barcode,-15} | Category ID: {product.CategoryId,-15} | Product Name: {product.ProductName}");
+        Console.WriteLine($"Barcode: {product.Barcode,-10} | Category ID: {product.CategoryId,-10}");
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine($"\nProduct: {product.ProductName}");
+        Console.ResetColor();
         DisplayHorizontalDots();
 
-        Console.WriteLine($"Description: {product.ProductDescription}");
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.WriteLine($"Description:\n{product.ProductDescription}");
+        Console.WriteLine($"\nBrand: {product.Brand}");
+        Console.ResetColor();
         DisplayHorizontalDots();
 
-        Console.WriteLine($"Price: {product.Price:C2,-15} | Stock: {product.Stock,-15} | Brand: {product.Brand}");
-        DisplayHorizontalDots();
+        Console.WriteLine($"Price: {product.Price,-10:C2} |     Stock: {product.Stock,-10}");
 
-        Console.WriteLine($"Created At: {product.CreatedAt,-15} | Modified At: {product.ModifiedAt,-15}");
         DisplayHorizontalDots();
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.WriteLine($"Created At: {product.CreatedAt,-15}");
+        Console.WriteLine($"Modified At: {product.ModifiedAt,-15}");
+        Console.ResetColor();
     }
     
     private bool DeleteItem(){
@@ -153,10 +166,13 @@ class Manager : Employee {
                     input = Console.ReadLine();
 
                     if (input == "y"){
+
                         _dataBaseManager.DeleteProductFromDatabase(barcode);
                         return true;
                     }
+
                 }else{
+
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine($"\nItem with barcode {barcode} NOT FOUND\n");
@@ -165,7 +181,7 @@ class Manager : Employee {
                 }
             }
 
-        } while (input != "" && input != "n");
+        }while (input != "" && input != "n");
 
         return false;
     }
@@ -229,7 +245,7 @@ class Manager : Employee {
                 case "2":
                     CheckPrice();
                     break;
-                //  Check Item Price
+                //  Add/Update Item
                 case "3":
                     AddNewItem();
                     break;
@@ -239,17 +255,17 @@ class Manager : Employee {
                     break;
                 //  Show Inventory
                 case "5":
-                    Console.WriteLine("Still under construction. *Nervous laugh.");
+                    Console.WriteLine("Under construction. *Nervous laugh.");
                     Thread.Sleep(3000);
                     break;
                 //  Add New Employee
                 case "6":
-                    Console.WriteLine("Still under construction. *Nervous laugh.");
+                    Console.WriteLine("Under construction. *Nervous laugh.");
                     Thread.Sleep(3000);
                     break;
                 //  Show employees' Info
                 case "7":
-                    Console.WriteLine("Still under construction. *Nervous laugh.");
+                    Console.WriteLine("Under construction. *Nervous laugh.");
                     Thread.Sleep(3000);
                     break;
             }
@@ -267,7 +283,6 @@ class Manager : Employee {
         Console.WriteLine("Enter the details for the new product:");
         DisplayHorizontalLine();
 
-        // int barcode = GetValidNumberInput("\nBarcode:\n");
         int categoryId = GetValidNumberInput("Category ID:\n");
         
         Console.Write("Product Name:\n");
@@ -281,14 +296,11 @@ class Manager : Employee {
 
         Console.Write("Brand:\n");
         string brand = Console.ReadLine();
-
         
         DateTime createdAt = DateTime.Now;
         DateTime modifiedAt = DateTime.Now;
 
         Product newProduct = new Product(barcode, categoryId, productName, productDescription, price, stock, brand, createdAt, modifiedAt);
-
-        
 
         return newProduct;
     }

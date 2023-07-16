@@ -12,10 +12,6 @@ public class Product{
     private DateTime _modifiedAt;
 
 
-    public Product(){
-        
-    }
-
     public Product(long barcode, long categoryId, string productName, string productDescription, float price, long stockQuantity, string brand, DateTime createdAt, DateTime modifiedAt){
 
         _barcode = barcode;
@@ -48,6 +44,4 @@ public class Product{
     public int ProductId { get { return _productId; } private set { _productId = value; } }
 
     public long Stock { get { return _stockQuantity; } private set { _stockQuantity = value; } }
-
-
 }

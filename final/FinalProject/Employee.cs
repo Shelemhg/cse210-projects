@@ -3,63 +3,17 @@ class Employee : Person{
     protected string _position;
     private List<Cart> _carts;
     private Store _store;
-    protected DataBaseManager _dataBaseManager;
+    public DataBaseManager _dataBaseManager;
 
     public string Position { get { return _position; }}
+   
 
-    public Employee(){
-
-        _carts = new List<Cart>();
-        _store = new Store();
-        _dataBaseManager = new DataBaseManager();
-
-    }
-    
-    private Boolean Checkout(Cart cart){
-        
-        string inputCheckout = "";
-        float payment;
-
-        do{
-            Console.Clear();
-            DisplayHorizontalLine();
-            Console.WriteLine("- -        C H E C K O U T        - -");
-            DisplayHorizontalLine();
-            DisplayItems(cart);
-            DisplayHorizontalLine();
-            DisplayTotal(cart);
-
-            Console.WriteLine("Enter Money received:\n");
-            inputCheckout = Console.ReadLine();
-
-            if(float.TryParse(inputCheckout, out payment)){
-
-                if(cart.TotalCost <= payment){
-                    DateTime currentDateTime = DateTime.Now;
-                    double result = payment - cart.TotalCost;
-                    double change = Math.Round(result,2);
-                    Console.WriteLine($"\nCHANGE: {change}\n");
-                    CompleteTransaction(_store, currentDateTime, cart);
-                    return true;
-                }else{
-
-                    Console.WriteLine("Insufficent amount. Please try again.");
-                    Thread.Sleep(2000);
-                }
-            }
-
-
-        }while(inputCheckout != "");
-
-        return false;
-    }
 
     protected void CheckPrice(){
         
         Cart cart = new Cart();
         
         string input = null;
-        // Boolean itemFound;
         int barcode = 0;
 
         do{
@@ -98,28 +52,16 @@ class Employee : Person{
                 }catch(Exception ex){
                     HandleException(ex);
                 }
+
             }else{
+
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("\nProduct NOT FOUND");
                 Console.ResetColor();
                 Thread.Sleep(2000);
             }
-            
 
         }while(input != "");
-    }
-
-    private void CompleteTransaction(Store store, DateTime date, Cart cart){
-        Console.Clear();
-        PrintRecit(store, date, cart);
-
-        foreach(var item in cart.Items){
-
-            _dataBaseManager.UpdateProductStock(item.Barcode, -1);
-        }
-
-        Console.WriteLine("Come back soon!");
-        Thread.Sleep(5000);
     }
 
     protected void DisplayHorizontalLine(){
@@ -147,31 +89,11 @@ class Employee : Person{
         Console.WriteLine("0. Logout\n");
     }
     
-    private void DisplayItems(Cart cart){
-        
-        int i = 1;
-
-        foreach(Product item in cart.Items){
-
-            Console.WriteLine(i + ". " + item.ProductName + "  -  $" + item.Price);
-            i++;
-        }
-
-    }
-
-    private void DisplayTotal(Cart cart){
-
-        DisplayHorizontalDots();
-        Console.WriteLine("TOTAL: $" + cart.TotalCost);
-        DisplayHorizontalDots();
-    }
-
     protected void LoadNewCart(){
         
         Cart cart = new Cart();
         
         string input = null;
-        // Boolean itemFound;
         int barcode = 0;
 
         while(true){
@@ -182,8 +104,10 @@ class Employee : Person{
             Console.WriteLine("- - -    L O A D    I T E M S     - - -");
             DisplayHorizontalLine();
             
-            DisplayItems(cart);
-            DisplayTotal(cart);
+            cart.DisplayItems();
+            DisplayHorizontalDots();
+            cart.DisplayTotal();
+            DisplayHorizontalDots();
 
             Console.WriteLine("\nPress \"0\" and hit ENTER to go to Checkout.");
             // Console.WriteLine("Press \"3\" to scan and DELETE an Item.");
@@ -195,10 +119,19 @@ class Employee : Person{
                 switch(input){
 
                     case "0":
-                        Boolean result = Checkout(cart);
+                        Boolean result = cart.Checkout();
 
                         if(result){
+
+                            foreach(var item in cart.Items){
+
+                                _dataBaseManager.UpdateProductStock(item.Barcode, -1);
+                            }
+
+                            Console.WriteLine("\nCome back soon!");
+                            Thread.Sleep(5000);
                             return;
+
                         }else{
                             break;
                         }                        
@@ -214,12 +147,15 @@ class Employee : Person{
                             Product product = _dataBaseManager.SearchBarcode(barcode);
 
                             if(product != null){
+
                                 cart.AddItem(product);
+                            
                             }else{
+
                                 Console.WriteLine("\nProduct NOT FOUND");
                                 Thread.Sleep(2000);
                             }
-                            // itemFound = SearchBarcode(barcode, cart);
+
                         }catch(Exception ex){
                             HandleException(ex);
                         }
@@ -279,20 +215,5 @@ class Employee : Person{
     }
 
     // private void PrintRecit(Store store, Terminal terminal, DateTime date, Person employee, Cart cart){
-    private void PrintRecit(Store store, DateTime date, Cart cart){
-
-        DisplayHorizontalLine();
-        Console.WriteLine("- -          R E C E I P T        - -");
-        Console.WriteLine("- - - - - - - - - - - - - - - - - - -");
-        Console.WriteLine("- -   C O R N E R    S T O R E    - -");
-        Console.WriteLine("- - - - - - - - - - - - - - - - - - -");
-        Console.WriteLine(date);
-        // Console.WriteLine(store.Address + " - " + store.PhoneNumber);
-        // Console.WriteLine("ST# {store.ID} OP# {employee.ID} ");
-        DisplayHorizontalLine();
-        DisplayTotal(cart);
-
-
-    }
 
 }

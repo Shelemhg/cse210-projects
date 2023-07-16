@@ -61,7 +61,7 @@ class DataBaseManager{
         decimal price = (decimal)reader["price"];
         long stock = (long)reader["stock"];
         string brand = (string)reader["brand"];
-        
+
         string createdAtString = (string)reader["created_at"];
         DateTime createdAt = DateTime.Parse(createdAtString);
         string modifiedAtString = (string)reader["modified_at"];
@@ -92,6 +92,7 @@ class DataBaseManager{
                 if (rowsAffected == 1){
 
                     Console.WriteLine("Product DELETED successfully.");
+                
                 }else{
 
                     Console.WriteLine($"Product {barcode} NOT FOUND.");
@@ -102,17 +103,18 @@ class DataBaseManager{
         }
     }
 
-    static string GetHashedPassword(string password)
-    {
-        // Use a strong hashing algorithm like BCrypt or SHA256
-        using (SHA256 sha256 = SHA256.Create())
-        {
+    static string GetHashedPassword(string password){
+
+        using (SHA256 sha256 = SHA256.Create()){
+
             byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
             StringBuilder builder = new StringBuilder();
-            foreach (byte b in bytes)
-            {
+
+            foreach (byte b in bytes){
+
                 builder.Append(b.ToString("x2"));
             }
+
             return builder.ToString();
         }
     }
@@ -123,8 +125,6 @@ class DataBaseManager{
     }
 
     public Employee IsLoginValid(string employeeNumber, string password){
-        
-        // string hashedPassword = GetHashedPassword(password);
         
         using (var connection = CreateDatabaseConnection()){
 
@@ -157,9 +157,10 @@ class DataBaseManager{
                         if (storedHash == hashedPassword){
 
                             if (position == "CASHIER"){
+
                                 return new Cashier(id, firstName, lastName, email, phoneNumber, address, zipCode, city, state, country, position);
-                            }
-                            else if (position == "MANAGER"){
+
+                            }else if (position == "MANAGER"){
 
                                 return new Manager(id, firstName, lastName, email, phoneNumber, address, zipCode, city, state, country, position);
                             }
@@ -168,10 +169,7 @@ class DataBaseManager{
                 }
             }
 
-            
-
             connection.Close();
-
         }
         return null;
     }
@@ -186,8 +184,8 @@ class DataBaseManager{
             using (var reader = command.ExecuteReader()){
 
                 if (reader.Read()){
+
                     return CreateProductFromReader(reader);
-                    // return reader;
                 }
 
                 return null;
@@ -204,19 +202,19 @@ class DataBaseManager{
 
                 command.CommandText = "UPDATE product SET stock = stock + @StockDifference, modified_at = @ModifiedAt WHERE barcode = @Barcode";
                 command.Parameters.AddWithValue("@StockDifference", stockDifference);
-                command.Parameters.AddWithValue("@ModifiedAt", DateTime.Now); // Set the modified date to the current date
+                command.Parameters.AddWithValue("@ModifiedAt", DateTime.Now);
                 command.Parameters.AddWithValue("@Barcode", barcode);
 
                 int rowsAffected = command.ExecuteNonQuery();
 
-                if (rowsAffected == 1){
+                // if (rowsAffected == 1){
 
-                    Console.WriteLine("Stock and Modified Date UPDATED successfully.");
+                //     Console.WriteLine("Stock and Modified Date UPDATED successfully.");
 
-                }else{
+                // }else{
 
-                    Console.WriteLine("Stock update FAILED. Item not found.");
-                }
+                //     Console.WriteLine("Stock update FAILED. Item not found.");
+                // }
             }
 
             connection.Close();
