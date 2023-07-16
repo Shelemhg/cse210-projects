@@ -1,4 +1,4 @@
-class Product{
+public class Product{
 
     private int _productId;
     private int _barcode;

@@ -1,4 +1,4 @@
-class Cart{
+public class Cart{
 
     private List<Product> _items;
     private int _numberOfItems;
@@ -21,11 +21,13 @@ class Cart{
 
     public Cart(){
         _items = new List<Product>();
+        _totalCost = 0;
     }
 
 
     public void AddItem(Product product){
         _items.Add(product);
+        _totalCost += product.Price;
     }
 
     public void RemoveItem(){}

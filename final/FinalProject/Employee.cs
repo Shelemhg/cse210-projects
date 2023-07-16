@@ -1,12 +1,15 @@
 using System.Data.SQLite;
 
-class PointOfSale{
+class Employee : Person{
 
+    protected string _position;
     private List<Cart> _carts;
     private Store _store;
     private DataBaseManager _dataBaseManager;
 
-    public PointOfSale(){
+    public string Position { get { return _position; }}
+
+    public Employee(){
 
         _carts = new List<Cart>();
         _store = new Store();
@@ -14,7 +17,7 @@ class PointOfSale{
 
     }
     
-    public Boolean Checkout(Cart cart){
+    private Boolean Checkout(Cart cart){
         
         string inputCheckout = "";
         float payment;
@@ -63,31 +66,30 @@ class PointOfSale{
         Thread.Sleep(2000);
     }
 
-    public void DisplayHorizontalLine(){
+    protected void DisplayHorizontalLine(){
         
         Console.WriteLine("- - - - - - - - - - - - - - - - - - -");
     }
 
-    private void DisplayHorizontalDots(){
+    protected void DisplayHorizontalDots(){
         
         Console.WriteLine(". . . . . . . . . . . . . . . . . . .");
     }
 
-    public void DisplayMenu(){
+    public virtual void DisplayMenu(){
 
         DisplayHorizontalLine();
         Console.WriteLine("- -   P O I N T   O F   S A L E   - -");
         DisplayHorizontalLine();
+        Console.WriteLine($"{FirstName} {LastName} - {Position}");
+        DisplayHorizontalLine();
         Console.WriteLine("1. New Cart");
         Console.WriteLine("2. Check Item Price");
-        Console.WriteLine("2. Check Item Price");
-        
         DisplayHorizontalDots();
-        DisplayHorizontalDots();
-        Console.WriteLine("0. Exit");
+        Console.WriteLine("0. Logout");
     }
     
-    public void DisplayItems(Cart cart){
+    private void DisplayItems(Cart cart){
         
         int i = 1;
 
@@ -99,14 +101,14 @@ class PointOfSale{
 
     }
 
-    public void DisplayTotal(Cart cart){
+    private void DisplayTotal(Cart cart){
 
         DisplayHorizontalDots();
         Console.WriteLine("TOTAL: $" + cart.TotalCost);
         DisplayHorizontalDots();
     }
 
-    public void LoadNewCart(){
+    private void LoadNewCart(){
         
         Cart cart = new Cart();
         
@@ -171,6 +173,42 @@ class PointOfSale{
         }while(input != "");
     }
 
+    public virtual void LoadPointOfSale(){
+        
+        string menuChoice = null;
+
+        do{
+            Console.Clear();
+            DisplayMenu();
+            Console.WriteLine("Select one option and hit ENTER:\n");
+            menuChoice = Console.ReadLine();
+
+            switch(menuChoice){
+
+                //  New Cart
+                case "1":
+                    LoadNewCart();
+                    break;
+                //  Check Item Price
+                case "2":
+                    
+                    break;
+                    //  Add Item
+                case "3":
+                    
+                    break;
+                    //  Check Item Price
+                case "4":
+                    
+                    break;
+
+            }
+
+
+        }while(menuChoice != "0");
+
+        Console.Clear();
+    }
     private void DisplayBarcodeNotFoundMessage(){
         
         Console.WriteLine("Barcode not found.");
@@ -201,7 +239,5 @@ class PointOfSale{
 
 
     }
-
-
 
 }
