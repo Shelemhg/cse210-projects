@@ -7,6 +7,28 @@ own options, but the program running on Employee doesn't know nor
 makes any differentiation, but each class has it's own unique way
 of dealing with different situations, starting by DisplayMenu() and LoadPointOfSale()!
 
+
+
+PROGRAM DESCRIPTION:
+
+Efficient Point of Sale for small and medium stores, made in about week and a half.
+The idea was to propose a simple but powerfull POS that could 
+potentially run in a very small computer, maybe Arduinos or other small and cheap computers but without compromising characteristics
+so SQLite was chosen by its light weight, high performance,
+cross-platform and self-contained characteristics, avoiding the need of having a SQL instance running
+all the time and consuming system resources, being able to store up to
+140 TB of information on a single database.
+
+
+PROGRAM CHARACTERISTICS
+
+- Full CRUD operations from C# POS to SQLite DB
+- Hashed passwords for all employees. (Salt will be added in v1.2)
+- Different Menu options between Cashiers and Managers through polymorphism
+- Coded with love :)
+
+S.H. July 16, 2023
+
 */
 
 
