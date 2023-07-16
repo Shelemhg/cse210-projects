@@ -1,6 +1,7 @@
 class Manager : Employee {
     
     public Manager(string id, string firstName, string lastName, string email, string phoneNumber, string address, string zipCode, string city, string state, string country, string position){
+        
         _id = id;
         _firstName = firstName;
         _lastName = lastName;
@@ -44,9 +45,9 @@ class Manager : Employee {
 
                         if(input == "y"){
 
-                            Product newProduct = PromptNewProductDetails(barcode);
-                            
+                            Product newProduct = PromptNewProductDetails(barcode);                            
                             _dataBaseManager.AddProductToDatabase(newProduct);
+                            
                             break;
                         }
 
@@ -74,6 +75,7 @@ class Manager : Employee {
                             Console.WriteLine($"\n{inputNewStock} Items added to the stock of {product.Barcode}\n");
                             Console.WriteLine("\n Press ENTER to continue.");
                             Console.ReadLine();
+
                             break;
                         }
 
