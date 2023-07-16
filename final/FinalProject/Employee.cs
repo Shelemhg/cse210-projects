@@ -36,6 +36,9 @@ class Employee : Person{
 
                 if(cart.TotalCost <= payment){
                     DateTime currentDateTime = DateTime.Now;
+                    double result = payment - cart.TotalCost;
+                    double change = Math.Round(result,2);
+                    Console.WriteLine($"\nCHANGE: {change}\n");
                     CompleteTransaction(_store, currentDateTime, cart);
                     return true;
                 }else{
@@ -65,8 +68,12 @@ class Employee : Person{
             Console.WriteLine("- - -   C H E C K    P R I C E   - - -");
             DisplayHorizontalLine();
 
-            Console.WriteLine("\nType Barcode:\n");
+            Console.WriteLine("\nType Barcode or Hit ENTER to return:\n");
             input = Console.ReadLine();
+            
+            if(input == ""){
+                break;
+            }
 
             if(int.TryParse(input, out barcode)){
                                       
@@ -76,7 +83,7 @@ class Employee : Person{
 
                     if(product != null){
                         Console.WriteLine("\n" + product.ProductName + "  -  $" + product.Price);
-                        Thread.Sleep(4000);
+                        Thread.Sleep(2000);
                     }else{
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("\nProduct NOT FOUND");
@@ -105,9 +112,9 @@ class Employee : Person{
 
             _dataBaseManager.UpdateProductStock(item.Barcode, -1);
         }
-        Console.Clear();
+
         Console.WriteLine("Come back soon!");
-        Thread.Sleep(2000);
+        Thread.Sleep(4000);
     }
 
     protected void DisplayHorizontalLine(){
@@ -162,17 +169,19 @@ class Employee : Person{
         // Boolean itemFound;
         int barcode = 0;
 
-        do{
+        while(true){
+
             Console.Clear();
+            Console.WriteLine("Items go from barcode: 1000-1012\n");
             DisplayHorizontalLine();
-            Console.WriteLine("- - -      L O A D    I T E M S       - - -");
+            Console.WriteLine("- - -    L O A D    I T E M S     - - -");
             DisplayHorizontalLine();
             
             DisplayItems(cart);
             DisplayTotal(cart);
 
             Console.WriteLine("\nPress \"0\" and hit ENTER to go to Checkout.");
-            Console.WriteLine("Press \"3\" to scan and DELETE an Item.");
+            // Console.WriteLine("Press \"3\" to scan and DELETE an Item.");
             Console.WriteLine("\nType Barcode:\n");
             input = Console.ReadLine();
 
@@ -216,7 +225,7 @@ class Employee : Person{
             }
             
 
-        }while(input != "");
+        }
     }
 
     public virtual void LoadPointOfSale(){

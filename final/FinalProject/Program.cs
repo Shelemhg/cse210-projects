@@ -1,3 +1,17 @@
+/*
+Just as a note, the polymorphism here is found in answering the quesiton: Who's login in? is it a regular Casheer or a Manager?
+
+Well... it doesn't matter! as the program will continue the loop 
+BUT!! each different employee type will see and have access to their
+own options, but the program running on Employee doesn't know nor
+makes any differentiation, but each class has it's own unique way
+of dealing with different situations, starting by DisplayMenu() and LoadPointOfSale()!
+
+*/
+
+
+
+
 class Program
 {
     static void Main(string[] args)

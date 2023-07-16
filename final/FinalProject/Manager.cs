@@ -83,6 +83,7 @@ class Manager : Employee {
 
     public override void DisplayMenu(){
         
+        int i = 1;
         DisplayHorizontalLine();
         Console.WriteLine("- -   P O I N T   O F   S A L E   - -");
         DisplayHorizontalLine();
@@ -90,17 +91,18 @@ class Manager : Employee {
         Console.WriteLine($"        {FirstName} {LastName} - {Position}");
         Console.ResetColor();
         DisplayHorizontalLine();
-        Console.WriteLine("1. New Cart");
-        Console.WriteLine("2. Check Item Price");
+        Console.WriteLine($"{i++}. New Cart");
+        Console.WriteLine($"{i++}. Check Item Price");
         DisplayHorizontalLine();
         Console.ForegroundColor = ConsoleColor.Blue;
-        Console.WriteLine("3. Add New Item");
-        Console.WriteLine("4. Show Store Inventory");
+        Console.WriteLine($"{i++}. Add/Update Item");
+        Console.WriteLine($"{i++}. Delete Item From Database");
+        Console.WriteLine($"{i++}. Show Store Inventory");
         Console.ResetColor();
         DisplayHorizontalLine();
         Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("5. Add New Employee");
-        Console.WriteLine("6. Show Employees' Info");
+        Console.WriteLine($"{i++}. Add New Employee");
+        Console.WriteLine($"{i++}. Show Employees' Info");
         Console.ResetColor();
         DisplayHorizontalDots();
         Console.WriteLine("0. Logout\n");
@@ -230,17 +232,24 @@ class Manager : Employee {
                 case "3":
                     AddNewItem();
                     break;
-                //  Check Item Price
+                //  Delete Item
                 case "4":
-                    // CheckPrice();
+                    DeleteItem();
                     break;
-                //  Check Item Price
+                //  Show Inventory
                 case "5":
-                    // CheckPrice();
+                    Console.WriteLine("Still under construction. *Nervous laugh.");
+                    Thread.Sleep(3000);
                     break;
-                //  Check Item Price
+                //  Add New Employee
                 case "6":
-                    // CheckPrice();
+                    Console.WriteLine("Still under construction. *Nervous laugh.");
+                    Thread.Sleep(3000);
+                    break;
+                //  Show employees' Info
+                case "7":
+                    Console.WriteLine("Still under construction. *Nervous laugh.");
+                    Thread.Sleep(3000);
                     break;
             }
 
