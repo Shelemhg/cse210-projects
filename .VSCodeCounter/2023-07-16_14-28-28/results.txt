@@ -1,0 +1,40 @@
+Date : 2023-07-16 14:28:28
+Directory : c:\Users\Yarko\OneDrive\Documentos\BYU\CSE 210 Programming with Classes\cse210-projects\final\FinalProject
+Total : 13 files,  1076 codes, 64 comments, 340 blanks, all 1480 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| C#       |         10 |        746 |         59 |        326 |      1,131 |
+| Draw.io  |          1 |        197 |          0 |          0 |        197 |
+| Database |          1 |        122 |          0 |          6 |        128 |
+| XML      |          1 |         11 |          5 |          8 |         24 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                           | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                              |         13 |      1,076 |         64 |        340 |      1,480 |
++--------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                                                       | language | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| c:\Users\Yarko\OneDrive\Documentos\BYU\CSE 210 Programming with Classes\cse210-projects\final\FinalProject\Cart.cs             | C#       |         78 |          3 |         38 |        119 |
+| c:\Users\Yarko\OneDrive\Documentos\BYU\CSE 210 Programming with Classes\cse210-projects\final\FinalProject\Cashier.cs          | C#       |         16 |          0 |          1 |         17 |
+| c:\Users\Yarko\OneDrive\Documentos\BYU\CSE 210 Programming with Classes\cse210-projects\final\FinalProject\Classes.drawio      | Draw.io  |        197 |          0 |          0 |        197 |
+| c:\Users\Yarko\OneDrive\Documentos\BYU\CSE 210 Programming with Classes\cse210-projects\final\FinalProject\DatabaseManager.cs  | C#       |        149 |         10 |         78 |        237 |
+| c:\Users\Yarko\OneDrive\Documentos\BYU\CSE 210 Programming with Classes\cse210-projects\final\FinalProject\Employee.cs         | C#       |        147 |          5 |         71 |        223 |
+| c:\Users\Yarko\OneDrive\Documentos\BYU\CSE 210 Programming with Classes\cse210-projects\final\FinalProject\FinalProject.csproj | XML      |         11 |          5 |          8 |         24 |
+| c:\Users\Yarko\OneDrive\Documentos\BYU\CSE 210 Programming with Classes\cse210-projects\final\FinalProject\Manager.cs          | C#       |        224 |          8 |         76 |        308 |
+| c:\Users\Yarko\OneDrive\Documentos\BYU\CSE 210 Programming with Classes\cse210-projects\final\FinalProject\Person.cs           | C#       |         20 |          0 |          7 |         27 |
+| c:\Users\Yarko\OneDrive\Documentos\BYU\CSE 210 Programming with Classes\cse210-projects\final\FinalProject\Product.cs          | C#       |         33 |          0 |         14 |         47 |
+| c:\Users\Yarko\OneDrive\Documentos\BYU\CSE 210 Programming with Classes\cse210-projects\final\FinalProject\Program.cs          | C#       |         56 |         33 |         32 |        121 |
+| c:\Users\Yarko\OneDrive\Documentos\BYU\CSE 210 Programming with Classes\cse210-projects\final\FinalProject\Store.cs            | C#       |         23 |          0 |          8 |         31 |
+| c:\Users\Yarko\OneDrive\Documentos\BYU\CSE 210 Programming with Classes\cse210-projects\final\FinalProject\Ticket.cs           | C#       |          0 |          0 |          1 |          1 |
+| c:\Users\Yarko\OneDrive\Documentos\BYU\CSE 210 Programming with Classes\cse210-projects\final\FinalProject\posdb.db            | Database |        122 |          0 |          6 |        128 |
+| Total                                                                                                                          |          |      1,076 |         64 |        340 |      1,480 |
++--------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
