@@ -82,7 +82,7 @@ public class Cart{
 
         foreach(Product item in _items){
 
-            Console.WriteLine(i + ". " + item.ProductName + "  -  $" + item.Price);
+            Console.WriteLine($"{i,-1}. {item.ProductName,-15} - {item.Barcode} - ${item.Price,8}");
             i++;
         }
 
@@ -90,7 +90,7 @@ public class Cart{
 
     public void DisplayTotal(){
         
-        Console.WriteLine("TOTAL: $" + _totalCost);
+        Console.WriteLine("   TOTAL:   $" + _totalCost);
     }
 
     private void PrintRecit( DateTime date){
@@ -101,6 +101,8 @@ public class Cart{
         Console.WriteLine("- -   C O R N E R    S T O R E    - -");
         Console.WriteLine("- - - - - - - - - - - - - - - - - - -");
         Console.WriteLine(date);
+        DisplayHorizontalLine();
+        DisplayItems();
         // Console.WriteLine(store.Address + " - " + store.PhoneNumber);
         // Console.WriteLine("ST# {store.ID} OP# {employee.ID} ");
         DisplayHorizontalLine();

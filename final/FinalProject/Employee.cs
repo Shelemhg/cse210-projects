@@ -101,7 +101,7 @@ class Employee : Person{
             Console.Clear();
             Console.WriteLine("Items go from barcode: 1000-1012\n");
             DisplayHorizontalLine();
-            Console.WriteLine("- - -    L O A D    I T E M S     - - -");
+            Console.WriteLine("- - -   S C A N    I T E M S    - - -");
             DisplayHorizontalLine();
             
             cart.DisplayItems();
@@ -129,7 +129,7 @@ class Employee : Person{
                             }
 
                             Console.WriteLine("\nCome back soon!");
-                            Thread.Sleep(5000);
+                            Thread.Sleep(6000);
                             return;
 
                         }else{

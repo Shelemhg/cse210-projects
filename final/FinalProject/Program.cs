@@ -71,8 +71,10 @@ class Program
                 employee.LoadPointOfSale();
 
             }else{
-
-                Console.WriteLine("\nInvalid username or password\n");                            
+                
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nInvalid username or password\n");
+                Console.ResetColor();                          
                 attempts--;
                 Console.WriteLine($"\n{attempts} more attempts.");
                 Thread.Sleep(2000);
